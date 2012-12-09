@@ -2,6 +2,9 @@
 
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      redirect_to user_photos_path
+    end
   end
   
   def create

@@ -1,10 +1,8 @@
-class PhotosController < ApplicationController
-    
-  before_filter :the_item
+class User::PhotosController < ApplicationController
+  before_filter :the_user
   
   def index
-    @photos = Photo.all
-
+    @photos = @user.photos.order("created_at desc")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @photos }
@@ -33,8 +31,7 @@ class PhotosController < ApplicationController
 
 
   def create
-    @photo = @item.photos.new(params[:photo])
-    @photo.user = @item.user
+    @photo = @user.photos.new(params[:photo])
     if @photo.save
 
     else
@@ -57,6 +54,10 @@ end
 
 private 
 
-def the_item
-  @item = Item.find(params["item_id"])
+def the_user
+  if logged_in?
+    @user = current_user
+  else
+    redirect_to login_path
+  end
 end

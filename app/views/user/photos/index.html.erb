@@ -1,0 +1,14 @@
+<h1><%= @user.username %>님의 상품사진</h1>
+
+<%= link_to '사진 올리기', new_user_photo_path %>
+
+<br />
+<div id="item">
+  <ul id="grid">
+    <% @photos.each do |pic| %>
+     <li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %>	
+				<%= link_to 'Remove', user_photo_path(@user, pic.id), :confirm => "Delete this photo?", :method => 'delete' %>
+			</li>
+    <% end %>
+  </ul>
+</div>

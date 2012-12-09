@@ -1,5 +1,15 @@
 MarketImg::Application.routes.draw do
+  get "photos/new"
+
+  get "photos/index"
+
+  get "photos/show"
+
   resources :items do
+    resources :photos
+  end
+  
+  namespace :user do
     resources :photos
   end
   
@@ -10,5 +20,5 @@ MarketImg::Application.routes.draw do
   get "login"   => "sessions#new", :as => "login"
   get "signup"  => "users#new", :as => "signup"
   
-  root :to => 'sessions#new'
+  root :to => 'user/photos#index'
 end

@@ -18,6 +18,11 @@
 		</div>
 	</header>
 	<div id="main">
+		<% if logged_in? %>
+			<%= current_user.username %>
+		<% else %>
+			<%= link_to "로그인", login_path%>
+		<% end %>
 		<div class="col-width"> 			   
 				<%= yield %>
 		</div>
