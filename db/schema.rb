@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209114709) do
+ActiveRecord::Schema.define(:version => 20121209183607) do
+
+  create_table "banners", :force => true do |t|
+    t.integer  "photo_id"
+    t.integer  "pos_x"
+    t.integer  "pos_y"
+    t.string   "font_color"
+    t.string   "bg_color"
+    t.integer  "font_size"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "items", :force => true do |t|
     t.string   "name"
