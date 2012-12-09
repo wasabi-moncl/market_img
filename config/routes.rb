@@ -1,4 +1,6 @@
 MarketImg::Application.routes.draw do
+  resources :banners
+
   get "photos/new"
 
   get "photos/index"
