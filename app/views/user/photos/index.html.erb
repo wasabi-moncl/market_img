@@ -7,7 +7,7 @@
   <ul id="grid">
     <% @photos.each do |pic| %>
      <li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %>	
-				<%= link_to 'Remove', user_photo_path(@user, pic.id), :confirm => "Delete this photo?", :method => 'delete' %>
+				<%= link_to '삭제', user_photo_path(pic.id), :confirm => "지울까요?", :method => 'delete' %>
 			</li>
     <% end %>
   </ul>

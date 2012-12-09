@@ -12,14 +12,14 @@
 		<div class="col-width">		
 			<hgroup id="logo">
 				<h1 id="site-title">
-					<%= link_to root_path, "Carrierwave/Jquery-File-Upload" %>
+					<%= link_to "market.img", root_path %>
 				</h1>
 			</hgroup>			
 		</div>
 	</header>
 	<div id="main">
 		<% if logged_in? %>
-			<%= current_user.username %>
+		<%= link_to current_user.username + " 로그아웃", logout_path %>
 		<% else %>
 			<%= link_to "로그인", login_path%>
 		<% end %>
@@ -29,8 +29,6 @@
 	</div>
 	<footer id="colophon">
 		<div class="col-width">
-			<div id="site-generator"><p>Refactor and Enjoy! </p>
-			</div>		
 		</div>	
 	</footer>
 </body>
