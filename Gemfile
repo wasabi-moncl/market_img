@@ -8,6 +8,10 @@ gem 'simple_form'
 gem "carrierwave"
 gem "rmagick"
 
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "less-rails"
+gem "therubyracer"
+
 #authentications
 gem "sorcery"
 
@@ -39,5 +43,3 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
-
-gem "twitter-bootstrap-rails"
