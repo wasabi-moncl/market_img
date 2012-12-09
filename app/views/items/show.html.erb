@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @item.name %>
+</p>
+
+<p>
+  <b>Item code:</b>
+  <%= @item.item_code %>
+</p>
+
+<p>
+  <b>Mall code:</b>
+  <%= @item.mall_code %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @item.url %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @item.price %>
+</p>
+
+<p>
+  <b>Discount rate:</b>
+  <%= @item.discount_rate %>
+</p>
+
+<p>
+  <b>Discount price:</b>
+  <%= @item.discount_price %>
+</p>
+
+<p>
+  <b>Fabric:</b>
+  <%= @item.fabric %>
+</p>
+
+<p>
+  <b>Laundry:</b>
+  <%= @item.laundry %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

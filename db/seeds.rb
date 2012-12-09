@@ -15,3 +15,9 @@ users = User.create(
   ]
 )
 puts'"onesup", "test" 계정 생성완료'
+photos = Item.create(
+[
+  {
+    name: '바지'
+  }
+])

@@ -1,0 +1,17 @@
+<h1>Gallery Photos:	<%= @item.name %></h1>
+
+<%= link_to 'Back', item_path(@item) %> |
+<%= link_to 'Upload Photos', new_item_photo_path(@item) %> |
+
+<br />
+<div id="item">
+  <ul id="grid">
+    <% @photos.each do |pic| %>
+     <li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), item_photo_path(@item,pic) %>	
+				<%= link_to 'Remove', item_photo_path(@item, pic.id), :confirm => "Delete this photo?", :method => 'delete' %>
+			</li>
+    <% end %>
+  </ul>
+</div>
+
+    

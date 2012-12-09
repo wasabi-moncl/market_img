@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209080829) do
+ActiveRecord::Schema.define(:version => 20121209114709) do
+
+  create_table "items", :force => true do |t|
+    t.string   "name"
+    t.string   "item_code"
+    t.string   "mall_code"
+    t.string   "url"
+    t.integer  "price"
+    t.integer  "discount_rate"
+    t.integer  "discount_price"
+    t.string   "fabric"
+    t.string   "laundry"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "photos", :force => true do |t|
+    t.string   "photo_file"
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username",                     :null => false

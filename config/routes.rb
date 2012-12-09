@@ -1,4 +1,8 @@
 MarketImg::Application.routes.draw do
+  resources :items do
+    resources :photos
+  end
+  
   resources :sessions
   resources :users
   

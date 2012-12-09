@@ -1,0 +1,13 @@
+<h1>Photo: <%= @photo.photo_file %></h1>
+</br>
+<p id="notice"><%= notice %></p>
+
+<%= image_tag(@photo.photo_file.url(:medium).to_s) %>
+</br>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Photo file:</b>
+  <%= @photo.photo_file %>
+</p>
+

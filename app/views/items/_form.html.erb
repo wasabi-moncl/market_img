@@ -1,0 +1,57 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :item_code %><br />
+    <%= f.text_field :item_code %>
+  </div>
+  <div class="field">
+    <%= f.label :mall_code %><br />
+    <%= f.text_field :mall_code %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_rate %><br />
+    <%= f.text_field :discount_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_price %><br />
+    <%= f.text_field :discount_price %>
+  </div>
+  <div class="field">
+    <%= f.label :fabric %><br />
+    <%= f.text_field :fabric %>
+  </div>
+  <div class="field">
+    <%= f.label :laundry %><br />
+    <%= f.text_field :laundry %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  item_code: MyString
+  mall_code: MyString
+  url: MyString
+  price: MyString
+  discount_rate: MyString
+  discount_price: MyString
+  fabric: MyString
+  laundry: MyString
+  description: MyString
+  integer: 
+
+two:
+  name: MyString
+  item_code: MyString
+  mall_code: MyString
+  url: MyString
+  price: MyString
+  discount_rate: MyString
+  discount_price: MyString
+  fabric: MyString
+  laundry: MyString
+  description: MyString
+  integer: 
