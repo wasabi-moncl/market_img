@@ -9,6 +9,8 @@ gem "carrierwave"
 gem "rmagick"
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "less-rails"
+gem "therubyracer"
 
 #authentications
 gem "sorcery"
