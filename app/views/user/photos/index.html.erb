@@ -1,3 +1,4 @@
+<% i = 0%>
 <h1><%= @user.username %>님의 상품사진</h1>
 <ul>
 	<li><%= link_to '사진 올리기', new_user_photo_path %></li>
@@ -5,21 +6,23 @@
 </ul>
 <br />
 <div id="item">
-	<%= form_for user_photo_update_multiple_path(@user) do |f|%>
+	<%= form_for @photos, :url => {:action => "update_multiple"} do |f|%>
   <ul id="grid" class="row-fluid">
     <% @photos.each do |pic| %>
+		<% i = i + 1 %>
      <li class="span4">
 			 <ul>
 					<li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %></li>
 					<li><%= link_to '삭제', user_photo_path(pic.id), :confirm => "지울까요?", :method => 'delete' %></li>
 					<li>
-						<%= f.simple_fields_for("photo_ids[]", pic) do |item_form| %>
-							<%= item_form.input :item %>
+						<%= simple_fields_for("photo_ids[]", pic) do |item_form| %>
+						<%= item_form.input :item_code, :label => "품번", :input_html => {:tabindex => i} %>
 						<% end %>
 					</li>
 				</ul>
 			</li>
     <% end %>
   </ul>
+	<%= f.submit "품번변경 완료" %>
 	<% end %>
 </div>

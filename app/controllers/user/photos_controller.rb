@@ -31,11 +31,12 @@ class User::PhotosController < ApplicationController
 
 
   def create
-    @photo = @user.photos.new(params[:photo])
-    if @photo.save
-
+    @photos = @user.photos.new(params[:photo])
+    if @photos.save
+      format.html { redirect_to @photos, notice: 'Item was successfully updated.' }
+      format.json { head :no_content }
     else
-      render :json => { "errors" => @photo.errors } 
+      render :json => { "errors" => @photos.errors } 
     end
   end
   
