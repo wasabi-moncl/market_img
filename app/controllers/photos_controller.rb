@@ -1,7 +1,5 @@
 class PhotosController < ApplicationController
-    
-  before_filter :the_item
-  
+      
   def write_all
     photos = Photo.all
 
@@ -9,7 +7,7 @@ class PhotosController < ApplicationController
       x.write_from_banner
     end
 
-    redirect_to photos_url, notice: "Photos was successfully updated."
+    redirect_to root_url, notice: "Photos was successfully updated."
   end
   
   def index
@@ -64,9 +62,3 @@ class PhotosController < ApplicationController
   end
 end
 
-
-private 
-
-def the_item
-  @item = Item.find(params["item_id"])
-end
