@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20121209114709) do
     t.string   "photo_file"
     t.integer  "item_id"
     t.integer  "user_id"
+    t.string   "item_code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

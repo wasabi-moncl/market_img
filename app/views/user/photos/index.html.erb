@@ -1,14 +1,25 @@
 <h1><%= @user.username %>님의 상품사진</h1>
-
-<%= link_to '사진 올리기', new_user_photo_path %>
-
+<ul>
+	<li><%= link_to '사진 올리기', new_user_photo_path %></li>
+	<li><%= link_to '품번 달기'%></li>
+</ul>
 <br />
 <div id="item">
-  <ul id="grid">
+	<%= form_for user_photo_update_multiple_path(@user) do |f|%>
+  <ul id="grid" class="row-fluid">
     <% @photos.each do |pic| %>
-     <li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %>	
-				<%= link_to '삭제', user_photo_path(pic.id), :confirm => "지울까요?", :method => 'delete' %>
+     <li class="span4">
+			 <ul>
+					<li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %></li>
+					<li><%= link_to '삭제', user_photo_path(pic.id), :confirm => "지울까요?", :method => 'delete' %></li>
+					<li>
+						<%= f.simple_fields_for("photo_ids[]", pic) do |item_form| %>
+							<%= item_form.input :item %>
+						<% end %>
+					</li>
+				</ul>
 			</li>
     <% end %>
   </ul>
+	<% end %>
 </div>

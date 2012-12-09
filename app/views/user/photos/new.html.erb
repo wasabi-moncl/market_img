@@ -22,7 +22,7 @@ Also see the setting in development.rb environment. New as of 3.2.3 -->
 		        url: '<%= user_photos_path(@user.id) %>',
 		        done: function (e, data) {
 		            $.each(data.result, function (index, file) { 
-		               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
+		               $('<li class="span4"><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
 		            });
 		        }
 		    });
@@ -33,7 +33,7 @@ Also see the setting in development.rb environment. New as of 3.2.3 -->
 
 		</br>
 	
-		<ul id="thumbs" class="cf">
+		<ul id="thumbs" class="row-fluid">
 	<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
 		</ul>
 <% end %>

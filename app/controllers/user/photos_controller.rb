@@ -38,6 +38,23 @@ class User::PhotosController < ApplicationController
       render :json => { "errors" => @photo.errors } 
     end
   end
+  
+  def edit
+  end
+  
+  def update_multiple
+    @photos = Photo.find(params[:photo_ids])
+
+    respond_to do |format|
+      if @photos.update_attributes(params[:photos_ids])
+        format.html { redirect_to @photos, notice: 'Item was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @photos.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
 
   def destroy
