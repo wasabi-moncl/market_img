@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Photo:</b>
+  <%= @banner.photo_id %>
+</p>
+
+<p>
+  <b>Pos x:</b>
+  <%= @banner.pos_x %>
+</p>
+
+<p>
+  <b>Pos y:</b>
+  <%= @banner.pos_y %>
+</p>
+
+<p>
+  <b>Font color:</b>
+  <%= @banner.font_color %>
+</p>
+
+<p>
+  <b>Bg color:</b>
+  <%= @banner.bg_color %>
+</p>
+
+<p>
+  <b>Font size:</b>
+  <%= @banner.font_size %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @banner.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_banner_path(@banner) %> |
+<%= link_to 'Back', banners_path %>

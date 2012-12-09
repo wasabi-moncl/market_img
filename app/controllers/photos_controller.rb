@@ -2,6 +2,16 @@ class PhotosController < ApplicationController
     
   before_filter :the_item
   
+  def write_all
+    photos = Photo.all
+
+    photos.each do |x|
+      x.write_from_banner
+    end
+
+    redirect_to photos_url, notice: "Photos was successfully updated."
+  end
+  
   def index
     @photos = Photo.all
 
@@ -48,7 +58,7 @@ class PhotosController < ApplicationController
     @photo.destroy
 
     respond_to do |format|
-      format.html { redirect_to gallery_photos_path(@item) }
+      format.html { redirect_to user_photos_path(@item) }
       format.json { head :no_content }
     end
   end

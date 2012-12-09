@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  photo_id: 1
+  pos_x: 1
+  pos_y: 1
+  font_color: MyString
+  bg_color: MyString
+  font_size: 1
+  content: MyText
+
+two:
+  photo_id: 1
+  pos_x: 1
+  pos_y: 1
+  font_color: MyString
+  bg_color: MyString
+  font_size: 1
+  content: MyText
