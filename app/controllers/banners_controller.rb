@@ -99,7 +99,7 @@ class BannersController < ApplicationController
         # build new customer record
         # banner = Banner.build_from_csv(row)
         banner = Banner.new
-        banner.painting_id  = row[0]
+        banner.photo_id  = row[0]
         banner.pos_x        = row[1]
         banner.pos_y        = row[2]
         banner.font_color   = row[3]
