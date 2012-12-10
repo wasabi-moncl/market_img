@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
-  attr_accessible :description, :discount_price, :discount_rate, :fabric, :item_code, :laundry, :mall_code, :name, :price, :url
+  attr_accessible :description, :discount_price, :discount_rate, :fabric, :item_code, :laundry, :mall_code, :name, :price, :url, :part
   has_many :photos
-  
+  belongs_to :template
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
       when ".csv" then Csv.new(file.path, nil, :ignore)
@@ -20,6 +20,10 @@ class Item < ActiveRecord::Base
       item.attributes = row.to_hash.slice(*accessible_attributes)
       item.save!
     end
+  end
+  
+  def parts
+    
   end
   
 end

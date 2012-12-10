@@ -22,8 +22,7 @@ Also see the setting in development.rb environment. New as of 3.2.3 -->
 		        url: '<%= user_photos_path %>',
 		        done: function (e, data) {
 		            $.each(data.result, function (index, file) { 
-		               // $('<li class="span4"><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
-									 $('<li class="span4">완료</li>').appendTo('#thumbs');
+		               $('<li><img src="'+file.photo_file.thumb.url+'"></li>').appendTo('#thumbs');
 		            });
 		        }
 		    });

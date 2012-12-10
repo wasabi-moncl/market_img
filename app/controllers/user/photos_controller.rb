@@ -2,7 +2,7 @@ class User::PhotosController < ApplicationController
   before_filter :the_user
   
   def index
-    @photos = @user.photos
+    @photos = @user.photos.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @user.photos }

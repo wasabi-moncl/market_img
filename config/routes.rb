@@ -1,5 +1,9 @@
 MarketImg::Application.routes.draw do
 
+  resources :positions
+
+  resources :templates
+
   resources :banners
 
   resources :items do

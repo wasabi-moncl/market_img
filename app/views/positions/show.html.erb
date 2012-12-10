@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @position.name %>
+</p>
+
+<p>
+  <b>Template:</b>
+  <%= @position.template_id %>
+</p>
+
+<p>
+  <b>Part:</b>
+  <%= @position.part %>
+</p>
+
+<p>
+  <b>X pos:</b>
+  <%= @position.x_pos %>
+</p>
+
+<p>
+  <b>Y pos:</b>
+  <%= @position.y_pos %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @position.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @position.height %>
+</p>
+
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

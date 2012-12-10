@@ -3,7 +3,10 @@
 		<tr>
 			<td>
 				<% Photo.where(:item_code => item.item_code).each do |photo| %>
-				<%= image_tag photo.photo_file.url(:thumb).to_s %>
+				<ul>
+					<li><%= photo.part %></li>
+					<li><%= image_tag photo.photo_file.url(:thumb).to_s %></li>
+				</ul>
 				<% end %>
 			</td>
 			<td><%= item.item_code %></td>

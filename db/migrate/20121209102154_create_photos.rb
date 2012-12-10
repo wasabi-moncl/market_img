@@ -5,6 +5,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.integer :item_id
       t.integer :user_id
       t.string :item_code
+      t.integer :part
       t.timestamps
     end
   end
