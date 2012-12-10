@@ -1,8 +1,8 @@
 <% i = 0 %>
-<div id="item">
+<div id="item" class="bs-docs-example">
 	<%= simple_form_for @user do |f| %>
 		<%= f.fields_for :photos do |photos_form| %>
-		<table class="unstyled">
+		<table class="table table-striped">
 		<% @photos.each do |pic| %>
 					<tr>
 					<% i = i + 1 %>
