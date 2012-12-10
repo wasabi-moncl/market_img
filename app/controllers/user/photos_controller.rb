@@ -2,10 +2,10 @@ class User::PhotosController < ApplicationController
   before_filter :the_user
   
   def index
-    @photos = @user.photos.order("created_at desc")
+    @photos = @user.photos
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @photos }
+      format.json { render json: @user.photos }
     end
   end
 
@@ -33,19 +33,20 @@ class User::PhotosController < ApplicationController
   def create
     @photos = @user.photos.new(params[:photo])
     if @photos.save
-      format.html { redirect_to @photos, notice: 'Item was successfully updated.' }
-      format.json { head :no_content }
-    else
-      render :json => { "errors" => @photos.errors } 
+      # format.html { redirect_to user_photos_path, notice: 'Item was successfully updated.' }
+      # format.json { head :no_content }
+      redirect_to user_photos_path
+    # else
+    #   render :json => { "errors" => @photos.errors } 
     end
   end
   
   def edit
+    @photos = @user.photos
   end
   
-  def update_multiple
-    @photos = Photo.find(params[:photo_ids])
-
+  def update
+    @photos = @user.photos.find(params[:photo_ids])
     respond_to do |format|
       if @photos.update_attributes(params[:photos_ids])
         format.html { redirect_to @photos, notice: 'Item was successfully updated.' }

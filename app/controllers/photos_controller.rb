@@ -1,6 +1,13 @@
-class PhotosController < ApplicationController
-    
+class PhotosController < ApplicationController  
   before_filter :the_item
+  
+  def index
+    @photos = Photo.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @photos }
+    end
+  end
   
   def write_all
     photos = Photo.all
@@ -10,15 +17,6 @@ class PhotosController < ApplicationController
     end
 
     redirect_to photos_url, notice: "Photos was successfully updated."
-  end
-  
-  def index
-    @photos = Photo.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @photos }
-    end
   end
 
 

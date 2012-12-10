@@ -1,2 +1,22 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<% i = 0 %>
+<div id="item">
+	<%= simple_form_for @user do |f| %>
+  <ul id="grid" class="row-fluid">
+		<%= f.fields_for :photos do |photos_form| %>
+		<% @photos.each do |pic| %>
+			<% i = i + 1 %>
+	     <li class="span4">
+				 <ul>
+						<li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %></li>
+						<li><%= link_to '삭제', user_photos_path(pic.id), :confirm => "지울까요?", :method => 'delete' %></li>
+						<li>
+							<%= text_field_tag "photo[#{pic.id}][[item_code]]", pic.item_code %>
+						</li>
+					</ul>
+				</li>
+				<% end %>
+    	<% end %>
+		</ul>
+	<%= f.submit "품번변경 완료" %>
+	<% end %>
+</div>

@@ -29,6 +29,25 @@ class UsersController < ApplicationController
     end    
   end
   
+  def edit
+    @user = current_user
+    @photos = @user.photos
+  end
+  
+  def update
+    photo = params[:photo]
+    @photos = Photo.find(photo.keys)
+    respond_to do |format|
+      if Photo.update(photo.keys, photo.values)
+        format.html { redirect_to user_photos_path, notice: 'Item was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @photos.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   # GET /villages
   # GET /villages.json
   def index

@@ -3,7 +3,7 @@ the authenticity token. Without this, authentication gets dropped with an ajax c
 strange things happen, lost authenticity + possible fall thru logic to next GET action. 
 Also see the setting in development.rb environment. New as of 3.2.3 -->
 
-<%= form_for [@user, @photo], :remote => true do %>
+<%= form_for user_photos_path, :remote => true do %>
 
 <h1>Upload Item Photos:	<%= @user.username %></h1>
 	<br>
@@ -19,10 +19,11 @@ Also see the setting in development.rb environment. New as of 3.2.3 -->
 		$(function () {
 		    $('#fileupload').fileupload({
 		        dataType: 'json',
-		        url: '<%= user_photos_path(@user.id) %>',
+		        url: '<%= user_photos_path %>',
 		        done: function (e, data) {
 		            $.each(data.result, function (index, file) { 
-		               $('<li class="span4"><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
+		               // $('<li class="span4"><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
+									 $('<li class="span4">완료</li>').appendTo('#thumbs');
 		            });
 		        }
 		    });

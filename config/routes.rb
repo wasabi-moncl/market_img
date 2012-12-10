@@ -12,11 +12,7 @@ MarketImg::Application.routes.draw do
   end
   
   namespace :user do
-    resources :photos do
-      collection do 
-        put "update_multiple"
-      end
-    end
+    resources :photos
   end
   
   resources :sessions
