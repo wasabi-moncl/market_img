@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121210174923) do
   end
 
   create_table "items", :force => true do |t|
+    t.integer  "template_id"
     t.string   "name"
     t.string   "item_code"
     t.string   "mall_code"
@@ -47,9 +48,8 @@ ActiveRecord::Schema.define(:version => 20121210174923) do
     t.integer  "user_id"
     t.string   "item_code"
     t.integer  "part"
-    t.integer  "position_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "positions", :force => true do |t|
