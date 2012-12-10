@@ -5,6 +5,7 @@ class Photo < ActiveRecord::Base
   attr_accessible :photo_file, :item_id, :user_id, :item_code, :part
   belongs_to :item
   belongs_to :user
+  belongs_to :position
   
   mount_uploader :photo_file, PhotoUploader
   
