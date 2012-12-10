@@ -6,11 +6,17 @@ gem 'sqlite3'
 
 gem 'simple_form'
 gem "carrierwave"
-gem "rmagick"
+
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem "less-rails"
 gem "therubyracer"
+
+#import excel file like xls xlsx
+gem "roo"
+
+# gem "roo" already include the gem "rmagick" so, "rmagick" is commented
+gem "rmagick"
 
 #authentications
 gem "sorcery"

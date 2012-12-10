@@ -10,7 +10,7 @@
 						<li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %></li>
 						<li><%= link_to '삭제', user_photos_path(pic.id), :confirm => "지울까요?", :method => 'delete' %></li>
 						<li>
-							<%= text_field_tag "photo[#{pic.id}][[item_code]]", pic.item_code %>
+							<%= text_field_tag "photo[#{pic.id}][[item_code]]", pic.item_code || pic.photo_file, :tabindex => i %>
 						</li>
 					</ul>
 				</li>

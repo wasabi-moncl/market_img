@@ -1,11 +1,6 @@
 MarketImg::Application.routes.draw do
+
   resources :banners
-
-  get "photos/new"
-
-  get "photos/index"
-
-  get "photos/show"
 
   resources :items do
     resources :photos
@@ -13,6 +8,9 @@ MarketImg::Application.routes.draw do
   
   namespace :user do
     resources :photos
+    resources :items do
+      collection { post :import }
+    end
   end
   
   resources :sessions
