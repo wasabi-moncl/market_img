@@ -15,7 +15,8 @@ class PhotosController < ApplicationController
     
     bg_img = Magick::Image.new(780,3000)
     bg_img.background_color = '#ffffff'
-      
+    bg_img.format = 'PNG'
+    
     photos.each do |x|
       begin
         filename = Rails.root.to_s + '/public/' + x.photo_file.to_s
@@ -29,15 +30,14 @@ class PhotosController < ApplicationController
         
         
         bg_img.composite!(img1, Magick::EastGravity, x_pos, y_pos, Magick::OverCompositeOp)
+        bg_img.write( filename + '.png')
         
       rescue
         next
       end
     end
 
-    bg_img.format = 'PNG'
     
-    bg_img.write('test.png')
 
     send_data bg_img.to_blob, :filename => "test.png",
     :disposition => 'inline',
