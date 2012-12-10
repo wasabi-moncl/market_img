@@ -15,7 +15,7 @@ class Photo < ActiveRecord::Base
   	banners = Banner.where(:photo_id => self.id )
 
   	banners.each do |banner|
-      filename = Rails.root.to_s + '/public/' + self.image.to_s
+      filename = Rails.root.to_s + '/public/' + self.photo_file.to_s
       img = Magick::ImageList.new(filename)
       md = Magick::Draw.new
       md.annotate( img, 0, 0, banner.pos_x, banner.pos_y, banner.content) do 
