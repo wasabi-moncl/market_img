@@ -13,6 +13,7 @@ class User::ItemsController < ApplicationController
 
   def import
     Item.import(params[:file])
+    Item.association_to_the_template
     redirect_to user_items_path
   end
   

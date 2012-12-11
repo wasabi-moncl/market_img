@@ -44,3 +44,4 @@ template = Template.create(
 )
 end
 puts'"ilcorso" 템플릿 생성완료'
+Position.association_to_the_template

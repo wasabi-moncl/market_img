@@ -9,6 +9,6 @@ class Position < ActiveRecord::Base
     self.all.each do |position|
       position.template = template
     end
-    puts "assciate:" + template.positions.count.to_s + "items to template"
+    puts "associate " + template.positions.count.to_s + " items to template"
   end
 end

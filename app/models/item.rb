@@ -36,20 +36,15 @@ class Item < ActiveRecord::Base
     parts
   end
   
-  #for generate test seed
-  def association_photos_and_positions
-    positions = self.templates.first.positions
-    photos = self.photos
-    
-  end
-  
+  #for generate test seed  
   def self.association_to_all_photos
     self.all.each do |item|
       photos = Photo.where(:item_code => item.item_code)
       item.photos << photos
     end
   end
-  
+
+  #for generate test seed  
   def self.association_to_the_template
     template = Template.first
     self.all.each do |item|

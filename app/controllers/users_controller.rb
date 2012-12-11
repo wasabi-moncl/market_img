@@ -39,6 +39,7 @@ class UsersController < ApplicationController
     @photos = Photo.find(photo.keys)
     respond_to do |format|
       if Photo.update(photo.keys, photo.values)
+        Item.association_to_all_photos
         format.html { redirect_to user_photos_path, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
