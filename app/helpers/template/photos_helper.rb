@@ -1,0 +1,2 @@
+module Template::PhotosHelper
+end

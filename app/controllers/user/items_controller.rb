@@ -15,9 +15,7 @@ class User::ItemsController < ApplicationController
   
   def product_image
     @item = Item.find(params[:id])
-    
     parts = @item.parts
-    
     dst = Magick::Image.new(780,1500)
     dst.background_color = '#ffffff'
     dst.format = 'PNG'

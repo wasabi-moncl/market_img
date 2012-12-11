@@ -51,10 +51,11 @@ ActiveRecord::Schema.define(:version => 20121211045207) do
     t.string   "photo_file"
     t.integer  "item_id"
     t.integer  "user_id"
+    t.integer  "template_id"
     t.string   "item_code"
     t.integer  "part"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "positions", :force => true do |t|
