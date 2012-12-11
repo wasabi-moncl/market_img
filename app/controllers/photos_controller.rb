@@ -18,8 +18,7 @@ class PhotosController < ApplicationController
       format.json { render json: @photo }
     end
   end
-
-
+  
   def new
     @photo = Photo.new
 

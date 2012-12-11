@@ -8,7 +8,6 @@ MarketImg::Application.routes.draw do
   end
 
   resources :banners
-
   resources :items do
     resources :photos
   end

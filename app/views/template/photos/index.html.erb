@@ -1,2 +1,8 @@
-<h1>Template::Photos#index</h1>
-<p>Find me in app/views/template/photos/index.html.erb</p>
+<h1>템플릿 이미지 모음</h1>
+
+<ul>
+	<li><%= link_to "사진 올리기", new_template_photo_path(params[:template_id])%></li>
+	<% @photos.all.each do |photo| %>
+	<li><%= image_tag photo.photo_file %></li>
+	<% end %>
+</ul>
