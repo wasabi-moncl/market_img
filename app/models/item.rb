@@ -36,6 +36,32 @@ class Item < ActiveRecord::Base
     parts
   end
   
+  def compose_resources
+    parts = self.parts
+    
+    bg_img = Magick::Image.new(780,3000)
+    bg_img.background_color = '#ffffff'
+    bg_img.format = 'PNG'
+    
+    parts.each do |part|
+      begin
+        unless part[:photo].nil?
+          filename = 'public' + part[:photo].photo_file.to_s
+          x_pos = part[:position].x_pos
+          y_pos = part[:position].y_pos
+          next if x_pos == nil or y_pos == nil
+          img1 = Magick::ImageList.new(filename)
+          puts img1
+          bg_img.composite!(img1, Magick::EastGravity, x_pos, y_pos, Magick::OverCompositeOp)
+          bg_img.write('generated_' + self.item_code + '.png')
+        end
+      rescue
+        next
+      end
+    end
+    bg_img
+  end
+  
   #for generate test seed  
   def self.association_to_all_photos
     self.all.each do |item|

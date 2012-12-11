@@ -23,6 +23,7 @@ MarketImg::Application.routes.draw do
   match 'banners/import' => 'banners#import', :via => :post  
   match 'photos_write_all' => 'photos#write_all', :via => :get
   match 'photos_merge_all' => 'photos#merge_all', :via => :get
+  match 'product_image/:id' => 'user/items#product_image', :via => :get, :as => "product_image"
   
   get "logout"  => "sessions#destroy", :as => "logout"
   get "login"   => "sessions#new", :as => "login"

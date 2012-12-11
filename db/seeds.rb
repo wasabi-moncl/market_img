@@ -36,7 +36,7 @@ template = Template.create(
       part: i,
       template_id: template_id,
       x_pos: 1,
-      y_pos: 553/2 * i - 553/2 + 1,
+      y_pos: 550 * i + 1,
       width: 550,
       height: 550
     }

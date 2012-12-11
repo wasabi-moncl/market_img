@@ -10,6 +10,13 @@ class User::ItemsController < ApplicationController
       # format.xls
     end
   end
+  
+  def product_image
+    @item = Item.find(params[:id])
+    image = @item.compose_resources
+    send_data image.to_blob, :filename => "product_" + @item.item_code + ".png",
+      :disposition => 'inline', :type => "image/png"
+  end
 
   def import
     Item.import(params[:file])

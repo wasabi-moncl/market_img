@@ -11,6 +11,7 @@
 			</td>
 			<td><%= item.item_code %></td>
 			<td><%= item.name %></td>
+			<td><%= link_to "완성된 상품 이미지", product_image_path(item) %></td>
 		</tr>
 	<% end %>
 </table>
