@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Item < ActiveRecord::Base
   attr_accessible :description, :discount_price, :discount_rate, :fabric, :item_code, :laundry, :mall_code, :name, :price, :url, :part
   has_many :photos
@@ -25,7 +26,36 @@ class Item < ActiveRecord::Base
   end
   
   def parts
-    self.templates.first.positions
+    positions = self.templates.first.positions
+    photos = self.photos
+    parts = Array.new
+    positions.each do |position|
+      photo = photos.where(:part => position.part).first
+      parts << {:position => position, :photo => photo}
+    end
+    parts
+  end
+  
+  #for generate test seed
+  def association_photos_and_positions
+    positions = self.templates.first.positions
+    photos = self.photos
+    
+  end
+  
+  def self.association_to_all_photos
+    self.all.each do |item|
+      photos = Photo.where(:item_code => item.item_code)
+      item.photos << photos
+    end
+  end
+  
+  def self.association_to_the_template
+    template = Template.first
+    self.all.each do |item|
+      item.templates << template
+    end
+    puts "assciate:" + template.items.count.to_s + "items to template"
   end
   
 end
