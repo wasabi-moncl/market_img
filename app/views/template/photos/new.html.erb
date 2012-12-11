@@ -1,2 +1,29 @@
 <h1><%= @template.name %> 템플릿에 쓰일 새 이미지 올리기</h1>
-
+<%= form_for [@template, @photo], :remote => true do %>
+	<p id="notice"><%= notice %></p>
+		사진 올리기: 
+		<input id="fileupload" type="file" name="photo[photo_file]" multiple>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
+		<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
+		<script src="/jquery-file-upload/jquery.fileupload.js"></script>
+		<script>
+		$(function () {
+		    $('#fileupload').fileupload({
+		        dataType: 'json',
+		        url: '<%= template_photos_path(@template.id) %>',
+		        done: function (e, data) {
+		            $.each(data.result, function (index, file) { 
+		               $('<li><img src="'+file.photo_file.thumb.url+'"></li>').appendTo('#thumbs');
+		            });
+		        }
+		    });
+		});
+		</script>	
+		<ul id="thumbs" class="cf">
+	<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
+		</ul>
+<% end %>
+<p>
+	<%= link_to '확인', template_photos_path(@template) %>
+</p>

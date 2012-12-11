@@ -1,7 +1,5 @@
-<%= form_for user_photos_path, :remote => true do %>
-
 <h1><%= @user.username %>님의 상품 사진을 올려주세요.</h1>
-	<br>
+<%= form_for user_photos_path, :remote => true do %>
 	<p id="notice"><%= notice %></p>
 		사진 올리기: 
 		<input id="fileupload" type="file" name="photo[photo_file]" multiple>
@@ -22,11 +20,6 @@
 		    });
 		});
 		</script>
-
-		</br>
-
-		</br>
-	
 		<ul id="thumbs" class="row-fluid">
 	<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
 		</ul>
