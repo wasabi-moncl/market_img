@@ -1,3 +1,5 @@
+require "RMagick"
+
 class User::ItemsController < ApplicationController
   def show
   end
@@ -13,8 +15,24 @@ class User::ItemsController < ApplicationController
   
   def product_image
     @item = Item.find(params[:id])
-    image = @item.compose_resources
-    send_data image.to_blob, :filename => "product_" + @item.item_code + ".png",
+    
+    parts = @item.parts
+    
+    dst = Magick::Image.new(780,1500)
+    dst.background_color = '#ffffff'
+    dst.format = 'PNG'
+    result_name = 'public/generated_images/generated_' + @item.item_code + '.png'
+    dst.write(result_name)
+    parts.each do |part|
+      filename = 'public' + part[:photo].photo_file.to_s
+      src = Magick::Image.read(filename)[0]
+      x_pos = part[:position].x_pos
+      y_pos = part[:position].y_pos
+      # next if x_pos == nil or y_pos == nil
+      dst.composite!(src, x_pos, y_pos, Magick::OverCompositeOp)
+      dst.write(result_name)
+    end
+    send_data dst.to_blob, :filename => "product_" + @item.item_code + ".png",
       :disposition => 'inline', :type => "image/png"
   end
 

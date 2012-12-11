@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   
   def edit
     @user = current_user
-    @photos = @user.photos
+    @photos = @user.photos.order(:item_code)
   end
   
   def update
