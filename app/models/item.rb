@@ -36,6 +36,11 @@ class Item < ActiveRecord::Base
       unless photo.first.nil?
         parts << {:position => position, :photo => photo.first}
       end
+      photo = Photo.where("part = ? AND template_id = ?", position.part, self.templates.first.id)
+      unless photo.first.nil?
+        parts << {:position => position, :photo => photo.first}
+      end
+      
     end
     parts
   end
