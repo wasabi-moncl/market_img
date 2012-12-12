@@ -40,10 +40,11 @@ class Item < ActiveRecord::Base
       unless photo.first.nil?
         parts << {:position => position, :photo => photo.first}
       end
-      
     end
     parts
   end
+  
+  
     
   #for generate test seed  
   def self.association_to_all_photos
