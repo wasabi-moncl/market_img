@@ -3,6 +3,10 @@
 <ul>
 	<li><%= link_to "사진 올리기", new_template_photo_path(params[:template_id])%></li>
 	<% @photos.all.each do |photo| %>
-	<li><%= image_tag photo.photo_file %></li>
+	<li>
+		<p><%= link_to image_tag(photo.photo_file), edit_template_photo_path(@template, photo) %></p>
+		<p><%= link_to '삭제', [@template, photo], method: :delete, data: { confirm: '진심?' } %></p>
+	</li>
+	    
 	<% end %>
 </ul>

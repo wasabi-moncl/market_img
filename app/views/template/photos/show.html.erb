@@ -1,2 +1,4 @@
-<h1>Template::Photos#show</h1>
-<p>Find me in app/views/template/photos/show.html.erb</p>
+<h1><%= @template.name %>의 <%= @photo.part %>번 파트 이미지</h1>
+<p><%= image_tag @photo.photo_file %></p>
+<p>part: <%= @photo.part%></p>
+<p><%= link_to "수정", edit_template_photo_path(@template, @photo) %></p>
