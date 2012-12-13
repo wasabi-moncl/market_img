@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211045207) do
+ActiveRecord::Schema.define(:version => 20121213125307) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121211045207) do
   end
 
   create_table "items", :force => true do |t|
+    t.integer  "template_id"
     t.string   "name"
     t.string   "item_code"
     t.string   "mall_code"
@@ -46,12 +47,31 @@ ActiveRecord::Schema.define(:version => 20121211045207) do
     t.integer "template_id"
   end
 
+  create_table "labels", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "template_id"
+    t.integer  "x_pos"
+    t.integer  "y_pos"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "kerning"
+    t.string   "color"
+    t.string   "font"
+    t.string   "size"
+    t.string   "column"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "photos", :force => true do |t|
     t.string   "photo_file"
     t.integer  "item_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "template_id"
+    t.string   "item_code"
+    t.integer  "part"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "positions", :force => true do |t|

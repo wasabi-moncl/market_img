@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  x_pos: MyString
+  y_pos: MyString
+  width: MyString
+  height: MyString
+  color: MyString
+  font: MyString
+  size: MyString
+  kerning: MyString
+  column: MyString
+  template_id: MyString
+  user_id: MyString
+
+two:
+  x_pos: MyString
+  y_pos: MyString
+  width: MyString
+  height: MyString
+  color: MyString
+  font: MyString
+  size: MyString
+  kerning: MyString
+  column: MyString
+  template_id: MyString
+  user_id: MyString
