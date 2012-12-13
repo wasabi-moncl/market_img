@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   attr_accessible :last_login_at, :username, :password, :password_confirmation, :email
   
   has_many :photos
+  has_many :labels
   
   validates_uniqueness_of :username
   validates_uniqueness_of :email    

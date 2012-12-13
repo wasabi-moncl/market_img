@@ -14,7 +14,10 @@ class TemplatesController < ApplicationController
   # GET /templates/1.json
   def show
     @template = Template.find(params[:id])
-
+    @photos = @template.photos
+    @labels = @template.labels
+    
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @template }

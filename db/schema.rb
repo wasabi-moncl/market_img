@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20121213125307) do
   create_table "labels", :force => true do |t|
     t.integer  "user_id"
     t.integer  "template_id"
+    t.integer  "part"
     t.integer  "x_pos"
     t.integer  "y_pos"
     t.integer  "width"

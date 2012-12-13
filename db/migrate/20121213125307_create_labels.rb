@@ -3,6 +3,7 @@ class CreateLabels < ActiveRecord::Migration
     create_table :labels do |t|
       t.integer :user_id
       t.integer :template_id
+      t.integer :part
       t.integer :x_pos
       t.integer :y_pos
       t.integer :width

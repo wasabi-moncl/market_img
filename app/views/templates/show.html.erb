@@ -1,10 +1,66 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @template.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_template_path(@template) %> |
-<%= link_to 'Back', templates_path %>
+<h2><%= @template.name %> 템플릿 관리</h2>
+<div class="row">
+	<ul class="parts unstyled">
+	<% @photos.each do |photo| %>
+		<li>
+			<dl>
+				<dt>Part: <%= photo.part %></dt>
+				<dd><%= link_to image_tag(photo.photo_file)%></dd>
+			</dl>
+			<ul class="columns inline unstyled">
+				<% @template.label_columns.each do |column| %>
+				<li>
+					<div class="span2">
+						<dl class="dl-horizontal">
+							<dt>part: </dt>
+							<dd><%= column[:part] %></dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<div class="span2">
+						<dl class="dl-horizontal">
+							<dt>column: </dt>
+							<dd><%= column[:column].to_s %></dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<div class="span2">
+						<dl class="dl-horizontal">
+							<dt>x </dt>
+							<dd>_</dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<div class="span2">
+						<dl class="dl-horizontal">
+							<dt>y </dt>
+							<dd>_</dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<div class="span2">
+						<dl class="dl-horizontal">
+							<dt>color </dt>
+							<dd>_</dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<div class="span2">
+						<dl class="dl-horizontal">
+							<dt>size </dt>
+							<dd>_</dd>
+						</dl>
+					</div>
+				</li>
+				
+				<% end %>
+			</ul>
+		</li>
+	<% end %>
+	</ul>
+</div>

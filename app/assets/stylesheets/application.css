@@ -11,4 +11,4 @@
  *= require_self
  *= require_tree .
  */
- ul{list-style: none;}
+ ul{/*list-style: none;*/}
