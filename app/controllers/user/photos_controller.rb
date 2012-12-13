@@ -1,11 +1,13 @@
 class User::PhotosController < ApplicationController
-  before_filter :the_user
+  
+  before_filter :require_login
   
   def index
-    @photos = @user.photos.all
+    @user = current_user
+    @photos = current_user.photos.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @user.photos }
+      format.json { render json: current_user.photos }
     end
   end
 
@@ -66,16 +68,5 @@ class User::PhotosController < ApplicationController
       format.html { redirect_to gallery_photos_path(@item) }
       format.json { head :no_content }
     end
-  end
-end
-
-
-private 
-
-def the_user
-  if logged_in?
-    @user = current_user
-  else
-    redirect_to login_path
   end
 end

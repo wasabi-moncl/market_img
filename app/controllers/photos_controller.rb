@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-      
+        
   def write_all
     photos = Photo.all
 
