@@ -14,7 +14,7 @@ class Template < ActiveRecord::Base
       columns = self.items.first.attributes.keys.map(&:to_sym) - except
     end
     columns.each do |column|
-      result << {:column => column, :part => i}
+      result << {:column => column}
       i = i + 1
     end
     result

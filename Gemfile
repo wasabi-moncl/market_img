@@ -11,6 +11,7 @@ gem "carrierwave"
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem "less-rails"
 gem "therubyracer"
+gem "nested_form"
 
 #import excel file like xls xlsx
 gem "roo"

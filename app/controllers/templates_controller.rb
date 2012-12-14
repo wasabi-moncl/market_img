@@ -38,6 +38,8 @@ class TemplatesController < ApplicationController
   # GET /templates/1/edit
   def edit
     @template = Template.find(params[:id])
+    @photos = @template.photos
+    @labels = @template.labels
   end
 
   # POST /templates

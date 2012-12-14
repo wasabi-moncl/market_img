@@ -39,14 +39,12 @@
 
     <div class="container">
       <div class="content">
-        <div class="row">
-			 		<% if logged_in? %>
-			 		<%= link_to current_user.username + " 로그아웃", logout_path %>
-			 		<% else %>
-			 			<%= link_to "로그인", login_path%>
-			 		<% end %>
-          <%= yield %>
-        </div><!--/row-->
+		 		<% if logged_in? %>
+		 		<%= link_to current_user.username + " 로그아웃", logout_path %>
+		 		<% else %>
+		 			<%= link_to "로그인", login_path%>
+		 		<% end %>
+        <%= yield %>
       </div><!--/content-->
 
       <footer>
