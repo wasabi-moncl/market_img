@@ -15,6 +15,12 @@ class TemplatesController < ApplicationController
   # GET /templates/1.json
   def show
     @template = Template.find(params[:id])
+    @template.label_columns.each do |column|
+      if @template.labels.find_all_by_column(column[:column]).empty?
+        label = @template.labels.build({:column => column[:column], :size => "12"})
+      end
+    end
+    
     @photos = @template.photos
     @labels = @template.labels
     respond_to do |format|
@@ -61,9 +67,8 @@ class TemplatesController < ApplicationController
   # PUT /templates/1.json
   def update
     template = Template.find(params[:id])
-    labels = template.labels.find(params[:label_ids])
     respond_to do |format|
-      if @photos.update_attributes(params[:label_ids])
+      if template.update_attributes(params[:template])
         format.html { redirect_to template, notice: '반영됨.' }
         format.json { head :no_content }
       else
