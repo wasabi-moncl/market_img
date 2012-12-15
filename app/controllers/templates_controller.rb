@@ -1,3 +1,4 @@
+#encoding: utf-8
 class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
@@ -16,8 +17,6 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
     @photos = @template.photos
     @labels = @template.labels
-    
-    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @template }
@@ -61,15 +60,15 @@ class TemplatesController < ApplicationController
   # PUT /templates/1
   # PUT /templates/1.json
   def update
-    @template = Template.find(params[:id])
-
+    template = Template.find(params[:id])
+    labels = template.labels.find(params[:label_ids])
     respond_to do |format|
-      if @template.update_attributes(params[:template])
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
+      if @photos.update_attributes(params[:label_ids])
+        format.html { redirect_to template, notice: '반영됨.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        format.json { render json: template.errors, status: :unprocessable_entity }
       end
     end
   end

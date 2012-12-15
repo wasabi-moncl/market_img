@@ -27,7 +27,9 @@ MarketImg::Application.routes.draw do
     scope :module => "template" do
       resources :photos
     end
-    resources :labels
+    resources :labels do
+      collection { get :update_all}
+    end
   end
 
   root :to => 'user/photos#index'

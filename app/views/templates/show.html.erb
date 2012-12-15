@@ -1,42 +1,42 @@
-
-
-		<h2><%= @template.name %> 템플릿 관리</h2>
-		<%= nested_form_for @template do |f| %>
-			<ul class="parts unstyled">
-				<% @photos.each do |photo| %>
-					<li>
-						<dl>
-							<dt>Part: <%= photo.part %></dt>
-							<dd><%= link_to image_tag(photo.photo_file), edit_template_photo_path(@template, photo)%></dd>
-						</dl>
-						<div class="clearfix"></div>
-						<div class="row columns">
-							<% @template.label_columns.each do |column| %>
-								<div class="span12">
-									<%= f.fields_for :label do |label_form|%>
-										<dl class="dl-horizontal">
-											<dt><span class="label label-inverse">column</span></dt>
-											<dd>
-												<%= column[:column].to_s %>
-												<%= label_form.hidden_field :column, :value => column[:column].to_s %>
-											</dd>
-										</dl>
-										<% keys = [:x_pos, :y_pos, :color, :size]%>
-										<div class="row">
-											<% keys.each do |key| %>
-												<div class="span3">
-													<dl class="dl-horizontal">
-														<dt class=""><%= key.to_s%> </dt>
-														<dd class=""><%= label_form.text_field key, :class => "input-mini" %></dd>
-													</dl>
-												</div>
-											<% end %>
+<h2><%= @template.name %> 템플릿 관리</h2>
+<%= nested_form_for @template do |f| %>
+	<ul class="parts unstyled">
+		<% @photos.each do |photo| %>
+			<li>
+				<dl>
+					<dt>Part: <%= photo.part %></dt>
+					<dd><%= link_to image_tag(photo.photo_file), edit_template_photo_path(@template, photo)%></dd>
+				</dl>
+				<%= f.submit "반영"%>
+				<div class="row columns">
+					<% @template.label_columns.each do |column| %>
+						<div class="span12">
+							<%= f.fields_for [@template, @labels] do |label_form|%>
+							<%= label_form.hidden_field :id, :value => label_form %>
+							<%= label_form.hidden_field :column, :value => column[:column].to_s %>
+								<dl class="dl-horizontal">
+									<dt><span class="label label-inverse">column</span></dt>
+									<dd>
+										<%= column[:column].to_s %>
+										<%= label_form.hidden_field :column, :value => column[:column].to_s %>
+									</dd>
+								</dl>
+								<% keys = [:x_pos, :y_pos, :color, :size]%>
+								<div class="row">
+									<% keys.each do |key| %>
+										<div class="span3">
+											<dl class="dl-horizontal">
+												<dt class=""><%= key.to_s%> </dt>
+												<dd class=""><%= label_form.text_field key, :class => "input-mini" %></dd>
+											</dl>
 										</div>
 									<% end %>
 								</div>
-							<% end %><!-- column -->
-						</div><!-- div_columns-->
-					</li>
-				<% end %><!--photo -->
-			</ul>
-		<% end %><!-- nested_form -->
+							<% end %>
+						</div>
+					<% end %><!-- column -->
+				</div><!-- div_columns-->
+			</li>
+		<% end %><!--photo -->
+	</ul>
+<% end %><!-- nested_form -->
