@@ -9,16 +9,13 @@
 				</dl>
 				<%= f.submit "반영"%>
 				<div class="row columns">
-					<% @template.label_columns.each do |column| %>
+					<%# @template.label_columns.each do |column| %>
 						<div class="span12">
-							<%= f.fields_for [@template, @labels] do |label_form|%>
-							<%= label_form.hidden_field :id, :value => label_form %>
-							<%= label_form.hidden_field :column, :value => column[:column].to_s %>
+							<%= f.fields_for :labels do |label_form|%>
 								<dl class="dl-horizontal">
 									<dt><span class="label label-inverse">column</span></dt>
 									<dd>
-										<%= column[:column].to_s %>
-										<%= label_form.hidden_field :column, :value => column[:column].to_s %>
+										<%= label_form.text_field :column %>
 									</dd>
 								</dl>
 								<% keys = [:x_pos, :y_pos, :color, :size]%>
@@ -34,8 +31,9 @@
 								</div>
 							<% end %>
 						</div>
-					<% end %><!-- column -->
+					<%# end %><!-- column -->
 				</div><!-- div_columns-->
+				<%= f.submit "반영"%>
 			</li>
 		<% end %><!--photo -->
 	</ul>
