@@ -14,7 +14,7 @@
 		        url: '<%= user_photos_path %>',
 		        done: function (e, data) {
 		            $.each(data.result, function (index, file) { 
-		               $('<li><img src="'+file.photo_file.thumb.url+'"></li>').appendTo('#thumbs');
+		               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
 		            });
 		        }
 		    });
