@@ -1,4 +1,6 @@
 #encoding: utf-8
+require "RMagick"
+
 class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
@@ -16,8 +18,8 @@ class TemplatesController < ApplicationController
   def show
     @template = Template.find(params[:id])
     @template.label_columns.each do |column|
-      if @template.labels.find_all_by_column(column[:column]).empty?
-        label = @template.labels.build({:column => column[:column], :size => "12"})
+      if @template.labels.find_all_by_column(column).empty?
+        label = @template.labels.build({:column => column.to_s, :size => "12"})
       end
     end
     
@@ -29,6 +31,9 @@ class TemplatesController < ApplicationController
     end
   end
 
+  def composed_image
+    
+  end
   # GET /templates/new
   # GET /templates/new.json
   def new
