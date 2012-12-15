@@ -7,14 +7,23 @@ class User::PhotosController < ApplicationController
     @photos = current_user.photos.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: current_user.photos }
+      format.json { render json: @photos }
     end
   end
 
-
+  def upload
+    @user = current_user
+    @photos = current_user.photos.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @photos }
+    end
+  end
+  
   def show
     @photo = Photo.find(params[:id])
-    
+    @user = current_user
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @photo }
@@ -33,15 +42,13 @@ class User::PhotosController < ApplicationController
 
 
   def create
-    user = current_user
-    @photos = user.photos.new(params[:photo])
-    if @photos.save
-      # format.html { redirect_to user_photos_path, notice: 'Item was successfully updated.' }
-      # format.json { head :no_content }
-      redirect_to user_photos_path
-    # else
-    #   render :json => { "errors" => @photos.errors } 
+    @user = current_user
+    @photo = Photo.new(params[:photo])
+    if @photo.save
+    else
+      render :json => { "errors" => @photos.errors } 
     end
+    
   end
   
   def edit
