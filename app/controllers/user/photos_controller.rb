@@ -23,6 +23,7 @@ class User::PhotosController < ApplicationController
 
 
   def new
+    @user = current_user
     @photo = Photo.new
     respond_to do |format|
       format.html # new.html.erb
@@ -32,7 +33,8 @@ class User::PhotosController < ApplicationController
 
 
   def create
-    @photos = @user.photos.new(params[:photo])
+    user = current_user
+    @photos = user.photos.new(params[:photo])
     if @photos.save
       # format.html { redirect_to user_photos_path, notice: 'Item was successfully updated.' }
       # format.json { head :no_content }
