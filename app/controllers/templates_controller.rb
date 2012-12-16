@@ -40,7 +40,6 @@ class TemplatesController < ApplicationController
     example_item = template.items.first
 
     template.labels.find_all_by_part(params[:part]).each do |part_label|
-      # part_label = template.labels.find_all_by_part(params[:part])[1]
       unless example_item[part_label.column.to_sym].nil?
         label = Magick::Draw.new
         label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item[part_label.column.to_sym]) do 

@@ -30,34 +30,34 @@ class User::ItemsController < ApplicationController
       dst.composite!(src, x_pos, y_pos, Magick::OverCompositeOp)
       dst.write(result_name)
     end
-    y = 1200
-    label = Magick::Draw.new
-    label.annotate( dst, 0, 0, 300, y, item.item_code) do 
-      label.fill      = "#ffffff"
-      label.pointsize = 20
-      # md.gravity = Magick::CenterGravity
-      label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    end
-    label.annotate( dst, 0, 0, 50, y, item.name) do 
-      label.fill      = "#ffffff"
-      label.pointsize = 20
-      # md.gravity = Magick::CenterGravity
-      label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    end
-    label.annotate( dst, 0, 0, 50, y+50, item.laundry) do 
-      label.fill      = "#cdca40"
-      label.pointsize = 20
-      # md.gravity = Magick::CenterGravity
-      label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    end
-    label.annotate( dst, 0, 0, 50, y+100, item.fabric) do 
-      label.fill      = "#cdca40"
-      label.pointsize = 20
-      # md.gravity = Magick::CenterGravity
-      label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    end
+    # y = 1200
+    # label = Magick::Draw.new
+    # label.annotate( dst, 0, 0, 300, y, item.item_code) do 
+    #   label.fill      = "#ffffff"
+    #   label.pointsize = 20
+    #   # md.gravity = Magick::CenterGravity
+    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+    # end
+    # label.annotate( dst, 0, 0, 50, y, item.name) do 
+    #   label.fill      = "#ffffff"
+    #   label.pointsize = 20
+    #   # md.gravity = Magick::CenterGravity
+    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+    # end
+    # label.annotate( dst, 0, 0, 50, y+50, item.laundry) do 
+    #   label.fill      = "#cdca40"
+    #   label.pointsize = 20
+    #   # md.gravity = Magick::CenterGravity
+    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+    # end
+    # label.annotate( dst, 0, 0, 50, y+100, item.fabric) do 
+    #   label.fill      = "#cdca40"
+    #   label.pointsize = 20
+    #   # md.gravity = Magick::CenterGravity
+    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+    # end
 
-    send_data dst.to_blob, :filename => "product_" + @item.item_code + ".png",
+    send_data dst.to_blob, :filename => "product_" + item.item_code + ".png",
       :disposition => 'inline', :type => "image/png"
   end
 
