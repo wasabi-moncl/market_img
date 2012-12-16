@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
     @template.label_columns.each do |column|
       if @template.labels.find_all_by_column(column).empty?
-        label = @template.labels.build({:column => column.to_s, :size => "12"})
+        label = @template.labels.build({:part => @template.photos.first.part, :column => column.to_s, :size => "12"})
       end
     end
     
@@ -32,8 +32,30 @@ class TemplatesController < ApplicationController
   end
 
   def composed_image
-    
+    template = Template.find(params[:id])
+    dst_image = template.photos.find_by_part(params[:part])
+    filename = 'public' + dst_image.photo_file.to_s
+    dst = Magick::Image.read(filename).first
+    label = Magick::Draw.new
+    example_item = template.items.first
+
+    template.labels.find_all_by_part(params[:part]).each do |part_label|
+      # part_label = template.labels.find_all_by_part(params[:part])[1]
+      unless example_item[part_label.column.to_sym].nil?
+        label = Magick::Draw.new
+        label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item[part_label.column.to_sym]) do 
+          label.fill      = "#ffffff"
+          label.pointsize = 20
+          # md.gravity = Magick::CenterGravity
+          label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+        end
+      end
+    end
+
+    send_data dst.to_blob, :filename => "template_" + template.name + "_" + dst_image.part.to_s + ".png",
+          :disposition => 'inline', :type => "image/png"
   end
+
   # GET /templates/new
   # GET /templates/new.json
   def new

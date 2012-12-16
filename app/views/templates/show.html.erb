@@ -5,33 +5,34 @@
 			<li>
 				<dl>
 					<dt>Part: <%= photo.part %></dt>
-					<dd><%= link_to image_tag(photo.photo_file), edit_template_photo_path(@template, photo)%></dd>
+					<dd><%= link_to image_tag(composed_image_template_path(@template, :part => photo.part)), edit_template_photo_path(@template, photo)%></dd>
 				</dl>
 				<%= f.submit "반영"%>
 				<div class="row columns">
-					<%# @template.label_columns.each do |column| %>
-						<div class="span12">
-							<%= f.fields_for :labels do |label_form|%>
-								<dl class="dl-horizontal">
-									<dt><span class="label label-inverse">column</span></dt>
-									<dd>
-										<%= label_form.text_field :column %>
-									</dd>
-								</dl>
-								<% keys = [:x_pos, :y_pos, :color, :size]%>
-								<div class="row">
-									<% keys.each do |key| %>
-										<div class="span3">
-											<dl class="dl-horizontal">
-												<dt class=""><%= key.to_s%> </dt>
-												<dd class=""><%= label_form.text_field key, :class => "input-mini" %></dd>
-											</dl>
-										</div>
-									<% end %>
-								</div>
-							<% end %>
-						</div>
-					<%# end %><!-- column -->
+
+					<div class="span12">
+						<%= f.fields_for :labels do |label_form|%>
+						<%= label_form.hidden_field :part, :value => photo.part %>
+							<dl class="dl-horizontal">
+								<dt><span class="label label-inverse">column</span></dt>
+								<dd>
+									<%= label_form.text_field :column %>
+								</dd>
+							</dl>
+							<% keys = [:x_pos, :y_pos, :color, :size]%>
+							<div class="row">
+								<% keys.each do |key| %>
+									<div class="span3">
+										<dl class="dl-horizontal">
+											<dt class=""><%= key.to_s%> </dt>
+											<dd class=""><%= label_form.text_field key, :class => "input-mini" %></dd>
+										</dl>
+									</div>
+								<% end %>
+							</div>
+						<% end %><!-- f.fields_for :labels -->
+					</div><!-- span12 -->
+
 				</div><!-- div_columns-->
 				<%= f.submit "반영"%>
 			</li>

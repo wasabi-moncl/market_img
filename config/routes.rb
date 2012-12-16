@@ -25,6 +25,7 @@ MarketImg::Application.routes.draw do
   end
 
   resources :templates do
+    member { get :composed_image }
     scope :module => "template" do
       resources :photos
     end
