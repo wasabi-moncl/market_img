@@ -1,4 +1,5 @@
 <h2><%= @template.name %> 템플릿 관리</h2>
+<%= link_to "템플릿 이미지 올리기", template_photos_path(@template)%>
 <%= nested_form_for @template do |f| %>
 	<ul class="parts unstyled">
 		<% @photos.each do |photo| %>

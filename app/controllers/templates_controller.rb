@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
     @template.label_columns.each do |column|
       if @template.labels.find_all_by_column(column).empty?
-        label = @template.labels.build({:part => @template.photos.first.part, :column => column.to_s, :size => "12"})
+        label = @template.labels.build({ :column => column.to_s, :size => "12"})
       end
     end
     
@@ -43,8 +43,8 @@ class TemplatesController < ApplicationController
       unless example_item[part_label.column.to_sym].nil?
         label = Magick::Draw.new
         label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item[part_label.column.to_sym]) do 
-          label.fill      = "#ffffff"
-          label.pointsize = 20
+          label.fill      = part_label.color
+          label.pointsize = part_label.size.to_i
           # md.gravity = Magick::CenterGravity
           label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
         end
