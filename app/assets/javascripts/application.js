@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require twitter/bootstrap
+//= require zclip
 //= require_tree .

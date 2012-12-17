@@ -18,10 +18,12 @@
 						 <%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %>
 					 </td>
 					 <td>
-						 <%= text_field_tag "photo[#{pic.id}][[item_code]]", pic.item_code ||  item_code, :tabindex => i %>
+						 <%= text_field_tag "photo[#{pic.id}][[item_code]]", 
+						 pic.item_code ||  pic.extracted_item_code[:item_code], :tabindex => i %>
 					 </td>
 					 <td>
-						 <%= text_field_tag "photo[#{pic.id}][[part]]", pic.part || i%2, :tabindex => i+@photos.count, :class => "input-small" %>
+						 <%= text_field_tag "photo[#{pic.id}][[part]]", 
+						 pic.part || pic.extracted_item_code[:part], :tabindex => i+@photos.count, :class => "input-small" %>
 					 </td>
 					 <td>
 						 <%= link_to '삭제', user_photos_path(pic.id), :confirm => "지울까요?", :method => 'delete' %>

@@ -12,6 +12,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem "less-rails"
 gem "therubyracer"
 gem "nested_form"
+gem 'zclip-rails'
 
 #import excel file like xls xlsx
 gem "roo"

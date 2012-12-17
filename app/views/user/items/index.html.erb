@@ -18,7 +18,20 @@
 			<td><%= item.item_code %></td>
 			<td><%= item.name %></td>
 			<td><%= link_to "상품 이미지 만들기", product_image_path(item), :class => "btn btn-primary" %></td>
-			<td><%= link_to "완성된 상품 이미지", saved_image_path(item, "png"), :class => "btn" %></td>
+			<td>
+				<%= link_to "완성된 상품 이미지", saved_image_path(item, "png"),
+					:id => "saved_image_" + item.id.to_s, :class => "btn" %>
+					<% saved_image_id = "#saved_image_"+item.id.to_s %>
+					<script>
+						
+						$('<%= saved_image_id %>').zclip({
+						    copy: "<%= saved_image_url(item, 'png')%>",
+								afterCopy: function() {
+									alert("주소창에 콘트롤+V 눌러보세요.\n<%= saved_image_url(item, 'png')%>")
+								}
+						});
+					</script>
+		</td>
 		</tr>
 	<% end %>
 </table>

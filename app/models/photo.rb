@@ -27,4 +27,20 @@ class Photo < ActiveRecord::Base
 
   end
   
+  def extracted_item_code
+    item_code = self[:photo_file]
+    item_code = item_code.gsub(/\.(png|jpg|jpeg|gif)+$/, '')
+    if item_code =~ /__\d+_$/
+      part = /__\d+_$/.match(item_code)[-1]
+      part = /\d+/.match(part)[0].to_i
+    else
+      part = 0  
+    end
+    item_code = item_code.gsub(/__\d+_$/, '')
+    item_code
+    result = Hash.new
+    result[:item_code] = item_code
+    result[:part] = part
+    result
+  end
 end
