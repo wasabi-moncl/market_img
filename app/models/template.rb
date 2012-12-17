@@ -11,7 +11,6 @@ class Template < ActiveRecord::Base
   #label에 컬러코드가 없으면 저장 안됨.
   accepts_nested_attributes_for :labels, :reject_if => lambda { |a| a[:color].blank? } 
 
-
   def label_columns
     result = Array.new
     except = [:id, :created_at, :updated_at, :url, :user_id, :template_id, :mall_code]

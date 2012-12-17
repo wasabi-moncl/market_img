@@ -43,8 +43,6 @@ class Item < ActiveRecord::Base
     end
     parts
   end
-  
-  
     
   #for generate test seed  
   def self.association_to_all_photos

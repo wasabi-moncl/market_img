@@ -21,41 +21,27 @@ class User::ItemsController < ApplicationController
     dst.format = 'PNG'
     result_name = 'public/generated_images/generated_' + item.item_code + '.png'
     dst.write(result_name)
+
     parts.each do |part|
       filename = 'public' + part[:photo].photo_file.to_s
       src = Magick::Image.read(filename)[0]
+      label = Magick::Draw.new
+      item.templates.first.labels.find_all_by_part(part[:photo].part).each do |part_label|
+        label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item[part_label.column.to_sym]) do 
+          label.fill      = part_label.color
+          label.pointsize = part_label.size.to_i
+          # md.gravity = Magick::CenterGravity
+          label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+        end
+      end
       x_pos = part[:position].x_pos
       y_pos = part[:position].y_pos
       # next if x_pos == nil or y_pos == nil
       dst.composite!(src, x_pos, y_pos, Magick::OverCompositeOp)
+      
+      
       dst.write(result_name)
     end
-    # y = 1200
-    # label = Magick::Draw.new
-    # label.annotate( dst, 0, 0, 300, y, item.item_code) do 
-    #   label.fill      = "#ffffff"
-    #   label.pointsize = 20
-    #   # md.gravity = Magick::CenterGravity
-    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    # end
-    # label.annotate( dst, 0, 0, 50, y, item.name) do 
-    #   label.fill      = "#ffffff"
-    #   label.pointsize = 20
-    #   # md.gravity = Magick::CenterGravity
-    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    # end
-    # label.annotate( dst, 0, 0, 50, y+50, item.laundry) do 
-    #   label.fill      = "#cdca40"
-    #   label.pointsize = 20
-    #   # md.gravity = Magick::CenterGravity
-    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    # end
-    # label.annotate( dst, 0, 0, 50, y+100, item.fabric) do 
-    #   label.fill      = "#cdca40"
-    #   label.pointsize = 20
-    #   # md.gravity = Magick::CenterGravity
-    #   label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-    # end
 
     send_data dst.to_blob, :filename => "product_" + item.item_code + ".png",
       :disposition => 'inline', :type => "image/png"
