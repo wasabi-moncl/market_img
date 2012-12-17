@@ -48,14 +48,16 @@ class User::ItemsController < ApplicationController
   def saved_image
     item = Item.find(params[:id])
     result_name = 'public/generated_images/generated_' + item.item_code + '.png'
-    respond_to do |format|
-      format.png do 
-        send_data File.read(result_name), :filename => "product_" + item.item_code + ".png",
-        :disposition => 'inline', :type => "image/png"
+    if File.exist?(result_name)
+      respond_to do |format|
+        format.png do 
+          send_data File.read(result_name), :filename => "product_" + item.item_code + ".png",
+          :disposition => 'inline', :type => "image/png"
+        end
       end
+    else
+      redirect_to product_image_item_path(item)
     end
-    
-    
   end
 
   def import
