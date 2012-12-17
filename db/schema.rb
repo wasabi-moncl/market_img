@@ -98,6 +98,13 @@ ActiveRecord::Schema.define(:version => 20121215184820) do
     t.string   "email"
     t.string   "crypted_password"
     t.string   "salt"
+    t.string   "brand"
+    t.string   "branch"
+    t.string   "name"
+    t.string   "mobile"
+    t.string   "emergency_call"
+    t.string   "shop_tel"
+    t.string   "manager_name"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "remember_me_token"

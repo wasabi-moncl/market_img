@@ -48,7 +48,7 @@ class User::ItemsController < ApplicationController
   end
 
   def import
-    Item.import(params[:file])
+    Item.import(params[:file], current_user)
     Item.association_to_the_template
     redirect_to user_items_path
   end

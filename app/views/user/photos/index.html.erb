@@ -1,7 +1,7 @@
 <% i = 0%>
-<h1><%= @user.username %>님의 상품사진</h1>
-<ul>
-	<li><%= link_to '사진 올리기', new_user_photo_path %></li>
-	<li><%= link_to '품번 달기', edit_user_path(@user)%></li>
-	<li><%= link_to '엑셀 파일 올리기', user_items_path %></li>
+<h1><%= @user.username %>님의 상품 이미지 관리</h1>
+<ul class="unstyled menu">
+	<li><%= link_to '1. 이미지 파일 업로드', new_user_photo_path, :class => "btn link-btn" %></li>
+	<li><%= link_to '2. 이미지명 상품 품번으로 변경', edit_user_path(@user), :class => "btn btn-primary link-btn" %></li>
+	<li><%= link_to '3. 상품정보 업로드 및 수정', user_items_path, :class => "btn btn-info link-btn" %></li>
 </ul>

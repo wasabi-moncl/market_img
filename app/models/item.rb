@@ -5,6 +5,8 @@ class Item < ActiveRecord::Base
   has_and_belongs_to_many :templates
   belongs_to :template
   
+  belongs_to :user
+  
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
       when ".csv" then Csv.new(file.path, nil, :ignore)
@@ -14,13 +16,14 @@ class Item < ActiveRecord::Base
     end
   end
   
-  def self.import(file)
+  def self.import(file, user)
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       item = find_by_id(row["id"]) || new
       item.attributes = row.to_hash.slice(*accessible_attributes)
+      item.user = user
       item.save!
     end
   end

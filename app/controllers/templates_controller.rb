@@ -17,12 +17,14 @@ class TemplatesController < ApplicationController
   # GET /templates/1.json
   def show
     @template = Template.find(params[:id])
-    @template.label_columns.each do |column|
-      if @template.labels.find_all_by_column(column).empty?
-        label = @template.labels.build({ :column => column.to_s, :size => "12"})
+    
+    unless @template.items.empty?
+      @template.label_columns.each do |column|
+        if @template.labels.find_all_by_column(column).empty?
+          label = @template.labels.build({ :column => column.to_s, :size => "12"})
+        end
       end
     end
-    
     @photos = @template.photos
     @labels = @template.labels
     respond_to do |format|

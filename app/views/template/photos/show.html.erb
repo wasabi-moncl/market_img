@@ -2,3 +2,4 @@
 <p><%= image_tag @photo.photo_file %></p>
 <p>part: <%= @photo.part%></p>
 <p><%= link_to "수정", edit_template_photo_path(@template, @photo) %></p>
+<p><%= link_to "#{@template.name} 템플릿 관리 페이지로.", template_path(@template) %></p>

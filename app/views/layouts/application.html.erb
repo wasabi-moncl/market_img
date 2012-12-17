@@ -27,10 +27,15 @@
           </a>
           <a class="brand" href="/">MarketImg</a>
 			<div class="container nav-collapse">
-				<ul class="nav">
-					<li><%= link_to "Banner Index", "/banners"  %></li>
-					<li><%= link_to "Write All Image", "/photos_write_all"  %></li>
+				<ul class="nav pull-right">
 					<li><%= link_to "템플릿 관리", templates_path  %></li>
+					<li>
+				 		<% if logged_in? %>
+				 		<%= link_to current_user.username + " 로그아웃", logout_path %>
+				 		<% else %>
+				 			<%= link_to "로그인", login_path%>
+				 		<% end %>
+					</li>
 				</ul>
 			</div><!--/.nav-collapse -->
         </div>
@@ -39,11 +44,6 @@
 
     <div class="container">
       <div class="content">
-		 		<% if logged_in? %>
-		 		<%= link_to current_user.username + " 로그아웃", logout_path %>
-		 		<% else %>
-		 			<%= link_to "로그인", login_path%>
-		 		<% end %>
         <%= yield %>
       </div><!--/content-->
 

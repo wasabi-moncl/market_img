@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   
   has_many :photos
   has_many :labels
+  has_many :items
   
   validates_uniqueness_of :username
   validates_uniqueness_of :email    

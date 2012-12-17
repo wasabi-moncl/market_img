@@ -1,7 +1,6 @@
+#encoding: utf-8
 class User::PhotosController < ApplicationController
-  
   before_filter :require_login
-  
   def index
     @user = current_user
     @photos = current_user.photos.all
@@ -44,6 +43,7 @@ class User::PhotosController < ApplicationController
   def create
     @user = current_user
     @photo = Photo.new(params[:photo])
+    @photo.user = @user
     if @photo.save
     else
       render :json => { "errors" => @photos.errors } 

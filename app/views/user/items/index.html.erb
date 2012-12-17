@@ -1,9 +1,15 @@
+<h2>엑셀 파일 업로드</h2>
+
+<%= form_tag import_user_items_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "올리기", :class => "btn" %>
+<% end %>
 <table>
 	<% @items.each do |item| %>
 		<tr>
 			<td>
 				<% Photo.where(:item_code => item.item_code).each do |photo| %>
-				<ul>
+				<ul class="unstyled">
 					<li><%= photo.part %></li>
 					<li><%= image_tag photo.photo_file.url(:thumb).to_s %></li>
 				</ul>
@@ -11,13 +17,7 @@
 			</td>
 			<td><%= item.item_code %></td>
 			<td><%= item.name %></td>
-			<td><%= link_to "완성된 상품 이미지", product_image_path(item) %></td>
+			<td><%= link_to "완성된 상품 이미지", product_image_path(item), :class => "btn btn-primary" %></td>
 		</tr>
 	<% end %>
 </table>
-<h2>엑셀 파일 업로드</h2>
-
-<%= form_tag import_user_items_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>

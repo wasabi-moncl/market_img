@@ -18,7 +18,6 @@ MarketImg::Application.routes.draw do
   
   namespace :user do
     resources :photos
-    
     resources :items do
       collection { post :import }
     end

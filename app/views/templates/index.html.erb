@@ -1,21 +1,17 @@
-<h1>Listing templates</h1>
+<h1>템플릿 목록</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-  </tr>
+<ul class="unstyled">
+	<% @templates.each do |template| %>
+	<li>
+	  <dl class="dl-horizontal">
+	    <dt><%= link_to template.name, template_path(template) %></dt>
+	    <dd>
+				<span><%= link_to '수정', edit_template_path(template) %></span>
+		    <span><%= link_to '삭제', template, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+			</dd>
+		</dl>
+	</li>
+	<% end %>
+</ul>
 
-<% @templates.each do |template| %>
-  <tr>
-    <td><%= link_to template.name, template_path(template) %></td>
-    <td><%= link_to 'Edit', edit_template_path(template) %></td>
-    <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Template', new_template_path %>
+<%= link_to '템플릿 새로 만들기', new_template_path %>
