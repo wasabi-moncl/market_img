@@ -17,7 +17,8 @@
 			</td>
 			<td><%= item.item_code %></td>
 			<td><%= item.name %></td>
-			<td><%= link_to "완성된 상품 이미지", product_image_path(item), :class => "btn btn-primary" %></td>
+			<td><%= link_to "상품 이미지 만들기", product_image_path(item), :class => "btn btn-primary" %></td>
+			<td><%= link_to "완성된 상품 이미지", saved_image_path(item, "png"), :class => "btn" %></td>
 		</tr>
 	<% end %>
 </table>
