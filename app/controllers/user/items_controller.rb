@@ -26,11 +26,13 @@ class User::ItemsController < ApplicationController
       src = Magick::Image.read(filename)[0]
       label = Magick::Draw.new
       item.templates.first.labels.find_all_by_part(part[:photo].part).each do |part_label|
-        label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item[part_label.column.to_sym]) do 
-          label.fill      = part_label.color
-          label.pointsize = part_label.size.to_i
-          # md.gravity = Magick::CenterGravity
-          label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+        unless item[part_label.column.to_sym].nil?
+          label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item[part_label.column.to_sym]) do 
+            label.fill      = part_label.color
+            label.pointsize = part_label.size.to_i
+            # md.gravity = Magick::CenterGravity
+            label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+          end
         end
       end
       x_pos = part[:position].x_pos
