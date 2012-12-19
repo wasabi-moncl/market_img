@@ -6,3 +6,20 @@ ul.menu li a{
 	font-size: 18px;
 	margin: 6px 6px 6px 6px;
 }
+
+div.first{
+	background-color: #e6e6e6;
+}
+
+div.second{
+	background-color:#0044cc;
+}
+div.second a{
+	color: #fff;
+}
+div.third{
+	background-color:#5bc0de;
+}
+div.third a{
+	color: #fff;
+}

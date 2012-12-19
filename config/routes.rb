@@ -1,4 +1,6 @@
 MarketImg::Application.routes.draw do
+  get "dashboard/index"
+
   match 'banners/import' => 'banners#import', :via => :post  
   match 'photos_write_all' => 'photos#write_all', :via => :get
   match 'product_image/:id' => 'user/items#product_image', :via => :get, :as => "product_image"
@@ -17,6 +19,9 @@ MarketImg::Application.routes.draw do
   end
   
   namespace :user do
+
+      get "dashboard" => "dashboard#index"
+
     resources :photos
     resources :items do
       collection { post :import }

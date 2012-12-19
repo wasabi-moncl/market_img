@@ -1,5 +1,3 @@
-require "RMagick"
-
 class User::ItemsController < ApplicationController
   def show
   end
