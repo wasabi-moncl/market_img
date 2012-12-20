@@ -40,7 +40,7 @@ class Photo < ActiveRecord::Base
     item_code
     result = Hash.new
     result[:item_code] = item_code
-    result[:part] = part - 1
+    result[:part] = part + Template.first.photos.count - 1
     result
   end
 end
