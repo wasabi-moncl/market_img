@@ -3,7 +3,7 @@ class User::PhotosController < ApplicationController
   before_filter :require_login
   def index
     @user = current_user
-    @photos = current_user.photos.all
+    @photos = @user.photos.order(:item_code)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @photos }
@@ -52,7 +52,8 @@ class User::PhotosController < ApplicationController
   end
   
   def edit
-    @photos = @user.photos
+    @user = current_user
+    @photos = @user.photos.order(:item_code)
   end
   
   def update

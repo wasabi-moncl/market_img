@@ -1,2 +1,18 @@
-<h1>User::Dashboard#index</h1>
-<p>Find me in app/views/user/dashboard/index.html.erb</p>
+<h1><%= @user.username %>님의 상품 이미지 관리</h1>
+<div class="row">
+	<div class="span4 well">
+		<div class="span3 well first">
+			<%= link_to '1. 이미지 파일 업로드', new_user_photo_path, :class => " btn-large main" %>
+		</div>
+		<div class="span3 well second">
+			<%= link_to '2. 이미지명 상품 품번으로 변경', user_photos_path, :class => " btn-large main" %>
+		</div>
+		<div class="span3 well third">
+			<%= link_to '3. 상품정보 업로드 및 수정', user_items_path, :class => " btn-large main" %>
+		</div>
+	</div>
+	<div class="span7 well">
+		<div class="span6 well">공지사항</div>
+		<div class="span6 well">이벤트</div>
+	</div>
+</div>

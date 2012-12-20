@@ -3,7 +3,7 @@
 class SessionsController < ApplicationController
   def new
     if logged_in?
-      redirect_to user_photos_path
+      redirect_to dashboard_path
     end
   end
   

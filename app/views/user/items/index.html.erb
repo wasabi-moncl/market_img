@@ -4,34 +4,34 @@
   <%= file_field_tag :file %>
   <%= submit_tag "올리기", :class => "btn" %>
 <% end %>
-<table>
+<div class="row">
 	<% @items.each do |item| %>
-		<tr>
-			<td>
-				<% Photo.where(:item_code => item.item_code).each do |photo| %>
-				<ul class="unstyled">
-					<li><%= photo.part %></li>
-					<li><%= image_tag photo.photo_file.url(:thumb).to_s %></li>
-				</ul>
-				<% end %>
-			</td>
-			<td><%= item.item_code %></td>
-			<td><%= item.name %></td>
-			<td><%= link_to "상품 이미지 만들기", product_image_path(item), :class => "btn btn-primary" %></td>
-			<td>
-				<%= link_to "완성된 상품 이미지", saved_image_path(item, "png"),
-					:id => "saved_image_" + item.id.to_s, :class => "btn" %>
-					<% saved_image_id = "#saved_image_"+item.id.to_s %>
-					<script>
+		<div class="span3 well">
+			<ul class="unstyled">
+				<li><h3><%= item.item_code %></h3></li>
+				<% photo = Photo.where(:item_code => item.item_code).first %>
+				<li>
+					<%= link_to image_tag(photo.photo_file.url(:thumb).to_s, :class => "product_image"), user_photos_path %>
+				</li>
+				<li>
+					<%= link_to "미리보기", product_image_path(item), :class => "btn" %>
+					<%= link_to "링크 복사하기", saved_image_path(item, "png"),
+						:id => "saved_image_" + item.id.to_s, :class => "btn btn-primary" %>
+				</li>
+				
+				<%# Photo.where(:item_code => item.item_code).each do |photo| %>
+				<%# end %>
+			</ul>
+			<% saved_image_id = "#saved_image_"+item.id.to_s %>
+			<script>
 						
-						$('<%= saved_image_id %>').zclip({
-						    copy: "<%= saved_image_url(item, 'png')%>",
-								afterCopy: function() {
-									alert("주소창에 콘트롤+V 눌러보세요.\n<%= saved_image_url(item, 'png')%>")
-								}
-						});
-					</script>
-		</td>
-		</tr>
+				$('<%= saved_image_id %>').zclip({
+				    copy: "<%= saved_image_url(item, 'png')%>",
+						afterCopy: function() {
+							alert("주소창에 콘트롤+V 눌러보세요.\n<%= saved_image_url(item, 'png')%>")
+						}
+				});
+			</script>
+		</div>
 	<% end %>
-</table>
+</div>

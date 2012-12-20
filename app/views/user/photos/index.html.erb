@@ -1,24 +1,40 @@
-<% i = 0%>
-<h1><%= @user.username %>님의 상품 이미지 관리</h1>
-<!-- <ul class="unstyled menu">
-	<li><%= link_to '1. 이미지 파일 업로드', new_user_photo_path, :class => "btn link-btn" %></li>
-	<li><%= link_to '2. 이미지명 상품 품번으로 변경', edit_user_path(@user), :class => "btn btn-primary link-btn" %></li>
-	<li><%= link_to '3. 상품정보 업로드 및 수정', user_items_path, :class => "btn btn-info link-btn" %></li>
-</ul> -->
-<div class="row">
-	<div class="span4 well">
-		<div class="span3 well first">
-			<%= link_to '1. 이미지 파일 업로드', new_user_photo_path, :class => " btn-large main" %>
-		</div>
-		<div class="span3 well second">
-			<%= link_to '2. 이미지명 상품 품번으로 변경', edit_user_path(@user), :class => " btn-large main" %>
-		</div>
-		<div class="span3 well third">
-			<%= link_to '3. 상품정보 업로드 및 수정', user_items_path, :class => " btn-large main" %>
-		</div>
-	</div>
-	<div class="span7 well">
-		<div class="span6 well">공지사항</div>
-		<div class="span6 well">이벤트</div>
-	</div>
+<% i = 0 %>
+<div id="item" class="well">
+	<%= simple_form_for @user do |f| %>
+	<%= f.submit "품번변경 완료", :class => "btn btn-primary" %>
+		<%= f.fields_for :photos do |photos_form| %>
+		<table class="table table-striped">
+		<% @photos.each do |pic| %>
+			<%
+			if /(.+\/)(.+)(\.png)/.match(pic.photo_file.to_s).nil?
+				item_code = ""
+			else
+				item_code = /(.+\/)(.+)(\.png)/.match(pic.photo_file.to_s)[2]
+			end
+			%>
+					<tr>
+					<% i = i + 1 %>
+			     <td class="span4">
+						 <%= link_to image_tag(pic.photo_file.url(:thumb).to_s), user_photo_path(pic) %>
+					 </td>
+					 <td>
+						 <%= text_field_tag "photo[#{pic.id}][[item_code]]", 
+						 pic.item_code ||  pic.extracted_item_code[:item_code], :tabindex => i %>
+					 </td>
+					 <td>
+						 <%= text_field_tag "photo[#{pic.id}][[part]]", 
+						 pic.part || pic.extracted_item_code[:part], :tabindex => i+@photos.count, :class => "input-small" %>
+					 </td>
+					 <td>
+						 <%= link_to '삭제', user_photos_path(pic.id), :confirm => "지울까요?", :method => 'delete' %>
+					 </td>
+				 </tr>
+
+			 <%end%>
+			 		</table>
+				<% end %>
+
+
+	<%= f.submit "품번변경 완료", :class => "btn btn-primary" %>
+	<% end %>
 </div>

@@ -3,7 +3,6 @@
 	<p id="notice"><%= notice %></p>
 		사진 올리기: 
 		<input id="fileupload" type="file" name="photo[photo_file]" multiple>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
 		<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
 		<script src="/jquery-file-upload/jquery.fileupload.js"></script>
@@ -14,15 +13,15 @@
 		        url: '<%= user_photos_path %>',
 		        done: function (e, data) {
 		            $.each(data.result, function (index, file) { 
-		               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
+		               $('<div class="span2 well"><img src="'+file.thumbnail_url+'"><p>'+file.file_name+'<p></div>').appendTo('#thumbs');
 		            });
 		        }
 		    });
 		});
 		</script>
-		<ul id="thumbs" class="row-fluid">
+		<div id="thumbs" class="row">
 	<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
-		</ul>
+		</div>
 <% end %>
 <p>
 	<%= link_to '확인', user_photos_path, :class => "btn btn-primary" %>
