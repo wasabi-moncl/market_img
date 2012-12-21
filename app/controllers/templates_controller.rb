@@ -47,6 +47,7 @@ class TemplatesController < ApplicationController
         label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item[part_label.column.to_sym]) do 
           label.fill      = part_label.color
           label.pointsize = part_label.size.to_i
+          label.interline_spacing = -(48 / 5) if self.respond_to?(:interline_spacing)
           # md.gravity = Magick::CenterGravity
           label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
         end
