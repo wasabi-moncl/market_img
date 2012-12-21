@@ -12,15 +12,21 @@ div.first{
 }
 
 div.second{
-	background-color:#0044cc;
+	background-color:#5bc0de;
 }
 div.second a{
 	color: #fff;
 }
 div.third{
-	background-color:#5bc0de;
+	background-color:#0044cc;
 }
 div.third a{
+	color: #fff;
+}
+div.fourth {
+	background-color:#5bb75b;
+}
+div.fourth a{
 	color: #fff;
 }
 

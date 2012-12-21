@@ -46,6 +46,28 @@ class Item < ActiveRecord::Base
     end
     parts
   end
+  
+  def description
+    words = Array.new
+    str = self[:description]
+    comma_separated_words = str.split(",")
+    last_word = str.split(",")[-1]
+    comma_separated_words = comma_separated_words[0..-2].map{|give_back_comma| give_back_comma + ","}
+    comma_separated_words = comma_separated_words << last_word
+    comma_separated_words.each{|x| words << x.split(" ")}
+    words.flatten!
+    i = 1
+    enterd_str = String.new
+    words.each do |word|
+      unless i % 4 == 0
+        enterd_str = enterd_str + word + " "
+      else
+        enterd_str = enterd_str + word + "\n"
+      end
+      i = i + 1
+    end
+    enterd_str
+  end
     
   #for generate test seed  
   def self.association_to_all_photos
