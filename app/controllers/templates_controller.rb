@@ -39,15 +39,15 @@ class TemplatesController < ApplicationController
     filename = 'public' + dst_image.photo_file.to_s
     dst = Magick::Image.read(filename).first
     label = Magick::Draw.new
-    example_item = template.items.first
+    example_item = template.items.last
 
     template.labels.find_all_by_part(params[:part]).each do |part_label|
       unless example_item[part_label.column.to_sym].nil?
         label = Magick::Draw.new
-        label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item[part_label.column.to_sym]) do 
+        label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item.send(part_label.column)) do  
           label.fill      = part_label.color
           label.pointsize = part_label.size.to_i
-          label.interline_spacing = -(48 / 5) if self.respond_to?(:interline_spacing)
+          # label.interline_spacing = -(48 / 5) if self.respond_to?(:interline_spacing)
           # md.gravity = Magick::CenterGravity
           label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
         end
