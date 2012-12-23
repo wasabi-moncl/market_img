@@ -14,11 +14,12 @@ gem "therubyracer"
 gem "nested_form"
 gem 'zclip-rails'
 
-#import excel file like xls xlsx
-gem "roo"
 
-# gem "roo" already include the gem "rmagick" so, "rmagick" is commented
+
+gem "roo", :git => 'git://github.com/Empact/roo.git'
+
 gem "rmagick"
+# gem "mini_magick"
 
 #authentications
 gem "sorcery"

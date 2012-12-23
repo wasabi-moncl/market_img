@@ -1,5 +1,4 @@
 #encoding: utf-8
-require "RMagick"
 
 class TemplatesController < ApplicationController
   # GET /templates
@@ -34,13 +33,14 @@ class TemplatesController < ApplicationController
   end
 
   def composed_image
+    # dst = MiniMagick::Image.open(dst_image.photo_file.path)
     template = Template.find(params[:id])
     dst_image = template.photos.find_by_part(params[:part])
-    filename = 'public' + dst_image.photo_file.to_s
-    dst = Magick::Image.read(filename).first
+    # filename = 'public' + dst_image.photo_file.to_s
+    dst = Magick::Image.read(dst_image.photo_file.path).first
     label = Magick::Draw.new
     example_item = template.items.last
-
+    
     template.labels.find_all_by_part(params[:part]).each do |part_label|
       unless example_item[part_label.column.to_sym].nil?
         label = Magick::Draw.new
@@ -52,7 +52,7 @@ class TemplatesController < ApplicationController
         end
       end
     end
-
+    
     send_data dst.to_blob, :filename => "template_" + template.name + "_" + dst_image.part.to_s + ".png",
           :disposition => 'inline', :type => "image/png"
   end
