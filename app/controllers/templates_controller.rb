@@ -44,7 +44,15 @@ class TemplatesController < ApplicationController
     template.labels.find_all_by_part(params[:part]).each do |part_label|
       unless example_item[part_label.column.to_sym].nil?
         begin
-          gravity = ("Magick::"+part_label.gravity.capitalize+"Gravity").constantize
+          case part_label.gravity.capitalize
+          when "Northeast"
+            gravity = "NorthEast"
+          when "Northwest"
+            gravity = "NorthWest"
+          else
+            gravity = part_label.gravity.capitalize
+          end
+          gravity = ("Magick::" + gravity + "Gravity").constantize
         rescue
           gravity = Magick::NorthGravity
         end

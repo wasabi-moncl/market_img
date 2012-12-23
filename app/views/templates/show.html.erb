@@ -20,7 +20,17 @@
 									<%= label_form.text_field :column %>
 								</dd>
 							</dl>
-							<% keys = [:gravity, :x_pos, :y_pos, :color, :size]%>
+							<div class="row">
+								<div class="span4">
+									<dl class="dl-horizontal">
+										<dt class="">정렬 기준점</dt>
+										<dd class="">
+											<%= label_form.select "gravity", options_for_select([["가운데", "North"],["왼쪽", "NorthWest"],["오른쪽", "NorthEast"]])%>
+										</dd>
+									</dl>
+								</div>
+							</div>
+							<% keys = [:x_pos, :y_pos, :color, :size]%>
 							<div class="row">
 								<% keys.each do |key| %>
 									<div class="span4">
