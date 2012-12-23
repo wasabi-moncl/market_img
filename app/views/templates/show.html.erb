@@ -20,10 +20,10 @@
 									<%= label_form.text_field :column %>
 								</dd>
 							</dl>
-							<% keys = [:x_pos, :y_pos, :color, :size]%>
+							<% keys = [:gravity, :x_pos, :y_pos, :color, :size]%>
 							<div class="row">
 								<% keys.each do |key| %>
-									<div class="span3">
+									<div class="span4">
 										<dl class="dl-horizontal">
 											<dt class=""><%= key.to_s%> </dt>
 											<dd class=""><%= label_form.text_field key, :class => "input-mini" %></dd>

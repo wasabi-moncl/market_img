@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215184820) do
+ActiveRecord::Schema.define(:version => 20121213125307) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20121215184820) do
     t.integer  "user_id"
     t.integer  "template_id"
     t.integer  "part"
+    t.string   "gravity"
     t.integer  "x_pos"
     t.integer  "y_pos"
     t.integer  "width"

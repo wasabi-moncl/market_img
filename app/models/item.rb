@@ -1,4 +1,5 @@
 #encoding: utf-8
+require 'roo'
 class Item < ActiveRecord::Base
   attr_accessible :description, :discount_price, :discount_rate, :fabric, :item_code, :laundry, :mall_code, :name, :price, :url, :part
   has_many :photos

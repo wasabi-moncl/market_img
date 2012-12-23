@@ -43,11 +43,16 @@ class TemplatesController < ApplicationController
     
     template.labels.find_all_by_part(params[:part]).each do |part_label|
       unless example_item[part_label.column.to_sym].nil?
+        begin
+          gravity = ("Magick::"+part_label.gravity.capitalize+"Gravity").constantize
+        rescue
+          gravity = Magick::NorthGravity
+        end
         label = Magick::Draw.new
         label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item.send(part_label.column)) do  
           label.fill      = part_label.color
           label.pointsize = part_label.size.to_i
-          label.gravity = Magick::CenterGravity
+          label.gravity = gravity
           label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
         end
       end

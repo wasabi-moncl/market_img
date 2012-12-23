@@ -14,9 +14,7 @@ gem "therubyracer"
 gem "nested_form"
 gem 'zclip-rails'
 
-
-
-gem "roo", :git => 'git://github.com/Empact/roo.git'
+gem "roo"# , :git => 'git://github.com/Empact/roo.git'
 
 gem "rmagick"
 # gem "mini_magick"
@@ -46,6 +44,8 @@ gem 'jbuilder'
 
 # Use unicorn as the app server
 gem 'unicorn'
+# gem 'thin'
+gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git'
 
 # Deploy with Capistrano
 gem 'capistrano'

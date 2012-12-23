@@ -59,5 +59,9 @@ module MarketImg
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # #disable logger in develop server
+    # config.assets.logger = false
+    # config.assets.logger = nil
   end
 end
