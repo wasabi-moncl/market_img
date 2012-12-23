@@ -51,6 +51,8 @@ class TemplatesController < ApplicationController
             gravity = "NorthWest"
           when "Southeast"  
             gravity = "SouthEast"
+          when "Southwest"  
+            gravity = "SouthWest"
           else
             gravity = part_label.gravity.capitalize
           end
