@@ -1,33 +1,25 @@
 ul.menu li{
 	margin-bottom: 15px;
-}
-
-ul.menu li a{
-	font-size: 18px;
-	margin: 6px 6px 6px 6px;
+	a{
+		font-size: 18px;
+		margin: 6px 6px 6px 6px;
+	}
 }
 
 div.first{
 	background-color: #e6e6e6;
 }
-
 div.second{
 	background-color:#5bc0de;
-}
-div.second a{
-	color: #fff;
 }
 div.third{
 	background-color:#0044cc;
 }
-div.third a{
-	color: #fff;
-}
 div.fourth {
 	background-color:#5bb75b;
 }
-div.fourth a{
-	color: #fff;
+div.second, div.third, div.fourth{
+	a{color: #fff;}
 }
 
 img.product_image{

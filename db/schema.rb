@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213125307) do
+ActiveRecord::Schema.define(:version => 20121223225605) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -23,6 +23,19 @@ ActiveRecord::Schema.define(:version => 20121213125307) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "brand_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "brands", :force => true do |t|
+    t.string   "name"
+    t.integer  "brand_category_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -51,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20121213125307) do
     t.integer  "user_id"
     t.integer  "template_id"
     t.integer  "part"
-    t.string   "gravity"
+    t.string   "gravity",     :default => "NorthGravity"
     t.integer  "x_pos"
     t.integer  "y_pos"
     t.integer  "width"
@@ -61,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20121213125307) do
     t.string   "font"
     t.string   "size"
     t.string   "column"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "photos", :force => true do |t|
@@ -90,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20121213125307) do
 
   create_table "templates", :force => true do |t|
     t.string   "name"
+    t.integer  "brand_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

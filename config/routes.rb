@@ -1,4 +1,8 @@
 MarketImg::Application.routes.draw do
+  resources :brand_categories
+
+  resources :brands
+
   match 'banners/import' => 'banners#import', :via => :post  
   match 'photos_write_all' => 'photos#write_all', :via => :get
   match 'product_image/:id' => 'user/items#product_image', :via => :get, :as => "product_image"
