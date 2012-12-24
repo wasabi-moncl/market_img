@@ -11,7 +11,9 @@
 		<%= f.input :emergency_call, :label => '비상전화(온라인담당자)', :placeholder => "비상전화"  %>
 		<%= f.input :shop_tel, :label => '매장전화', :placeholder => "매장전화"  %>
 		<%= f.input :manager_name, :label => '샵 매니저 명', :placeholder => "매니저 명"  %>
-		<%= f.input :brand, :label => '담당 브랜드', :placeholder => "브랜드", :as => :select, :collection => @brands, :prompt => "브랜드명"  %>
+		<%= f.input :brand_category_id, :label => '브랜드 카테고리', :placeholder => "카테고리", :as => :select, :collection => BrandCategory.all, :prompt => "카테고리"  %>
+		<%= f.input :brand_category_id, :label => '브랜드 카테고리', :placeholder => "카테고리", :as => :select, :collection => BrandCategory.all, :prompt => "카테고리"  %>
+		<%= f.input :brand_id, :label => '브랜드 카테고리', :placeholder => "카테고리", :as => :select, :collection => BrandCategory.all, :prompt => "카테고리"  %>
 		<%= f.input :branch, :label => '담당 지점', :placeholder => "담당 지점", :as => :select, :collection => @branchs, :prompt => "지점명"  %>
 	  <div class="actions">
 	  	<%= f.submit "가입하기", :class => "btn btn-primary submit" %>

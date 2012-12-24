@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(:version => 20121223225605) do
     t.string   "emergency_call"
     t.string   "shop_tel"
     t.string   "manager_name"
+    t.integer  "brand_id"
+    t.integer  "brand_category_id"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "remember_me_token"

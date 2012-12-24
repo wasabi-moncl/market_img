@@ -60,7 +60,7 @@ class Item < ActiveRecord::Base
     i = 1
     enterd_str = String.new
     words.each do |word|
-      unless i % 4 == 0
+      unless i % 7 == 0
         enterd_str = enterd_str + word + " "
       else
         enterd_str = enterd_str + word + "\n"

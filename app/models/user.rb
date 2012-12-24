@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
 
   attr_accessible :last_login_at, :username, :password, :password_confirmation, :email
   attr_accessible :name, :mobile, :emergency_call, :shop_tel, :manager_name, :brand, :branch
+  attr_accessible :brand_category_id, :brand_id
+  
+  belongs_to :brand
+  belongs_to :brand_cateogory
+  
   has_many :photos
   has_many :labels
   has_many :items
