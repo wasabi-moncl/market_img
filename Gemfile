@@ -11,6 +11,7 @@ gem "carrierwave"
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem "less-rails"
 gem "therubyracer"
+gem 'libv8', '~> 3.11.8'
 gem "nested_form"
 gem 'zclip-rails'
 

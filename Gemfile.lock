@@ -100,6 +100,7 @@ GEM
     less-rails (2.2.6)
       actionpack (>= 3.1)
       less (~> 2.2.0)
+    libv8 (3.11.8.4)
     log4r (1.1.10)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -211,6 +212,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   less-rails
+  libv8 (~> 3.11.8)
   nested_form
   rails (= 3.2.8)
   rails-clean-logs!
