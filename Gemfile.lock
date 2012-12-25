@@ -56,6 +56,9 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     choice (0.1.6)
+    chosen-rails (0.9.8)
+      railties (~> 3.0)
+      thor (~> 0.14)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -207,6 +210,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   carrierwave
+  chosen-rails
   coffee-rails (~> 3.2.1)
   debugger
   jbuilder

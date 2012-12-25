@@ -5,9 +5,11 @@ gem 'rails', '3.2.8'
 gem 'sqlite3'
 
 gem 'simple_form'
+#awsome select form
+# gem "select2-rails"
+gem 'chosen-rails'
+
 gem "carrierwave"
-
-
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem "less-rails"
 gem "therubyracer"
