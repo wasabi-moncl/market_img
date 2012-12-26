@@ -1,28 +1,32 @@
 # coding : utf-8
 require 'csv'
 
-puts "Importing category..."
 CSV.foreach(Rails.root.join("db", "category_brand_list.csv"), headers: true) do |row|
   if BrandCategory.find_by_name(row[0]).nil?
     BrandCategory.create! do |category|
       category.name = row[0]
-      puts row[0]
     end
   end
 end
-puts "Importing brands..."
+puts "Imported " + BrandCategory.count.to_s + " categories"
 CSV.foreach(Rails.root.join("db", "category_brand_list.csv"), headers: true) do |row|
   if BrandCategory.find_by_name(row[0]).brands.find_by_name(row[1]).nil? 
     unless row[1].nil?
       Brand.create! do |brand|
         brand.name = row[1]
         brand.brand_category = BrandCategory.find_by_name(row[0])
-        puts "                " + row[0] + " / " + row[1]
       end
     end
   end
 end
-
+puts "Imported " + Brand.count.to_s + " brands"
+CSV.foreach(Rails.root.join("db", "branch_list.csv"), headers: true) do |row|
+  Branch.create! do |branch|
+    branch.mall = row[0]
+    branch.branch = row[1]
+  end
+end
+puts "Imported " + Branch.count.to_s + " branchs"
 users = User.create(
   [
     { 

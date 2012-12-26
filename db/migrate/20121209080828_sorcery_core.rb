@@ -14,6 +14,7 @@ class SorceryCore < ActiveRecord::Migration
       t.string :manager_name
       t.integer :brand_id
       t.integer :brand_category_id
+      t.integer :branch_id
       t.timestamps
     end
   end

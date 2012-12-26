@@ -3,3 +3,5 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
   $('#user_brand_id').chosen()
+jQuery ->
+	$('#user_branch_id').chosen()

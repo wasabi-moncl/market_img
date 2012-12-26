@@ -1,4 +1,6 @@
 MarketImg::Application.routes.draw do
+  resources :branches
+
   resources :brand_categories
 
   resources :brands

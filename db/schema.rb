@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223225605) do
+ActiveRecord::Schema.define(:version => 20121226014815) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(:version => 20121223225605) do
     t.string   "bg_color"
     t.integer  "font_size"
     t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "branches", :force => true do |t|
+    t.string   "mall"
+    t.string   "branch"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -122,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20121223225605) do
     t.string   "manager_name"
     t.integer  "brand_id"
     t.integer  "brand_category_id"
+    t.integer  "branch_id"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "remember_me_token"
