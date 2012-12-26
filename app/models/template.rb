@@ -3,6 +3,8 @@ class Template < ActiveRecord::Base
   attr_accessible :name
   attr_accessible :labels_attributes
 
+  belongs_to :brand
+  
   has_many :positions
   has_many :photos
   has_many :labels
