@@ -16,10 +16,16 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :category_id %><br />
-    <%= f.number_field :category_id %>
+    <%= f.label :brand_category_id %><br />
+    <%= f.number_field :brand_category_id %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<ul>
+<% BrandCategory.all.each do |category|%>
+	<li><%=category.name%> <%=category.id%></li>
+<% end %>
+</ul>

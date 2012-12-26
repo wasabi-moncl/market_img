@@ -1,0 +1,16 @@
+<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
+	<%= f.input :brand_id, :label => '브랜드', :as => :select, :collection => Brand.all, :prompt => "브랜드"  %>
+	<%= f.input :username, :label => 'ID', :placeholder => "ID"  %>
+	<%#= f.input :password, :label => '패스워드', :placeholder => "패스워드", :hint => '특수문자를 제외한 1글자 ~ 20글자 이하' %>
+	<%#= f.input :password_confirmation, :label => '패스워드 확인', :placeholder => "패스워드 확인", :hint => '특수문자를 제외한 1글자 ~ 20글자 이하' %>
+	<%= f.input :email, :label => '이메일', :placeholder => "이메일"  %>
+	<%= f.input :name, :label => '이름', :placeholder => "이름"  %>
+	<%= f.input :mobile, :label => '핸드폰', :placeholder => "핸드폰"  %>
+	<%= f.input :emergency_call, :label => '비상전화(온라인담당자)', :placeholder => "비상전화"  %>
+	<%= f.input :shop_tel, :label => '매장전화', :placeholder => "매장전화"  %>
+	<%= f.input :manager_name, :label => '샵 매니저 명', :placeholder => "매니저 명"  %>
+	<%= f.input :branch, :label => '담당 지점', :placeholder => "담당 지점", :as => :select, :collection => @branchs, :prompt => "지점명"  %>
+  <div class="actions">
+  	<%= f.submit "가입하기", :class => "btn btn-primary submit" %>
+  </div>
+<% end %>

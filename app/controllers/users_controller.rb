@@ -23,7 +23,6 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find params[:id]
-    @collections = @user.collections
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,16 +36,15 @@ class UsersController < ApplicationController
   end
   
   def update
-    photo = params[:photo]
-    @photos = Photo.find(photo.keys)
+    @user = User.find(params[:id])
+
     respond_to do |format|
-      if Photo.update(photo.keys, photo.values)
-        Item.association_to_all_photos
-        format.html { redirect_to dashboard_path, notice: 'Item was successfully updated.' }
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'Brand was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @photos.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
