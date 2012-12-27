@@ -28,7 +28,7 @@ class User::ItemsController < ApplicationController
           label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item[part_label.column.to_sym]) do 
             label.fill      = part_label.color
             label.pointsize = part_label.size.to_i
-            # md.gravity = Magick::CenterGravity
+            label.gravity = Magick::NorthGravity
             label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
           end
         end

@@ -1,6 +1,6 @@
 <% i = 0 %>
 <div id="item" class="well">
-	<%= simple_form_for [:user, Photo.new] do |f| %>
+	<%= simple_form_for [:user, Photo.first] do |f| %>
 	<%= f.submit "품번변경 완료", :class => "btn btn-primary" %>
 		<%= f.fields_for :photos do |photos_form| %>
 		<table class="table table-striped">
