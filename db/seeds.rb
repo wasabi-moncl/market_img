@@ -49,19 +49,55 @@ template = Template.create(
     }
   ]
 )
-5.times do |i|
-  name = "sisley_" + i.to_s
+
   template_id = Template.last.id
-  p = Position.create(
+Position.create(
   [
     {
-      name: name,
-      part: i,
+      name: "sisley_0",
+      part: 0,
       template_id: template_id,
+      x_pos: 1,
+      y_pos: 1
+    },
+    {
+      name: "sisley_1",
+      part: 1,
+      template_id: template_id,
+      x_pos: 32,
+      y_pos: 1077
+    },
+    {
+      name: "sisley_2",
+      part: 2,
+      template_id: template_id,
+      x_pos: 75,
+      y_pos: 1646
+    },
+    {
+      name: "sisley_3",
+      part: 3,
+      template_id: template_id,
+      x_pos: 232,
+      y_pos: 1646
+    },
+    {
+      name: "sisley_4",
+      part: 4,
+      template_id: template_id,
+      x_pos: 390,
+      y_pos: 1646
+    },
+    {
+      name: "sisley_0",
+      part: 5,
+      template_id: template_id,
+      x_pos: 550,
+      y_pos: 1646
     }
   ]
 )
-end
+
 puts Template.first.name + ' 템플릿 생성완료'
 Position.association_to_the_template
 
