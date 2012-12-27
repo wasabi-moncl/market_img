@@ -24,7 +24,9 @@ MarketImg::Application.routes.draw do
   end
   
   namespace :user do
-    resources :photos
+    resources :photos do
+      collection { post :update_all }
+    end
     resources :items do
       collection { post :import }
     end

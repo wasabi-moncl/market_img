@@ -4,9 +4,13 @@ class User::PhotosController < ApplicationController
   def index
     @user = current_user
     @photos = @user.photos.order(:item_code)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @photos }
+    if @photos.empty?
+      redirect_to dashboard_path, notice: '품번을 넣을 이미지 파일이 아직 없습니다.'
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @photos }
+      end
     end
   end
 
@@ -57,6 +61,21 @@ class User::PhotosController < ApplicationController
   end
   
   def update
+    photo = params[:photo]
+    @photos = Photo.find(photo.keys)
+    respond_to do |format|
+      if Photo.update(photo.keys, photo.values)
+        Item.association_to_all_photos
+        format.html { redirect_to dashboard_path, notice: 'Item was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @photos.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def update_all
     photo = params[:photo]
     @photos = Photo.find(photo.keys)
     respond_to do |format|
