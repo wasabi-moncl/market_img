@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Template < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :brand_id
   attr_accessible :labels_attributes
 
   belongs_to :brand

@@ -1,6 +1,14 @@
 <h2><%= @template.name %> 템플릿 관리</h2>
 <%= link_to "템플릿 이미지 올리기", template_photos_path(@template)%>
 <%= nested_form_for @template do |f| %>
+	<ul class="unstyled">
+		<li>
+			<dl>
+				<dt>해당 브랜드</dt>
+				<dd><%= f.collection_select :brand_id, Brand.all, :id, :name %></dd>
+			</dl>
+		</li>
+	</ul>
 	<ul class="parts unstyled">
 		<% @photos.each do |photo| %>
 			<li>

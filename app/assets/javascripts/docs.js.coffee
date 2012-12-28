@@ -5,3 +5,5 @@ jQuery ->
   $('#user_brand_id').chosen()
 jQuery ->
 	$('#user_branch_id').chosen()
+jQuery ->
+	$('#template_brand_id').chosen()

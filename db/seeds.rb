@@ -38,7 +38,7 @@ users = User.create(
        email: 'test@moncl.net',
        username: "test",
        password: "1111"
-      }     
+      }
   ]
 )
 puts'"onesup", "test" 계정 생성완료'
@@ -99,6 +99,21 @@ Position.create(
 )
 
 puts Template.first.name + ' 템플릿 생성완료'
+
+# Label.create(
+#   [
+#     {
+#       part: 0,
+#       template_id: template_id,
+#       x_pos: 1,
+#       y_pos: 1,
+#       gravity: "North",
+#       color: "#ffcfdf"
+#       size: "26"
+#     },
+#   ]
+# )
+
 Position.association_to_the_template
 
 
