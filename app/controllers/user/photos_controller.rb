@@ -96,7 +96,7 @@ class User::PhotosController < ApplicationController
     @photo.destroy
 
     respond_to do |format|
-      format.html { redirect_to gallery_photos_path(@item) }
+      format.html { redirect_to user_photos_path }
       format.json { head :no_content }
     end
   end

@@ -26,7 +26,7 @@
 						 pic.part || pic.extracted_item_code[:part], :tabindex => i+@photos.count, :class => "input-small" %>
 					 </td>
 					 <td>
-						 <%= link_to '삭제', user_photos_path(pic.id), :confirm => "지울까요?", :method => 'delete' %>
+						 <%= link_to '삭제', [:user, pic], method: :delete, data: { confirm: "지울까요?"} %>
 					 </td>
 				 </tr>
 
