@@ -1,3 +1,4 @@
+#encoding: utf-8
 class User::ItemsController < ApplicationController
   def show
   end
@@ -59,12 +60,16 @@ class User::ItemsController < ApplicationController
       redirect_to product_image_item_path(item)
     end
   end
+  
+  def first
+    
+  end
 
   def import
     Item.import(params[:file], current_user)
     Item.association_to_the_template
     
-    redirect_to user_items_path
+    redirect_to new_user_photo_path, notice: '상품 정보가 입력되었습니다.'
   end
   
   def edit

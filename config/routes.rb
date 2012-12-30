@@ -28,7 +28,10 @@ MarketImg::Application.routes.draw do
       collection { post :update_all }
     end
     resources :items do
-      collection { post :import }
+      collection do 
+        post :import
+        get :first
+      end
     end
   end
 

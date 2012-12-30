@@ -1,0 +1,15 @@
+<h2>엑셀 파일 업로드</h2>
+
+<%= form_tag import_user_items_path, multipart: true do %>
+	<div class="fileupload fileupload-new" data-provides="fileupload">
+	  <span class="btn btn-file btn-large">
+			<span class="fileupload-new">엑셀 파일 선택</span>
+			<span class="fileupload-exists">다른 엑셀 파일</span>
+			<%= file_field_tag :file %>
+		</span>
+	  <span class="fileupload-preview"></span>
+	  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+	</div>
+
+  <%= submit_tag "올리기", :class => "btn btn-large" %>
+<% end %>

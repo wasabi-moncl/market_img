@@ -66,7 +66,7 @@ class User::PhotosController < ApplicationController
     respond_to do |format|
       if Photo.update(photo.keys, photo.values)
         Item.association_to_all_photos
-        format.html { redirect_to dashboard_path, notice: 'Item was successfully updated.' }
+        format.html { redirect_to user_items_path, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -75,20 +75,20 @@ class User::PhotosController < ApplicationController
     end
   end
   
-  def update_all
-    photo = params[:photo]
-    @photos = Photo.find(photo.keys)
-    respond_to do |format|
-      if Photo.update(photo.keys, photo.values)
-        Item.association_to_all_photos
-        format.html { redirect_to dashboard_path, notice: 'Item was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @photos.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update_all
+  #   photo = params[:photo]
+  #   @photos = Photo.find(photo.keys)
+  #   respond_to do |format|
+  #     if Photo.update(photo.keys, photo.values)
+  #       Item.association_to_all_photos
+  #       format.html { redirect_to user_items_path, notice: 'Item was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: "edit" }
+  #       format.json { render json: @photos.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
 
   def destroy

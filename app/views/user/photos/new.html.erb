@@ -1,8 +1,16 @@
 <h1><%= @user.username %>님의 상품 사진을 올려주세요.</h1>
 <%= form_for user_photos_path, :remote => true do %>
-	<p id="notice"><%= notice %></p>
-		사진 올리기: 
-		<input id="fileupload" type="file" name="photo[photo_file]" multiple>
+		<div class="fileupload fileupload-new" data-provides="fileupload">
+		  <span class="btn btn-file btn-large">
+				<span class="fileupload-new">사진 올리기</span>
+				<span class="fileupload-exists">다른 사진으로</span>
+				<input id="fileupload" type="file" name="photo[photo_file]" multiple>
+			</span>
+		  <span class="fileupload-preview"></span>
+		  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+		</div>
+		
+		
 		<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
 		<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
 		<script src="/jquery-file-upload/jquery.fileupload.js"></script>
@@ -24,5 +32,5 @@
 		</div>
 <% end %>
 <p>
-	<%= link_to '확인', user_photos_path, :class => "btn btn-primary" %>
+	<%= link_to '확인', user_photos_path, :class => "btn btn-primary btn-large" %>
 </p>
