@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
@@ -57,10 +58,9 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
-
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.html { redirect_to user_items_path, notice: '상품 정보가 수정되었습니다.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

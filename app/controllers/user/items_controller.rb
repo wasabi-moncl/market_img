@@ -83,6 +83,7 @@ class User::ItemsController < ApplicationController
   end
   
   def edit
+    @item = current_user.items.find(params[:id])
   end
 
   def destroy

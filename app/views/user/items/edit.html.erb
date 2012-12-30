@@ -1,2 +1,62 @@
-<h1>User::Items#edit</h1>
-<p>Find me in app/views/user/items/edit.html.erb</p>
+<h2><%= @item.item_code %> (<%= @item.name %>)</h2>
+<%= image_tag Photo.find_by_item_code(@item.item_code).photo_file.url(:thumb) %>
+<%= form_for @item do |f| %>
+	<ul class="unstyled">
+	  <% if @item.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+	      <ul>
+	      <% @item.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <li class="field">
+	    <%= f.label :name, "품명" %><br />
+	    <%= f.text_field :name %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :item_code, "품번" %><br />
+	    <%= f.text_field :item_code %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :description, "상세설명" %><br />
+	    <%= f.text_field :description %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :mall_code %><br />
+	    <%= f.text_field :mall_code %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :url %><br />
+	    <%= f.text_field :url %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :price %><br />
+	    <%= f.text_field :price %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :discount_rate %><br />
+	    <%= f.text_field :discount_rate %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :discount_price %><br />
+	    <%= f.text_field :discount_price %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :fabric %><br />
+	    <%= f.text_field :fabric %>
+	  </li>
+	  <li class="field">
+	    <%= f.label :laundry %><br />
+	    <%= f.text_field :laundry %>
+	  </li>
+	  <li class="actions">
+	    <%= f.submit "완료", :class => "btn btn-primary" %>
+	  </li>
+		
+	</ul>
+<% end %>

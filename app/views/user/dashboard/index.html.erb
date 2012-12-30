@@ -1,21 +1,23 @@
 <h1><%= @user.username %>님의 상품 이미지 관리</h1>
-<div class="row">
-	<div class="span4 well">
-		<div class="span3 well first">
+<div class="row well">
+	<div class="span11">
+		<div class="span4 well well-large first">
 			<%= link_to '1. 상품정보 엑셀 업로드', first_user_items_path, :class => "btn-large main" %>
 		</div>
-		<div class="span3 well second">
+	</div>
+	<div class="span11">
+		<div class="span4 offset1 well well-large second">
 			<%= link_to '2. 이미지 파일 업로드', new_user_photo_path, :class => " btn-large main" %>
 		</div>
-		<div class="span3 well third">
+	</div>
+	<div class="span11">
+		<div class="span4 offset2 well well-large third">
 			<%= link_to '3. 상품 품번 넣기', user_photos_path, :class => " btn-large main" %>
 		</div>
-		<div class="span3 well fourth">
+	</div>
+	<div class="span11">
+		<div class="span4 offset3 well well-large fourth">
 			<%= link_to '4. 상품 이미지 완성', user_items_path, :class => " btn-large main" %>
 		</div>
-	</div>
-	<div class="span7 well">
-		<div class="span6 well">공지사항</div>
-		<div class="span6 well">이벤트</div>
 	</div>
 </div>

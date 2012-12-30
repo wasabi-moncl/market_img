@@ -18,6 +18,12 @@
 	<%= f.submit "품번변경 완료", :class => "btn btn-primary" %>
 		<%= f.fields_for :photos do |photos_form| %>
 		<table class="table table-striped">
+			<tr>
+				<th>상품사진</th>
+				<th>품번</th>
+				<th>자리</th>
+				<th>삭제</th>
+			</tr>
 		<% @photos.each do |pic| %>
 			<%
 			if /(.+\/)(.+)(\.png)/.match(pic.photo_file.to_s).nil?

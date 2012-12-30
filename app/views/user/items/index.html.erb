@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="span2 well well-small">
 		<h5>1. 엑셀 파일 업로드</h5>
 	</div>
@@ -11,57 +11,59 @@
 	<div class="span3 well" style="text-align: center;">
 		<h2><i class="icon-arrow-right"></i>&nbsp 완료</h2>
 	</div>
-</div>
-<div class="row">
-	<div class="span2 well">
-		<h3>템플릿 선택</h3>
-		<ul>
-			<% if current_user.brand.nil? %>
-				<%= link_to "브랜드 선택이 필요합니다.", edit_user_path(current_user)%>				
-			<% elsif current_user.brand.templates.empty? %>
-				<li><%= current_user.brand.name %> 템플릿이 아직 만들어지지 않았습니다. 연락주세요.</li>				
-			<% else %>
-				<% current_user.brand.templates.each do |template| %>
-					<li><%= link_to template.name %></li>
-				<% end %>
-			<% end %>
-		</ul>
-	</div>
-	<div class="span9">
-		<div class="row">
-			<% @items.each do |item| %>
-				<% photo = Photo.where(:item_code => item.item_code).first %>
-				<% unless photo.nil? %>
-					<div class="span2 well">
-						<ul class="unstyled">
-							<li><h3><%= item.item_code %></h3></li>
-							<li>
-								<%= link_to image_tag(photo.photo_file.url(:thumb).to_s, :class => "product_image"), user_photos_path %>
-							</li>
-							<li>
-								<%= link_to "미리보기", product_image_path(item), :class => "btn" %>
-								<%= link_to "링크 복사하기", saved_image_path(item, "png"),
-									:id => "saved_image_" + item.id.to_s, :class => "btn btn-primary" %>
-							</li>
-						</ul>
-						<% saved_image_id = "#saved_image_"+item.id.to_s %>
-						<script>
-						
-							$('<%= saved_image_id %>').zclip({
-							    copy: "<%= saved_image_url(item, 'png')%>",
-									afterCopy: function() {
-										alert("주소창에 콘트롤+V 눌러보세요.\n<%= saved_image_url(item, 'png')%>")
-									}
-							});
-						</script>
-					</div>
+</div> -->
+<h2>4. 완성된 상품 이미지</h2>
+
+	<div class="row">
+		<div class="span3 bs-docs-sidebar">
+			<h3>템플릿 선택</h3>
+			<ul class="nav nav-list bs-docs-sidenav affix-top" >
+				<% if current_user.brand.nil? %>
+					<%= link_to "브랜드 선택이 필요합니다.", edit_user_path(current_user)%>				
+				<% elsif current_user.brand.templates.empty? %>
+					<li><%= current_user.brand.name %> 템플릿이 아직 만들어지지 않았습니다. 연락주세요.</li>				
 				<% else %>
-					<div class ="span3 well">
-						<h3><%= item.item_code %></h3>
-						<p><%= link_to "사진이 필요합니다.", user_photos_path %></p>
-					</div>
+					<% current_user.brand.templates.each do |template| %>
+						<li><%= link_to template.name %></li>
+					<% end %>
 				<% end %>
-			<% end %>
+			</ul>
+		</div>
+		<div class="span9">
+			<div class="row">
+				<% @items.each do |item| %>
+					<% photo = Photo.where(:item_code => item.item_code).first %>
+					<% unless photo.nil? %>
+						<div class="span2 well well-small">
+							<ul class="unstyled">
+								<li><h3><%= item.item_code %></h3></li>
+								<li>
+									<%= link_to image_tag(photo.photo_file.url(:thumb).to_s, :class => "product_image"), edit_user_item_path(photo) %>
+								</li>
+								<li>
+									<%= link_to "미리보기", product_image_path(item), :class => "btn" %>
+									<%= link_to "링크 복사하기", saved_image_path(item, "png"),
+										:id => "saved_image_" + item.id.to_s, :class => "btn btn-primary" %>
+								</li>
+							</ul>
+							<% saved_image_id = "#saved_image_"+item.id.to_s %>
+							<script>
+						
+								$('<%= saved_image_id %>').zclip({
+								    copy: "<%= saved_image_url(item, 'png')%>",
+										afterCopy: function() {
+											alert("주소창에 콘트롤+V 눌러보세요.\n<%= saved_image_url(item, 'png')%>")
+										}
+								});
+							</script>
+						</div>
+					<% else %>
+						<div class ="span3 well well-small">
+							<h3><%= item.item_code %></h3>
+							<p><%= link_to "사진이 필요합니다.", user_photos_path %></p>
+						</div>
+					<% end %>
+				<% end %>
+			</div>
 		</div>
 	</div>
-</div>
