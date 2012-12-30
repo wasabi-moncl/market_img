@@ -5,10 +5,20 @@ class User::ItemsController < ApplicationController
 
   def index
     @items = current_user.items.order(:item_code)
-    respond_to do |format|
-      format.html
-      format.csv { send_data @item.to_csv }
-      # format.xls
+    if current_user.brand.nil?
+      redirect_to edit_user_path(current_user), notice: '사용자 정보 수정페이지입니다. 브랜드를 선택해주세요.'
+    elsif current_user.items.empty?
+      redirect_to first_user_items_path, notice: '1번 단계로 되돌아왔습니다. 먼저, 엑셀 파일을 업로드해주세요.'
+    elsif current_user.photos.empty?
+      redirect_to new_user_photo_path, notice: '2번 단계로 되돌아왔습니다. 먼저, 상품 사진을 업로드해주세요.'
+    elsif current_user.brand.templates.empty?
+      redirect_to dashboard_path, notice: '템플릿이 만들어지지 않았습니다. 담당 직원에게 연락주세요.'
+    else
+      respond_to do |format|
+        format.html
+        format.csv { send_data @item.to_csv }
+        # format.xls
+      end
     end
   end
   
