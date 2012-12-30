@@ -33,10 +33,10 @@ class Template::PhotosController < ApplicationController
 
   def create
     @template = Template.find(params[:template_id])
-    @photos = @template.photos.new(params[:photo])
-    if @photos.save
-      # format.html { redirect_to user_photos_path, notice: 'Item was successfully updated.' }
-      # format.json { head :no_content }
+    photo = @template.photos.new(params[:photo])
+    photo.part = @template.positions.count
+    if photo.save
+      @template.positions.create({:part => photo.part})
       redirect_to template_photos_path(params[:template_id])
     # else
     #   render :json => { "errors" => @photos.errors } 

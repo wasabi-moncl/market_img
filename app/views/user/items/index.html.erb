@@ -6,9 +6,17 @@
 <% end %>
 <div class="row">
 	<div class="span2 well">
-		<h2>템플릿 선택</h2>
+		<h3>템플릿 선택</h3>
 		<ul>
-			
+			<% if current_user.brand.nil? %>
+				<%= link_to "브랜드 선택이 필요합니다.", edit_user_path(current_user)%>				
+			<% elsif current_user.brand.templates.empty? %>
+				<li><%= current_user.brand.name %> 템플릿이 아직 만들어지지 않았습니다. 연락주세요.</li>				
+			<% else %>
+				<% current_user.brand.templates.each do |template| %>
+					<li><%= link_to template.name %></li>
+				<% end %>
+			<% end %>
 		</ul>
 	</div>
 	<div class="span9">

@@ -24,4 +24,5 @@ class Template < ActiveRecord::Base
     end
     result
   end
+  
 end

@@ -31,7 +31,7 @@ class Item < ActiveRecord::Base
   
   def parts
     positions = Array.new 
-    self.templates.first.positions.each do |position|
+    self.user.brand.templates.first.positions.each do |position|
       positions << position
     end
     parts = Array.new
@@ -46,6 +46,26 @@ class Item < ActiveRecord::Base
       end
     end
     parts
+  end
+  
+  def image_height
+    template = self.templates.first
+    height_values = Array.new
+    photos = Array.new
+    template.photos.each do |photo|
+      height = Magick::Image.read(photo.photo_file.path).first.rows
+      y_pos = template.positions.find_by_part(photo.part).y_pos
+      height_values << y_pos + height
+    end
+    template.positions.each do |position|
+      photo = self.photos.find_by_part(position.part)
+      unless photo.nil?
+        y_pos = position.y_pos
+        height = Magick::Image.read(photo.photo_file.path).first.rows
+        height_values << y_pos + height
+      end
+    end
+    height_values.sort.last
   end
   
   def description

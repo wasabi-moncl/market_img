@@ -3,7 +3,7 @@ class User::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.order(:item_code)
+    @items = current_user.items.order(:item_code)
     respond_to do |format|
       format.html
       format.csv { send_data @item.to_csv }
@@ -14,7 +14,7 @@ class User::ItemsController < ApplicationController
   def product_image
     item = Item.find(params[:id])
     parts = item.parts
-    dst = Magick::Image.new(780,2500)
+    dst = Magick::Image.new(780,item.image_height)
     dst.background_color = '#ffffff'
     dst.format = 'PNG'
     result_name = 'public/generated_images/generated_' + item.item_code + '.png'
