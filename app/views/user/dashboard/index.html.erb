@@ -1,24 +1,29 @@
 <h1><%= @user.username %>님의 상품 이미지 관리</h1>
-<div class="row">
-	<div class="row span7">
-		<div class="span11">
-			<div class="span4 well well-large first">
-				<%= link_to '1. 상품정보 엑셀 업로드', first_user_items_path, :class => "btn-large main" %>
+<div class="row dashboard-box">
+	<div class="span3 bs-docs-sidebar">
+		<h4>상세 페이지 제작</h4>
+		<ul class="nav nav-list bs-docs-sidenav affix-top" >
+			<li><%= link_to "1. 상품 정보 엑셀 업로드", first_user_items_path %></li>
+			<li><%= link_to "2. 이미지 파일 업로드", new_user_photo_path %></li>
+			<li><%= link_to "3. 상품 품번 넣기", user_photos_path %></li>
+			<li><%= link_to "4. 상품 이미지 완성", user_items_path %></li>
+		</ul>
+	</div>
+	<div class="row span8">
+		<div class="row">
+			<div class="span7 offset1 well">
+				<h4>공지사항</h4>
+				<ul>
+					<li><%= link_to '마켓이미지 오픈' %></li>
+					<li><%= link_to '사용법이 어려우신가요?'%></li>
+				</ul>
 			</div>
-		</div>
-		<div class="span11">
-			<div class="span4 well well-large second">
-				<%= link_to '2. 이미지 파일 업로드', new_user_photo_path, :class => " btn-large main" %>
-			</div>
-		</div>
-		<div class="span11">
-			<div class="span4 well well-large third">
-				<%= link_to '3. 상품 품번 넣기', user_photos_path, :class => " btn-large main" %>
-			</div>
-		</div>
-		<div class="span11">
-			<div class="span4 well well-large fourth">
-				<%= link_to '4. 상품 이미지 완성', user_items_path, :class => " btn-large main" %>
+			<div class="span7 offset1 well">
+				<h4>이벤트</h4>
+				<ul>
+					<li><%= link_to '오픈 기념 이벤트'%></li>
+					<li><%= link_to '2013년 기념 이벤트'%></li>
+				</ul>
 			</div>
 		</div>
 	</div>
