@@ -38,7 +38,18 @@ users = User.create(
        email: 'test@moncl.net',
        username: "test",
        password: "1111"
+      },
+      { 
+        email: 'admin@moncl.net',
+        username: "admin",
+        password: "1111"
+      },
+      { 
+        email: 'moncl@moncl.net',
+        username: "moncl",
+        password: "1111"
       }
+      
   ]
 )
 puts'"onesup", "test" 계정 생성완료'

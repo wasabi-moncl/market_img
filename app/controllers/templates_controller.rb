@@ -1,11 +1,12 @@
 #encoding: utf-8
 
 class TemplatesController < ApplicationController
+  before_filter :require_login, :right_user
+  
   # GET /templates
   # GET /templates.json
   def index
     @templates = Template.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @templates }
@@ -133,5 +134,12 @@ class TemplatesController < ApplicationController
       format.html { redirect_to templates_url }
       format.json { head :no_content }
     end
+  end
+end
+private 
+
+def right_user
+  unless current_user.username == "admin" || current_user.username == "moncl" 
+    redirect_to root_path
   end
 end

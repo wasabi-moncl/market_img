@@ -25,7 +25,7 @@
         <a class="brand" href="/">MarketImg</a>
 				<div class="container nav-collapse">
 					<ul class="nav pull-right">
-						<li><%= link_to "템플릿 관리", templates_path  %></li>
+						<li><%= link_to "템플릿 관리", templates_path if logged_in? && (current_user.username == "admin" || current_user.username == "moncl") %></li>
 				 		<% if logged_in? %>
 							<li><%= link_to current_user.username + " 로그아웃", logout_path %></li>
 							<li><%= link_to current_user.username + " 정보수정", edit_user_path(current_user) %></li>
