@@ -2,7 +2,7 @@
 	<div class="span2 well well-small">
 		<h5>1. 엑셀 파일 업로드</h5>
 	</div>
-	<div class="span3 well" style="text-align: center;">
+	<div class="span3" style="text-align: center;">
 		<h2><i class="icon-arrow-right"></i> 이미지 업로드</h2>
 	</div>
 	<div class="span2 well well-small">
@@ -14,38 +14,62 @@
 </div>
 
 <h1><%= @user.username %>님의 상품 사진을 올려주세요.</h1>
-<%= form_for user_photos_path, :remote => true do %>
-		<div class="fileupload fileupload-new" data-provides="fileupload">
-		  <span class="btn btn-file btn-large">
-				<span class="fileupload-new">사진 올리기</span>
-				<span class="fileupload-exists">다른 사진으로</span>
-				<input id="fileupload" type="file" name="photo[photo_file]" multiple>
-			</span>
-		  <span class="fileupload-preview"></span>
-		  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
-		</div>
+<div class="row">
+	<div class="span11">
+			<%= form_for user_photos_path, :remote => true do %>
+				<div class="fileupload fileupload-new" data-provides="fileupload">
+				  <span class="btn btn-file btn-large">
+						<span class="fileupload-new">사진 올리기</span>
+						<span class="fileupload-exists">다른 사진으로</span>
+						<input id="fileupload" type="file" name="photo[photo_file]" multiple>
+					</span>
+				  <span class="fileupload-preview"></span>
+				  <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+				</div>
 		
 		
-		<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
-		<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
-		<script src="/jquery-file-upload/jquery.fileupload.js"></script>
-		<script>
-		$(function () {
-		    $('#fileupload').fileupload({
-		        dataType: 'json',
-		        url: '<%= user_photos_path %>',
-		        done: function (e, data) {
-		            $.each(data.result, function (index, file) { 
-		               $('<div class="span2 well"><img src="'+file.thumbnail_url+'"><p>'+file.file_name+'<p></div>').appendTo('#thumbs');
-		            });
-		        }
-		    });
-		});
-		</script>
-		<div id="thumbs" class="row">
-	<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
-		</div>
-<% end %>
-<p>
-	<%= link_to '확인', user_photos_path, :class => "btn btn-primary btn-large" %>
-</p>
+				<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
+				<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
+				<script src="/jquery-file-upload/jquery.fileupload.js"></script>
+				<script>
+				$(function () {
+				    $('#fileupload').fileupload({
+				        dataType: 'json',
+				        url: '<%= user_photos_path %>',
+				        done: function (e, data) {
+				            $.each(data.result, function (index, file) { 
+				               $('<div class="span2 well"><img src="'+file.thumbnail_url+'"><p>'+file.file_name+'<p></div>').appendTo('#thumbs');
+				            });
+				        }
+				    });
+				});
+				</script>
+				<div id="thumbs" class="row">
+				<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
+				</div>
+			<% end %>
+		<p>
+			<%= link_to '확인', user_photos_path, :class => "btn btn-primary btn-large" %>
+		</p>
+	</div>
+	<div class="span11 well">
+		<p>신규 상품 이미지를 등록하는 단계입니다.</p>
+		<p>각각의 이미지 파일명은 아래와 같이 일정해야 합니다.</p>
+		<p>상품품번_생상코드 (숫자)</p>
+		<p>MK123_R (1)</p>
+		<p>MK123_R (2)</p>
+		<p>MK123_R (3)</p>
+		<p>MK123_B (1)</p>
+		<p>MK123_B (2)</p>
+		<p>MK123라는 상품의 레드와 블랙 상품이 둘로 나뉘어서 인식됩니다.</p>
+		<p>이미지 파일명 지정 방법은 크게 두가지 입니다.</p>
+		<p>첫째, 촬영 시 요청</p>
+		<p>이미지 파일 저장시 '파일명 = 상품품범_생상코드'로 해줄 것을 요청하면
+따로 작업하실 필요 없이 등록만 하시면 됩니다.</p>
+		<p>둘쨰, 직접수정</p>
+		<p>1.동일한 상품이미지 모두 선택</p>
+		<p>2.키보드 최상단 'F2'클릭</p>
+		<p>3.상푸품번 입력후 'ENTER' 키 입력</p>
+	</div>
+
+</div>
