@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20121226014815) do
   create_table "templates", :force => true do |t|
     t.string   "name"
     t.integer  "brand_id"
+    t.text     "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
