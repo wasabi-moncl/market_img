@@ -48,8 +48,8 @@ class Item < ActiveRecord::Base
     parts
   end
   
-  def image_height
-    template = self.templates.first
+  def image_height(current_user)
+    template = current_user.brand.templates.last
     height_values = Array.new
     photos = Array.new
     template.photos.each do |photo|
