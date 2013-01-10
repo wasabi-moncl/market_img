@@ -100,7 +100,7 @@ class Item < ActiveRecord::Base
 
   #for generate test seed  
   def self.association_to_the_template
-    template = Template.first
+    template = Template.last
     self.all.each do |item|
       item.templates << template
     end
