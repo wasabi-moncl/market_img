@@ -3,7 +3,7 @@ class User::PhotosController < ApplicationController
   before_filter :require_login
   def index
     @user = current_user
-    @photos = @user.photos.order(:item_code)
+    @photos = @user.photos.where(:has_code => false).order("created_at desc")
     if @photos.empty?
       redirect_to dashboard_path, notice: '품번을 넣을 이미지 파일이 아직 없습니다.'
     else

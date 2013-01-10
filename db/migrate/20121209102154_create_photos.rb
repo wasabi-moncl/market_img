@@ -7,6 +7,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.integer :template_id
       t.string :item_code
       t.integer :part
+      t.boolean :has_code, :default => false
       t.timestamps
     end
   end

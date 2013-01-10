@@ -9,6 +9,8 @@ class Photo < ActiveRecord::Base
   
   mount_uploader :photo_file, PhotoUploader
   
+  before_save :check_item_code
+  
   def write_from_banner
   	banners = Banner.where(:photo_id => self.id )
 
@@ -46,4 +48,19 @@ class Photo < ActiveRecord::Base
     result[:part] = part + Template.first.photos.count - 1
     result
   end
+  
+  def has_code?
+    if self.has_code == nil || self.has_code == false
+      false
+    else
+      true
+    end
+  end
+  
+  private
+    def check_item_code
+      unless self.item_code == "" || self.item_code.nil?
+        self.has_code = true
+      end
+    end
 end
