@@ -35,11 +35,27 @@ class User::ItemsController < ApplicationController
       src = Magick::Image.read(filename)[0]
       label = Magick::Draw.new
       current_user.brand.templates.last.labels.find_all_by_part(part[:photo].part).each do |part_label|
+        begin
+          case part_label.gravity.capitalize
+          when "North"
+            gravity = "North"  
+          when "Northeast"
+            gravity = "NorthEast"
+          when "Northwest"
+            gravity = "NorthWest"
+          else
+            gravity = part_label.gravity.capitalize
+          end
+          gravity = ("Magick::" + gravity + "Gravity").constantize
+        rescue
+          gravity = Magick::NorthGravity
+        end
+        
         unless item[part_label.column.to_sym].nil?
           label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item.send(part_label.column)) do 
             label.fill      = part_label.color
             label.pointsize = part_label.size.to_i
-            label.gravity = Magick::NorthGravity
+            label.gravity = gravity
             label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
           end
         end
