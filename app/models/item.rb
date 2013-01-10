@@ -99,8 +99,8 @@ class Item < ActiveRecord::Base
   end
 
   #for generate test seed  
-  def self.association_to_the_template
-    template = Template.last
+  def self.association_to_the_template(current_user)
+    template = current_user.brand.templates.last
     self.all.each do |item|
       item.templates << template
     end

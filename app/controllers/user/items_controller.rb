@@ -77,9 +77,12 @@ class User::ItemsController < ApplicationController
 
   def import
     Item.import(params[:file], current_user)
-    Item.association_to_the_template
-    
-    redirect_to new_user_photo_path, notice: '상품 정보가 입력되었습니다.'
+    unless current_user.brand.templates.empty?
+      Item.association_to_the_template(current_user)
+      redirect_to new_user_photo_path, notice: '상품 정보가 입력되었습니다.'
+    else
+      redirect_to dashboard_path, notice: '템플릿이 아직 준비되지 않았습니다. 관리자에게 연락 바랍니다.'
+    end
   end
   
   def edit

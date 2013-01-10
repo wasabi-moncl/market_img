@@ -34,26 +34,20 @@ class TemplatesController < ApplicationController
   end
 
   def composed_image
-    # dst = MiniMagick::Image.open(dst_image.photo_file.path)
     template = Template.find(params[:id])
     dst_image = template.photos.find_by_part(params[:part])
-    # filename = 'public' + dst_image.photo_file.to_s
-    dst = Magick::Image.read(dst_image.photo_file.path).first
-    label = Magick::Draw.new
     example_item = template.items.last
-    
+    dst = Magick::Image.read(dst_image.photo_file.path).first    
     template.labels.find_all_by_part(params[:part]).each do |part_label|
       unless example_item[part_label.column.to_sym].nil?
         begin
           case part_label.gravity.capitalize
+          when "North"
+            gravity = "North"  
           when "Northeast"
             gravity = "NorthEast"
           when "Northwest"
             gravity = "NorthWest"
-          when "Southeast"  
-            gravity = "SouthEast"
-          when "Southwest"  
-            gravity = "SouthWest"
           else
             gravity = part_label.gravity.capitalize
           end
@@ -62,7 +56,7 @@ class TemplatesController < ApplicationController
           gravity = Magick::NorthGravity
         end
         label = Magick::Draw.new
-        label.annotate( dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item.send(part_label.column)) do  
+        label.annotate(dst, 0, 0, part_label.x_pos, part_label.y_pos, example_item.send(part_label.column)) do  
           label.fill      = part_label.color
           label.pointsize = part_label.size.to_i
           label.gravity = gravity

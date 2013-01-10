@@ -4,7 +4,7 @@ class Position < ActiveRecord::Base
   has_one :photo
   
   #for generate test seed
-  def self.association_to_the_template
+  def self.association_to_the_template(current_user)
     template = Template.first
     self.all.each do |position|
       position.template = template

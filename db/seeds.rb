@@ -125,7 +125,7 @@ puts Template.first.name + ' 템플릿 생성완료'
 #   ]
 # )
 
-Position.association_to_the_template
+Position.association_to_the_template(User.find(3))
 
 
 # photos = ['MC1G2D401DB.png',   'MC1G2D403GE_1.png',  'MCD02D409BL.png',    'MCD02D503GE_1.png',

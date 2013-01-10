@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20121226014815) do
     t.string   "fabric"
     t.string   "laundry"
     t.text     "description"
+    t.string   "color"
+    t.string   "size"
     t.integer  "user_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -121,8 +123,6 @@ ActiveRecord::Schema.define(:version => 20121226014815) do
     t.string   "email"
     t.string   "crypted_password"
     t.string   "salt"
-    t.string   "brand"
-    t.string   "branch"
     t.string   "name"
     t.string   "mobile"
     t.string   "emergency_call"

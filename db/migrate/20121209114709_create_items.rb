@@ -12,6 +12,8 @@ class CreateItems < ActiveRecord::Migration
       t.string :fabric
       t.string :laundry
       t.text :description
+      t.string :color
+      t.string :size
       t.integer :user_id
 
       t.timestamps

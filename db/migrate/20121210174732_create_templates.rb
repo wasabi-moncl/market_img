@@ -4,6 +4,7 @@ class CreateTemplates < ActiveRecord::Migration
       t.string :name
       t.integer :brand_id
       t.text :code
+      
       t.timestamps
     end
   end
