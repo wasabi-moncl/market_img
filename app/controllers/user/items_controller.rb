@@ -34,7 +34,7 @@ class User::ItemsController < ApplicationController
       filename = 'public' + part[:photo].photo_file.to_s
       src = Magick::Image.read(filename)[0]
       label = Magick::Draw.new
-      item.templates.first.labels.find_all_by_part(part[:photo].part).each do |part_label|
+      current_user.brand.templates.last.labels.find_all_by_part(part[:photo].part).each do |part_label|
         unless item[part_label.column.to_sym].nil?
           label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item.send(part_label.column)) do 
             label.fill      = part_label.color
