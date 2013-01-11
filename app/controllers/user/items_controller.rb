@@ -4,7 +4,7 @@ class User::ItemsController < ApplicationController
   end
 
   def index
-    @items = current_user.items.order(:item_code)
+    @items = current_user.items.order("created_at desc")
     if current_user.brand.nil?
       redirect_to edit_user_path(current_user), notice: '사용자 정보 수정페이지입니다. 브랜드를 선택해주세요.'
     elsif current_user.items.empty?
