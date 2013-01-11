@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226014815) do
+ActiveRecord::Schema.define(:version => 20130111153235) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(:version => 20121226014815) do
     t.integer  "brand_category_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "elements", :force => true do |t|
+    t.string   "name"
+    t.integer  "part"
+    t.integer  "template_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -85,6 +93,15 @@ ActiveRecord::Schema.define(:version => 20121226014815) do
     t.string   "column"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+  end
+
+  create_table "molds", :force => true do |t|
+    t.string   "name"
+    t.integer  "part"
+    t.integer  "template_id"
+    t.integer  "element_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "photos", :force => true do |t|

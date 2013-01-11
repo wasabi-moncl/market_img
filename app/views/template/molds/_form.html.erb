@@ -1,0 +1,25 @@
+<%= form_for([@template, @mold]) do |f| %>
+  <% if @mold.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mold.errors.count, "error") %> prohibited this mold from being saved:</h2>
+
+      <ul>
+      <% @mold.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :value => "#{@template.name}_mold_#{@mold.id}" || "" %>
+  </div>
+  <div class="field">
+    <%= f.label :part %><br />
+    <%= f.number_field :part, :value => @template.molds.count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

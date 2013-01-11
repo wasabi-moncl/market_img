@@ -57,6 +57,9 @@ template = Template.create(
   [
     {
       name: "시슬리(영패션)"
+    },
+    {
+      name: "게스"
     }
   ]
 )
@@ -100,11 +103,67 @@ Position.create(
       y_pos: 1646
     },
     {
-      name: "sisley_0",
+      name: "sisley_5",
       part: 5,
       template_id: template_id,
       x_pos: 550,
       y_pos: 1646
+    },
+    {
+      name: "guess_0",
+      part: 0,
+      template_id: 2,
+      x_pos: 1,
+      y_pos: 1
+    },
+    {
+      name: "guess_1",
+      part: 1,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 1317
+    },
+    {
+      name: "guess_2",
+      part: 2,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 2544
+    },
+    {
+      name: "guess_3",
+      part: 3,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 3107
+    },
+    {
+      name: "guess_4",
+      part: 4,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 3670
+    },
+    {
+      name: "guess_5",
+      part: 5,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 4233
+    },
+    {
+      name: "guess_6",
+      part: 6,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 4796
+    },
+    {
+      name: "guess_7",
+      part: 7,
+      template_id: 2,
+      x_pos: 115,
+      y_pos: 5359
     }
   ]
 )

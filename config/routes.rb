@@ -1,4 +1,8 @@
 MarketImg::Application.routes.draw do
+
+
+  resources :elements
+
   resources :branches
 
   resources :brand_categories
@@ -37,14 +41,19 @@ MarketImg::Application.routes.draw do
 
   resources :templates do
     member { get :composed_image }
-    scope :module => "template" do
-      resources :photos
-    end
     resources :labels do
       collection { get :update_all}
     end
+    scope :module => "template" do
+      resources :molds
+      resources :elements
+      resources :photos
+    end
+    
   end
-
+  
+  resources :molds
+  resources :elements
   
   root :to => 'sessions#new'
 end

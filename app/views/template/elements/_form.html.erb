@@ -1,0 +1,25 @@
+<%= form_for([:template, @element]) do |f| %>
+  <% if @element.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@element.errors.count, "error") %> prohibited this element from being saved:</h2>
+
+      <ul>
+      <% @element.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :value => "#{@template.name}_element_#{@element.id}" || ""  %>
+  </div>
+  <div class="field">
+    <%= f.label :part %><br />
+    <%= f.number_field :part, :value => @template.elements.count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

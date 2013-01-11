@@ -8,6 +8,8 @@ class Template < ActiveRecord::Base
   has_many :positions
   has_many :photos
   has_many :labels
+  has_many :molds
+  has_many :elements
   has_and_belongs_to_many :items
 
   #label에 컬러코드가 없으면 저장 안됨.

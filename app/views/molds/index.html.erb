@@ -1,0 +1,27 @@
+<h1>Listing molds</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Part</th>
+    <th>Template</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @molds.each do |mold| %>
+  <tr>
+    <td><%= mold.name %></td>
+    <td><%= mold.part %></td>
+    <td><%= mold.template_id %></td>
+    <td><%= link_to 'Show', mold %></td>
+    <td><%= link_to 'Edit', edit_mold_path(mold) %></td>
+    <td><%= link_to 'Destroy', mold, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mold', new_mold_path %>
