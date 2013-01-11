@@ -26,10 +26,10 @@
 			</tr>
 		<% @photos.each do |pic| %>
 			<%
-			if /(.+\/)(.+)(\.png)/.match(pic.photo_file.to_s).nil?
+			if /(.+\/)(.+)(\.(png|jpg|jpeg))/.match(pic.photo_file.to_s).nil?
 				item_code = ""
 			else
-				item_code = /(.+\/)(.+)(\.png)/.match(pic.photo_file.to_s)[2]
+				item_code = /(.+\/)(.+)(\.(png|jpg|jpeg))/.match(pic.photo_file.to_s)[2]
 			end
 			%>
 					<tr>
