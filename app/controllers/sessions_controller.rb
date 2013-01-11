@@ -2,8 +2,12 @@
 
 class SessionsController < ApplicationController
   def new
-    if logged_in?
-      redirect_to dashboard_path
+    begin
+      if logged_in?
+        redirect_to dashboard_path
+      end
+    rescue ActiveRecord::RecordNotFound
+      session[:user_id] = nil
     end
   end
   

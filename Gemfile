@@ -24,7 +24,7 @@ gem "rmagick"
 # gem "mini_magick"
 
 #authentications
-gem "sorcery"
+gem "sorcery", :git => "git://github.com/NoamB/sorcery.git"
 
 # Gems used only for assets and not required
 # in production environments by default.
