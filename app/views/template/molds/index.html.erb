@@ -1,26 +1,25 @@
-<h1>Listing molds</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Part</th>
-    <th>Template</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @molds.each do |mold| %>
-  <tr>
-    <td><%= mold.name %></td>
-    <td><%= mold.part %></td>
-    <td><%= link_to 'Show', template_mold_path(@template, mold) %></td>
-    <td><%= link_to 'Edit', edit_template_mold_path(@template, mold) %></td>
-    <td><%= link_to 'Destroy', (mold), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<h1><%= @template.name %>의 이미지 틀</h1>
+<%= nested_form_for @template do |f| %>	
+	<ul>
+		<li><%= f.link_to_add "새 이미지 틀 추가", :molds %></li>
+		<li><%= f.submit %></li>
+		<li>
+			<%= f.fields_for :molds do |mold_form|%>
+			<ul>
+				<li>
+					<%= mold_form.label :name, "이미지 틀 이름"%>
+					<%= mold_form.text_field :name%>
+				</li>
+				<li>
+					<%= mold_form.label :part%>
+					<%= mold_form.text_field :part%>
+				<li>
+					<%= link_to("#{mold_form.object.name} 이미지 좌표 수정", mold_positions_path(mold_form.object.id)) if Mold.exists?(mold_form.object.id) %>
+				</li>
+			</ul>
+			<% end %>
+		</li>
+		<li><%= f.link_to_add "새 이미지 틀 추가", :molds %></li>
+		<li><%= f.submit %></li>
+	</ul>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Mold', new_template_mold_path %>

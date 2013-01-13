@@ -30,22 +30,26 @@ puts "Imported " + Branch.count.to_s + " branchs"
 users = User.create(
   [
     { 
+      email: 'admin@moncl.net',
+      brand_id: 1,
+      username: "admin",
+      password: "1111"
+    },
+    { 
       email: 'wasabi@moncl.net',
+      brand_id: 1,
       username: "onesup",
       password: "1111"
      },
      { 
        email: 'test@moncl.net',
+       brand_id: 1,
        username: "test",
        password: "1111"
       },
       { 
-        email: 'admin@moncl.net',
-        username: "admin",
-        password: "1111"
-      },
-      { 
         email: 'moncl@moncl.net',
+        brand_id: 1,
         username: "moncl",
         password: "1111"
       }

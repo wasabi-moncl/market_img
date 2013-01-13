@@ -8,6 +8,7 @@ class CreatePositions < ActiveRecord::Migration
       t.integer :y_pos
       t.integer :width
       t.integer :height
+      t.integer :mold_id
 
       t.timestamps
     end

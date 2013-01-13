@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20130111153235) do
 
   create_table "items", :force => true do |t|
     t.integer  "template_id"
+    t.integer  "brand_id"
     t.string   "name"
     t.string   "item_code"
     t.string   "mall_code"
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(:version => 20130111153235) do
     t.integer  "y_pos"
     t.integer  "width"
     t.integer  "height"
+    t.integer  "mold_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

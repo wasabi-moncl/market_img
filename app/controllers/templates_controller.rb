@@ -94,8 +94,12 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: 'Template was successfully created.' }
-        format.json { render json: @template, status: :created, location: @template }
+        if request.referer == template_molds_path(@template)
+          format.html { redirect_to template_molds_path(@template), notice: 'Template was successfully created.' }
+        else
+          format.html { redirect_to @template, notice: 'Template was successfully created.' }
+          format.json { render json: @template, status: :created, location: @template }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @template.errors, status: :unprocessable_entity }
@@ -109,8 +113,12 @@ class TemplatesController < ApplicationController
     template = Template.find(params[:id])
     respond_to do |format|
       if template.update_attributes(params[:template])
-        format.html { redirect_to template, notice: '반영됨.' }
-        format.json { head :no_content }
+        if request.referer == template_molds_url(template)
+          format.html { redirect_to template_molds_path(template), notice: '이미지 틀 수정 반영됨.' }
+        else
+          format.html { redirect_to template, notice: '반영됨.' }
+          format.json { head :no_content }
+        end
       else
         format.html { render action: "edit" }
         format.json { render json: template.errors, status: :unprocessable_entity }

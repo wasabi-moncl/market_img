@@ -5,7 +5,6 @@ class Template::MoldsController < ApplicationController
   # GET /molds.json
   def index
     @molds = @template.molds
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @molds }
@@ -42,11 +41,12 @@ class Template::MoldsController < ApplicationController
   # POST /molds
   # POST /molds.json
   def create
+    @template_molds = Template.find(params[:id])
     @mold = @template.molds.new(params[:mold])
 
     respond_to do |format|
-      if @mold.save
-        format.html { redirect_to template_mold_path(@template, @mold), notice: 'Mold was successfully created.' }
+      if @template.save
+        format.html { redirect_to template_molds_path(@template), notice: 'Mold was successfully created.' }
         format.json { render json: template_mold_path(@template, @mold), status: :created, location: @mold }
       else
         format.html { render action: "new" }

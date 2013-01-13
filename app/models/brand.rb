@@ -3,4 +3,5 @@ class Brand < ActiveRecord::Base
   belongs_to :brand_category
   has_many :users
   has_many :templates
+  has_many :items
 end

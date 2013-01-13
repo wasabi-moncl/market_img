@@ -18,10 +18,10 @@ MarketImg::Application.routes.draw do
   get "login"   => "sessions#new", :as => "login"
   get "signup"  => "users#new", :as => "signup"
   
+  resources :photos, :only => [:index, :edit, :destroy]
   resources :sessions
   resources :users
   resources :positions
-  # resources :banners
 
   resources :items do
     resources :photos
@@ -52,8 +52,11 @@ MarketImg::Application.routes.draw do
     
   end
   
-  resources :molds
-  resources :elements
+  resources :molds do
+    scope :module => "mold" do
+      resources :positions
+    end
+  end
   
   root :to => 'sessions#new'
 end

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class MoldsController < ApplicationController
   # GET /molds
   # GET /molds.json
@@ -57,9 +58,15 @@ class MoldsController < ApplicationController
   # PUT /molds/1.json
   def update
     @mold = Mold.find(params[:id])
-
+    
     respond_to do |format|
       if @mold.update_attributes(params[:mold])
+        if request.referer == mold_positions_url(@mold)
+          format.html { redirect_to mold_positions_path(@mold), notice: '이미지 좌표 수정 반영됨.' }
+        else
+          format.html { redirect_to template, notice: '반영됨.' }
+          format.json { head :no_content }
+        end
         format.html { redirect_to @mold, notice: 'Mold was successfully updated.' }
         format.json { head :no_content }
       else

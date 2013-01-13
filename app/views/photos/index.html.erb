@@ -1,11 +1,32 @@
-<div id="item">
-  <ul id="grid">
-    <% @photos.each do |pic| %>
-     <li><%= link_to image_tag(pic.photo_file.url(:thumb).to_s), item_photo_path(@item,pic) %>	
-				<%= link_to 'Remove', item_photo_path(@item, pic.id), :confirm => "Delete this photo?", :method => 'delete' %>
-			</li>
-    <% end %>
-  </ul>
-</div>
+<h1>Listing photos</h1>
 
-    
+<table>
+  <tr>
+    <th>photo_file</th>
+    <th>item_id </th>
+    <th>user_id </th>
+    <th>template_id</th>
+    <th>item_code</th>
+    <th>part</th>
+    <th>has_code</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @photos.each do |photo| %>
+  <tr>
+		
+    <td><%= image_tag photo.photo_file.url(:thumb) %></td>
+    <td><%= photo.item_id %></td>
+    <td><%= photo.user_id %></td>
+    <td><%= photo.template_id %></td>
+    <td><%= photo.item_code %></td>
+    <td><%= photo.part %></td>
+    <td><%= photo.has_code %></td>
+    <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
+    <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+

@@ -1,4 +1,12 @@
 class PhotosController < ApplicationController
+  
+  def index
+    @photos = Photo.all
+  end
+  
+  def edit
+    @photo = Photo.find(params[:id])
+  end
         
   def write_all
     photos = Photo.all
@@ -45,7 +53,7 @@ class PhotosController < ApplicationController
     @photo.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_photos_path(@item) }
+      format.html { redirect_to photos_path(@photo) }
       format.json { head :no_content }
     end
   end

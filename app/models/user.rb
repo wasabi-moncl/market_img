@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email    
 
   validates_presence_of :username
+  validates_presence_of :brand_id
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password
     

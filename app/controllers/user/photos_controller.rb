@@ -5,7 +5,7 @@ class User::PhotosController < ApplicationController
     @user = current_user
     @photos = @user.photos.where(:has_code => false).order("created_at desc")
     if @photos.empty?
-      redirect_to dashboard_path, notice: '품번을 넣을 이미지 파일이 아직 없습니다.'
+      redirect_to dashboard_path, notice: '현재 품번을 넣을 이미지 파일이 없습니다.'
     else
       respond_to do |format|
         format.html # index.html.erb

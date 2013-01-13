@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
   has_many :photos
   has_and_belongs_to_many :templates
   belongs_to :template
-  
+  belongs_to :brand
   belongs_to :user
   
   def self.open_spreadsheet(file)
@@ -25,6 +25,7 @@ class Item < ActiveRecord::Base
       item = find_by_id(row["id"]) || new
       item.attributes = row.to_hash.slice(*accessible_attributes)
       item.user = user
+      item.brand = user.brand
       item.save!
     end
   end
