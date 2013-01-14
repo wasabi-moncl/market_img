@@ -1,3 +1,4 @@
+# require "erb"
 #encoding: utf-8
 class Template < ActiveRecord::Base
   attr_accessible :name, :brand_id

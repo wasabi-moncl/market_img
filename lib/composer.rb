@@ -1,10 +1,10 @@
 class Composer
   def self.m(mold)
     dst = Magick::Image.new(image_width(mold), image_height(mold))
-    # dst.background_color = '#ffffff'
-    # dst.format = 'PNG'
-    # result_name = 'public/generated_images/generated_' + item.item_code + '.png'
-    # dst.write(result_name)
+    dst.background_color = '#ffffff'
+    dst.format = 'PNG'
+    result_name = 'public/generated_images/mold' + mold.id +  + '_example.png'
+    dst.write(result_name)
     # parts.each do |part|
     #   filename = 'public' + part[:photo].photo_file.to_s
     #   src = Magick::Image.read(filename)[0]

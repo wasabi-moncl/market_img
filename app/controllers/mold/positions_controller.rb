@@ -5,7 +5,7 @@ class Mold::PositionsController < ApplicationController
   def index
     
     @positions = @mold.positions
-
+    @photos = @mold.photos.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @positions }

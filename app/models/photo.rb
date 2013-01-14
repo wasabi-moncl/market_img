@@ -6,7 +6,7 @@ class Photo < ActiveRecord::Base
   belongs_to :item
   belongs_to :user
   belongs_to :position
-  
+  belongs_to :mold
   mount_uploader :photo_file, PhotoUploader
   
   before_save :check_item_code

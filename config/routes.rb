@@ -13,6 +13,7 @@ MarketImg::Application.routes.draw do
   match 'photos_write_all' => 'photos#write_all', :via => :get
   match 'product_image/:id' => 'user/items#product_image', :via => :get, :as => "product_image"
   match 'saved_image/:id' => 'user/items#saved_image', :via => :get, :as => "saved_image"
+  match 'brands/:id/:item_code' => 'templates#html_code', :via => :get, :as => "html_code"
   get "dashboard" => "user/dashboard#index", :via => :get, :as => "dashboard" 
   get "logout"  => "sessions#destroy", :as => "logout"
   get "login"   => "sessions#new", :as => "login"
@@ -40,7 +41,9 @@ MarketImg::Application.routes.draw do
   end
 
   resources :templates do
-    member { get :composed_image }
+    member do
+      get :composed_image
+    end
     resources :labels do
       collection { get :update_all}
     end
@@ -55,6 +58,7 @@ MarketImg::Application.routes.draw do
   resources :molds do
     scope :module => "mold" do
       resources :positions
+      resources :photos
     end
   end
   

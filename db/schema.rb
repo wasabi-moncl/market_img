@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20130111153235) do
   create_table "molds", :force => true do |t|
     t.string   "name"
     t.integer  "part"
+    t.string   "bg_color"
     t.integer  "template_id"
     t.integer  "element_id"
     t.datetime "created_at",  :null => false
@@ -107,9 +108,9 @@ ActiveRecord::Schema.define(:version => 20130111153235) do
 
   create_table "photos", :force => true do |t|
     t.string   "photo_file"
-    t.integer  "item_id"
     t.integer  "user_id"
     t.integer  "template_id"
+    t.integer  "mold_id"
     t.string   "item_code"
     t.integer  "part"
     t.boolean  "has_code",    :default => false

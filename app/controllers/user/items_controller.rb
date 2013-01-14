@@ -2,6 +2,11 @@
 class User::ItemsController < ApplicationController
   def show
   end
+  
+  def html_code
+    @brand = Brand.find(params[:id])
+    @item = @brand.items.where(:item_code => params[:item_code]).first
+  end
 
   def index
     @items = current_user.items.order("created_at desc")

@@ -1,8 +1,6 @@
 <h1><%= @template.name %>의 이미지 틀</h1>
 <%= nested_form_for @template do |f| %>	
 	<ul>
-		<li><%= f.link_to_add "새 이미지 틀 추가", :molds %></li>
-		<li><%= f.submit %></li>
 		<li>
 			<%= f.fields_for :molds do |mold_form|%>
 			<ul>
@@ -13,8 +11,12 @@
 				<li>
 					<%= mold_form.label :part%>
 					<%= mold_form.text_field :part%>
+				</li>
 				<li>
-					<%= link_to("#{mold_form.object.name} 이미지 좌표 수정", mold_positions_path(mold_form.object.id)) if Mold.exists?(mold_form.object.id) %>
+					<%= mold_form.label :bg_color %>
+					<%= mold_form.text_field :bg_color %>
+				<li>
+					<%= link_to("#{mold_form.object.name} 이미지 틀 세부 설정", mold_positions_path(mold_form.object.id)) if Mold.exists?(mold_form.object.id) %>
 				</li>
 			</ul>
 			<% end %>
