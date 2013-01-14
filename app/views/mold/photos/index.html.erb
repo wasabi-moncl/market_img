@@ -1,12 +1,21 @@
-<h1>이미지 틀용 필수 사진 모음</h1>
-
-<ul>
-	<li><%= link_to "사진 올리기", new_mold_photo_path(params[:mold_id])%></li>
-	<% @photos.all.each do |photo| %>
-	<li>
-		<p><%= link_to image_tag(photo.photo_file), edit_mold_photo_path(@mold, photo) %></p>
-		<p><%= link_to '삭제', [@mold, photo], method: :delete, data: { confirm: '진심?' } %></p>
-	</li>
-	    
+<h1><%= @template.name %> 템플릿의 <%= @mold.name %>이미지 틀에 쓰일 필수 이미지 관리</h1>
+<%= link_to "#{@mold.name} 이미지 틀 관리로 돌아가기", mold_positions_path(@mold)%>
+<%= nested_form_for @mold do |mold_form| %>	
+	<div class="row">
+	<%= mold_form.fields_for :photos, nil, {:class => "well"} do |photo_form|%>
+		<div class="span3 well">
+			<ul>
+				<%= photo_form.hidden_field :template_id, :value => @template.id %>
+				<li><%= image_tag photo_form.object.photo_file.url(:thumb)%></li>
+		    <li>
+					<%= photo_form.label :part %>
+					<%= photo_form.text_field :part, :class => "input-small" %>
+				</li>
+				<li><%= photo_form.link_to_remove "삭제" %></li>
+			</ul>
+		</div>
 	<% end %>
-</ul>
+	</div>
+	<%= mold_form.submit %>
+<% end %>
+<%= link_to "새 사진 추가", new_mold_photo_path(@mold)%>

@@ -63,6 +63,8 @@ class MoldsController < ApplicationController
       if @mold.update_attributes(params[:mold])
         if request.referer == mold_positions_url(@mold)
           format.html { redirect_to mold_positions_path(@mold), notice: '이미지 좌표 수정 반영됨.' }
+        elsif request.referer == mold_photos_url(@mold)
+          format.html { redirect_to mold_photos_path(@mold), notice: '이미지 틀용 필수 사진 수정 반영됨.' }
         else
           format.html { redirect_to template, notice: '반영됨.' }
           format.json { head :no_content }

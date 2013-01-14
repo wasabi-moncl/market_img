@@ -1,34 +1,51 @@
-<%= link_to "이미지 틀 수정", template_molds_path(@template)%>
+<%= link_to "이미지 틀 관리로 돌아가기", template_molds_path(@template)%>
 <h1><%= @template.name %> 템플릿의 <%= @mold.name%> 이미지 틀 세부 설정</h1>
-<%= link_to "이미지 틀 필수 사진 넣기", new_mold_photo_path(@mold)%>
-<%= nested_form_for @mold do |mold_form| %>	
-	<%= mold_form.submit %>
+<%= link_to "이미지 틀 필수 사진 관리", mold_photos_path(@mold)%>
+<div class="row">
+	<div class="span10">
+		<%= nested_form_for @mold do |mold_form| %>	
+			<%= mold_form.submit %>
+				<ul>
+					<li>
+						<%= mold_form.fields_for :positions, nil, {:class => "well"} do |position_form|%>
+							<div class="row well">
+								<%= position_form.hidden_field :template_id, :value => @template.id %>
+								<div class="span2">
+									<%= image_tag(@mold.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) unless @mold.photos.where(:part => position_form.object.part).empty?%>
+								</div>
+								<div class="span2">
+									<%= position_form.label :name, "포지션 이름" %>
+									<%= position_form.text_field :name, :class => "input-small" %>
+								</div>
+								<div class="span2">
+							    <%= position_form.label :x_pos %><br />
+							    <%= position_form.text_field :x_pos, :class => "input-small" %>
+								</div>
+								<div class="span2">
+							    <%= position_form.label :y_pos %><br />
+							    <%= position_form.text_field :y_pos, :class => "input-small" %>
+								</div>
+								<div class="span2">
+							    <%= position_form.label :part %><br />
+							    <%= position_form.text_field :part, :class => "input-small" %>
+								</div>
+								<%= position_form.link_to_remove "삭제" %>
+							</div>
+						<% end %>
+					</li>
+					<li><%= mold_form.link_to_add "새 좌표 추가", :positions %></li>
+				</ul>
+			<%= mold_form.submit %>
+		<% end %>
+	</div>
+	<div class="span2">
 		<ul>
-			<li>
-				<%= mold_form.fields_for :positions, nil, {:class => "well"} do |position_form|%>
-					<div class="row well">
-						<%= position_form.hidden_field :template_id, :value => @template.id %>
-						<div class="span2">
-							<%= position_form.label :name, "포지션 이름" %>
-							<%= position_form.text_field :name, :class => "input-small" %>
-						</div>
-						<div class="span2">
-					    <%= position_form.label :x_pos %><br />
-					    <%= position_form.text_field :x_pos, :class => "input-small" %>
-						</div>
-						<div class="span2">
-					    <%= position_form.label :y_pos %><br />
-					    <%= position_form.text_field :y_pos, :class => "input-small" %>
-						</div>
-						<div class="span2">
-					    <%= position_form.label :part %><br />
-					    <%= position_form.text_field :part, :class => "input-small" %>
-						</div>
-						<%= position_form.link_to_remove "삭제" %>
-					</div>
-				<% end %>
-			</li>
-			<li><%= mold_form.link_to_add "새 좌표 추가", :positions %></li>
+			<% @mold.photos.each do |photo|%>
+				<li>
+					<%= link_to image_tag(photo.photo_file.url(:thumb)), mold_photos_path(@mold)%>
+					<%= photo.part %>
+				</li>
+			<% end %>
 		</ul>
-	<%= mold_form.submit %>
-<% end %>
+	</div>
+</div>
