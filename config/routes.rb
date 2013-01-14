@@ -41,18 +41,17 @@ MarketImg::Application.routes.draw do
   end
 
   resources :templates do
-    member do
-      get :composed_image
-    end
-    resources :labels do
-      collection { get :update_all}
-    end
     scope :module => "template" do
       resources :molds
       resources :elements
       resources :photos
     end
-    
+    member do
+      get :composed_image
+    end
+    resources :labels do
+      collection { get :update_all}
+    end    
   end
   
   resources :molds do

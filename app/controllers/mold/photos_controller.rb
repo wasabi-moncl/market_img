@@ -2,10 +2,10 @@
 class Mold::PhotosController < ApplicationController
   before_filter :the_mold
   def index
-    @photo = @mold.photos.new
+    @photos = @mold.photos
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @template.photos }
+      format.html
+      format.json { render json: @mold.photos }
     end
   end
 
@@ -30,9 +30,8 @@ class Mold::PhotosController < ApplicationController
 
   def create
     photo = @mold.photos.new(params[:photo])
-    part = @template.positions.count
     if photo.save
-      @template.positions.create({:part => part, :y_pos => Magick::Image.read(@mold.photos.all[-2].photo_file.path).first.rows || 1})
+      @template.photos << photo
       redirect_to mold_positions_path(params[:mold_id])
     # else
     #   render :json => { "errors" => @photos.errors } 

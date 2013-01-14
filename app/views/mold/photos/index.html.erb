@@ -1,11 +1,11 @@
 <h1>이미지 틀용 필수 사진 모음</h1>
 
 <ul>
-	<li><%= link_to "사진 올리기", new_template_photo_path(params[:template_id])%></li>
+	<li><%= link_to "사진 올리기", new_mold_photo_path(params[:mold_id])%></li>
 	<% @photos.all.each do |photo| %>
 	<li>
-		<p><%= link_to image_tag(photo.photo_file), edit_template_photo_path(@template, photo) %></p>
-		<p><%= link_to '삭제', [@template, photo], method: :delete, data: { confirm: '진심?' } %></p>
+		<p><%= link_to image_tag(photo.photo_file), edit_mold_photo_path(@mold, photo) %></p>
+		<p><%= link_to '삭제', [@mold, photo], method: :delete, data: { confirm: '진심?' } %></p>
 	</li>
 	    
 	<% end %>
