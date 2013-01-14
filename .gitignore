@@ -12,6 +12,7 @@ capybara-*.html
 /public/uploads/*
 /public/generated_images/*.png
 /coverage/
+/config/database.yml
 /spec/tmp/*
 **.orig
 rerun.txt

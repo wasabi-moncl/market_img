@@ -16,7 +16,7 @@ class TemplatesController < ApplicationController
   def html_code
     @brand = Brand.find(params[:id])
     @item = @brand.items.where(:item_code => params[:item_code])
-    html_code = "<%= @item.name %><%= @brand.name%>"
+    html_code = @brand.templates.last.code || "<%= @item.name %><%= @brand.name%>"
     render :layout => false, :inline => html_code
   end
 
