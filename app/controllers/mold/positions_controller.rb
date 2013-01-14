@@ -1,9 +1,14 @@
 class Mold::PositionsController < ApplicationController
   before_filter :the_mold
+  
+  def example_image
+    example_image = Composer.m(@mold)
+    send_data example_image, :filename => "product_" + item.item_code + ".png",
+    :disposition => 'inline', :type => "image/png"
+  end
   # GET /positions
   # GET /positions.json
   def index
-    
     @positions = @mold.positions
     @photos = @mold.photos.new
     respond_to do |format|
@@ -43,7 +48,6 @@ class Mold::PositionsController < ApplicationController
   # POST /positions.json
   def create
     @position = Position.new(params[:position])
-
     respond_to do |format|
       if @position.save
         format.html { redirect_to @position, notice: 'Position was successfully created.' }
@@ -59,7 +63,6 @@ class Mold::PositionsController < ApplicationController
   # PUT /positions/1.json
   def update
     @position = Position.find(params[:id])
-
     respond_to do |format|
       if @position.update_attributes(params[:position])
         format.html { redirect_to @position, notice: 'Position was successfully updated.' }
@@ -76,13 +79,14 @@ class Mold::PositionsController < ApplicationController
   def destroy
     @position = Position.find(params[:id])
     @position.destroy
-
     respond_to do |format|
       format.html { redirect_to positions_url }
       format.json { head :no_content }
     end
   end
 end
+
+private 
 def the_mold
   @mold = Mold.find(params[:mold_id])
   @template = @mold.template

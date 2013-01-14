@@ -56,7 +56,9 @@ MarketImg::Application.routes.draw do
   
   resources :molds do
     scope :module => "mold" do
-      resources :positions
+      resources :positions do
+        collection { get :example_image}
+      end
       resources :photos
     end
   end

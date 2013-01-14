@@ -15,7 +15,7 @@ class Composer
     #   dst.composite!(src, x_pos, y_pos, Magick::OverCompositeOp)
     #   dst.write(result_name)
     # end
-    # result_image = dst.to_blob
+    result_image = dst.to_blob
   end
   
   def self.molding

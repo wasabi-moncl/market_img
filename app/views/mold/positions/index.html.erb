@@ -1,6 +1,7 @@
 <%= link_to "이미지 틀 관리로 돌아가기", template_molds_path(@template)%>
 <h1><%= @template.name %> 템플릿의 <%= @mold.name%> 이미지 틀 세부 설정</h1>
 <%= link_to "이미지 틀 필수 사진 관리", mold_photos_path(@mold)%>
+<%= image_tag example_image_mold_positions(@mold)%>
 <div class="row">
 	<div class="span10">
 		<%= nested_form_for @mold do |mold_form| %>	
@@ -39,11 +40,14 @@
 		<% end %>
 	</div>
 	<div class="span2">
+		<h3>미리보기</h3>
 		<ul>
 			<% @mold.photos.each do |photo|%>
 				<li>
-					<%= link_to image_tag(photo.photo_file.url(:thumb)), mold_photos_path(@mold)%>
-					<%= photo.part %>
+					<dl>
+						<dt><%= link_to image_tag(photo.photo_file.url(:thumb)), mold_photos_path(@mold)%></dt>
+						<dd><%= photo.part || "파트 번호 없음"%></dd>
+					</dl>
 				</li>
 			<% end %>
 		</ul>
