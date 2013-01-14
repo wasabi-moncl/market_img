@@ -36,7 +36,7 @@ class Template::PhotosController < ApplicationController
     photo = @template.photos.new(params[:photo])
     photo.part = @template.positions.count
     if photo.save
-      @template.positions.create({:part => photo.part, :y_pos => Magick::Image.read(@template.photos.all[-2].photo_file.path).first.rows || 1})
+      @template.positions.create({:part => photo.part})
       redirect_to template_photos_path(params[:template_id])
     # else
     #   render :json => { "errors" => @photos.errors } 
