@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111153235) do
+ActiveRecord::Schema.define(:version => 20130114151911) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20130111153235) do
     t.boolean  "has_code",    :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "item_id"
   end
 
   create_table "positions", :force => true do |t|

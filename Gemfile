@@ -22,7 +22,7 @@ gem 'zclip-rails'
 gem "roo"# , :git => 'git://github.com/Empact/roo.git'
 
 gem "rmagick"
-# gem "mini_magick"
+gem "mini_magick"
 
 #authentications
 gem "sorcery", :git => "git://github.com/NoamB/sorcery.git"

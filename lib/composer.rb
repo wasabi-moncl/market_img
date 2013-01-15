@@ -1,24 +1,31 @@
 class Composer
   def self.m(mold)
-    dst = Magick::Image.new(image_width(mold), image_height(mold))
-    dst.background_color = '#ffffff'
-    dst.format = 'PNG'
-    result_name = 'public/generated_images/mold' + mold.id +  + '_example.png'
-    dst.write(result_name)
-    # parts.each do |part|
-    #   filename = 'public' + part[:photo].photo_file.to_s
-    #   src = Magick::Image.read(filename)[0]
-    #   label = Magick::Draw.new
-    #   x_pos = part[:position].x_pos
-    #   y_pos = part[:position].y_pos
-    #   # next if x_pos == nil or y_pos == nil
-    #   dst.composite!(src, x_pos, y_pos, Magick::OverCompositeOp)
-    #   dst.write(result_name)
-    # end
-    result_image = dst.to_blob
+    if mold.photos.where(:part => mold.positions.map(&:part)).empty?
+      rails_png = './app/assets/images/rails.png'
+      dst = MiniMagick::Image.open(rails_png)
+    else
+      result_name = 'public/generated_images/mold_' + mold.id.to_s + '_example.png'
+      dst = Magick::Image.new(image_width(mold), image_height(mold))
+      dst.background_color = "#aaaaaa"
+      dst.format = "PNG"
+      dst.write(result_name)
+      mold.positions.order("part desc").each do |position|
+        # unless mold.photos.where(:part => position.part).empty?
+        #   photo = mold.photos.where(:part => position.part).first
+        # else
+        #   photo = example_item.photos.where(:part => position.part).first
+        # end
+        # src = MiniMagick::Image.read('public'+photo.photo_file.url)
+        # result = dst.composite(src, position.x_pos, position.y_pos) do |c|
+        # end
+        # result.write(result_name)
+      end
+    end
+    dst.to_blob
   end
   
-  def self.molding
+  def self.item
+    example_item
   end
   
   def self.image_width(mold)
@@ -28,9 +35,14 @@ class Composer
     end_points = Array.new
     positions.each do |position|
       x_position = position.x_pos
-      photo = example_item.photos.where(:part => position.part).first
       if position.width.nil?
-        end_points << Magick::Image.read(photo.photo_file.path).first.columns + x_position
+        if mold.photos.where(:part => position.part).count > 0
+          photo = mold.photos.where(:part => position.part).first
+          end_points << Magick::Image.read(photo.photo_file.path).first.columns + x_position
+        elsif example_item.photos.where(:part => position.part).count > 0
+          photo = example_item.photos.where(:part => position.part).first
+          end_points << Magick::Image.read(photo.photo_file.path).first.columns + x_position
+        end
       else
         end_points << position.width + x_position
       end
@@ -39,7 +51,7 @@ class Composer
     width = end_point - start_point
     width
   end
-  
+
   def self.image_height(mold)
     positions = mold.positions
     y_positions = positions.map(&:y_pos)
@@ -47,9 +59,14 @@ class Composer
     end_points = Array.new
     positions.each do |position|
       y_position = position.y_pos
-      photo = example_item.photos.where(:part => position.part).first
-      if position.width.nil?
-        end_points << Magick::Image.read(photo.photo_file.path).first.rows + y_position
+      if position.height.nil?
+        if mold.photos.where(:part => position.part).count > 0
+          photo = mold.photos.where(:part => position.part).first
+          end_points << Magick::Image.read(photo.photo_file.path).first.rows + y_position
+        elsif example_item.photos.where(:part => position.part).count > 0
+          photo = example_item.photos.where(:part => position.part).first
+          end_points << Magick::Image.read(photo.photo_file.path).first.rows + y_position
+        end
       else
         end_points << position.height + y_position
       end

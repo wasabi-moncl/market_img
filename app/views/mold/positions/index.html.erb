@@ -1,7 +1,13 @@
 <%= link_to "이미지 틀 관리로 돌아가기", template_molds_path(@template)%>
 <h1><%= @template.name %> 템플릿의 <%= @mold.name%> 이미지 틀 세부 설정</h1>
-<%= link_to "이미지 틀 필수 사진 관리", mold_photos_path(@mold)%>
-<%= image_tag example_image_mold_positions(@mold)%>
+<ul>
+	<li><%= link_to "이미지 틀 필수 사진 관리", mold_photos_path(@mold)%></li>
+<% if Item.joins(:photos).group("photos.item_id").having("count(photos.id) > 0").empty? %>
+	<li><strong><%= link_to "예제 파일 생성용 이미지 없음.", dashboard_path%></strong></li>
+<% else %>
+	<li><%= image_tag example_image_mold_positions_path(@mold)%></li>
+<% end %>
+</ul>
 <div class="row">
 	<div class="span10">
 		<%= nested_form_for @mold do |mold_form| %>	

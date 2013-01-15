@@ -3,7 +3,7 @@ class Mold::PositionsController < ApplicationController
   
   def example_image
     example_image = Composer.m(@mold)
-    send_data example_image, :filename => "product_" + item.item_code + ".png",
+    send_data example_image, :filename => "product_" + @mold.id.to_s + ".png",
     :disposition => 'inline', :type => "image/png"
   end
   # GET /positions
