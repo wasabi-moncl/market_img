@@ -14,14 +14,14 @@ class Position < ActiveRecord::Base
   end
   
   def geometry
-    if self.x_pos.nil? && self.y_pos.nil?
+    if x_pos.nil? && y_pos.nil?
       result = "+0+0"
-    elsif self.x_pos.nil? && self.y_pos.class == Fixnum
-      result = "+0" + operation(self.y_pos)
-    elsif self.x_pos.class == Fixnum && self.y_pos.nil?
-      result = operation(self.x_pos) + "+0"
+    elsif x_pos.nil? && y_pos.class == Fixnum
+      result = "+0" + operation(y_pos)
+    elsif x_pos.class == Fixnum && y_pos.nil?
+      result = operation(x_pos) + "+0"
     else
-      result = operation(self.x_pos) + operation(self.y_pos)
+      result = operation(x_pos) + operation(y_pos)
     end
     result
   end

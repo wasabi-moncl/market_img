@@ -7,28 +7,45 @@ class Composer
       else
         result_name = 'public/generated_images/mold_' + mold.id.to_s + '_example.png'
         dst = Magick::Image.new(image_width(mold), image_height(mold))
-        dst[0].background_color = "#aaaaaa"
+        dst.background_color = "#aaaaaa"
         dst.format = "PNG"
         dst.write(result_name)
+        parts = Array.new
         mold.positions.order("part desc").each do |position|
-          unless mold.photos.where(:part => position.part).empty?
-            photo = mold.photos.where(:part => position.part).first
-          else
-            photo = example_item.photos.where(:part => position.part).first
+          if mold.photos.where(:part => position.part).count > 0
+            parts << {:photo => mold.photos.where(:part => position.part).first, :position => position}
+          elsif example_item.photos.where(:part => position.part).count > 0
+            parts << {:photo => example_item.photos.where(:part => position.part).first, :position => position}
           end
-          src = MiniMagick::Image.open('public' + photo.photo_file.url)
+        end
+        parts.each do |part|
+          src = MiniMagick::Image.open('public' + part[:photo].photo_file.url)          
           dst = MiniMagick::Image.open(result_name)
           result = dst.composite(src, "png") do |c|
-            c.geometry ''
-            c.gravity 'NorthEast'
+            c.geometry part[:position].geometry
+            c.gravity 'NorthWest'
           end
-          # end
-          # result.write(result_name)
+          result.write(result_name)
         end
       end
-      dst.to_blob
+      result = MiniMagick::Image.open(result_name)
+      result.to_blob
     end
-  
+    
+    def test
+      src = MiniMagick::Image.open('public' + Photo.last.photo_file.url)          
+      dst = MiniMagick::Image.open('public' + Photo.first.photo_file.url)
+      result = src.composite(dst, "png") do |c|
+        c.geometry "+100+100"
+        c.gravity 'NorthWest'
+      end
+      result.to_blob      
+    end
+    
+    def item
+      example_item
+    end
+    
     def image_width(mold)
       positions = mold.positions
       x_positions = positions.map(&:x_pos)
