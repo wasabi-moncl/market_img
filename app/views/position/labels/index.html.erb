@@ -1,0 +1,62 @@
+<%= link_to "이미지 틀 세부설정으로 돌아가기", mold_positions_path(@mold)%>
+<h1><%= @mold.name %> 이미지 틀의 <%= @position.part %> 파트의 레이블링 세부 설정</h1>
+<ul>
+<% if Item.joins(:photos).group("photos.item_id").having("count(photos.id) > 0").empty? %>
+	<li><strong><%= link_to "예제 파일 생성용 이미지 없음.", dashboard_path%></strong></li>
+<% else %>
+	<li><%= image_tag example_image_position_labels_path(@position)%></li>
+<% end %>
+</ul>
+<div class="row">
+	<div class="span10">
+		<%= nested_form_for @position do |position_form| %>	
+			<%= position_form.submit %>
+				<ul>
+					<li>
+						<%= position_form.fields_for :labels, nil, {:class => "well"} do |label_form|%>
+							<div class="row well">
+								<%= label_form.hidden_field :position_id, :value => @position.id %>
+								<div class="span2">
+							    <%= label_form.label :column %>
+									<%= label_form.select :column, Item.label_columns, {:include_blank => "컬럼선택"}, {:class => "input-medium"}%>
+									
+								</div>
+								<div class="span2">
+							    <%= label_form.label :x_pos %>
+							    <%= label_form.text_field :x_pos, :class => "input-small" %>
+								</div>
+								<div class="span2">
+							    <%= label_form.label :y_pos %>
+							    <%= label_form.text_field :y_pos, :class => "input-small" %>
+								</div>
+								<div class="span2">
+									<%= label_form.label :color %>
+									<%= label_form.text_field :color, :class => "input-small" %>
+								</div>
+								<div class="span2">
+									<%= label_form.label :size %>
+									<%= label_form.text_field :size, :class => "input-small" %>
+								</div>
+								<div class="span2">
+									<%= label_form.label :gravity %>
+									<%= label_form.select :gravity, [["가운데", "North"],["왼쪽", "NorthWest"],["오른쪽", "NorthEast"]], {:include_blank => "정렬선택"}, {:class => "input-small"}%>
+								</div>
+								<div class="span2">
+									<%= label_form.label :font %>
+									<%= label_form.select :font, [["나눔고딕", "NanumGothic.ttf"]], {}, {:class => "input-small"}%>
+								</div>
+								<%= label_form.link_to_remove "삭제" %>
+							</div>
+						<% end %>
+					</li>
+					<li><%= position_form.link_to_add "새 레이블링 추가", :labels %></li>
+				</ul>
+			<%= position_form.submit %>
+		<% end %>
+	</div>
+	<div class="span2">
+		<h3>미리보기</h3>
+		<%= image_tag(@position.mold.photos.where(:part => @position.part).first.photo_file.url(:thumb)) if @position.mold.photos.where(:part => @position.part).any? %>
+		<%= image_tag(Item.example.photos.where(:part => @position.part).first.photo_file.url(:thumb)) if Item.example.photos.where(:part => @position.part).any? %>
+	</div>
+</div>

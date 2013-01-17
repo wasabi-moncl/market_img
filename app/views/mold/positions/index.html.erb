@@ -1,4 +1,4 @@
-<%= link_to "이미지 틀 관리로 돌아가기", template_molds_path(@template)%>
+<%= link_to "전체 이미지 틀 관리로 돌아가기", template_molds_path(@template)%>
 <h1><%= @template.name %> 템플릿의 <%= @mold.name%> 이미지 틀 세부 설정</h1>
 <ul>
 	<li><%= link_to "이미지 틀 필수 사진 관리", mold_photos_path(@mold)%></li>
@@ -18,26 +18,33 @@
 							<div class="row well">
 								<%= position_form.hidden_field :template_id, :value => @template.id %>
 								<div class="span2">
-									<%= image_tag(@mold.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) unless @mold.photos.where(:part => position_form.object.part).empty?%>
+									<%= image_tag(@mold.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) if @mold.photos.where(:part => position_form.object.part).any? %>
+									<%= image_tag(Item.example.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) if Item.example.photos.where(:part => position_form.object.part).any? %>
+
 								</div>
 								<div class="span2">
 									<%= position_form.label :name, "포지션 이름" %>
 									<%= position_form.text_field :name, :class => "input-small" %>
 								</div>
 								<div class="span2">
-							    <%= position_form.label :x_pos %><br />
+							    <%= position_form.label :x_pos %>
 							    <%= position_form.text_field :x_pos, :class => "input-small" %>
 								</div>
 								<div class="span2">
-							    <%= position_form.label :y_pos %><br />
+							    <%= position_form.label :y_pos %>
 							    <%= position_form.text_field :y_pos, :class => "input-small" %>
 								</div>
 								<div class="span2">
-							    <%= position_form.label :part %><br />
+							    <%= position_form.label :part %>
 							    <%= position_form.text_field :part, :class => "input-small" %>
 								</div>
+								<div class="span2">
+									<%= link_to "레이블링 설정", position_labels_path(position_form.object.id) if Position.exists?(position_form.object.id) %>
+								</div>
 								<%= position_form.link_to_remove "삭제" %>
+								
 							</div>
+							<p><%=  %></p>
 						<% end %>
 					</li>
 					<li><%= mold_form.link_to_add "새 좌표 추가", :positions %></li>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>X pos:</b>
+  <%= @label.x_pos %>
+</p>
+
+<p>
+  <b>Y pos:</b>
+  <%= @label.y_pos %>
+</p>
+
+<p>
+  <b>Part:</b>
+  <%= @label.part %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @label.name %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @label.color %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @label.size %>
+</p>
+
+<p>
+  <b>Font:</b>
+  <%= @label.font %>
+</p>
+
+<p>
+  <b>Gravity:</b>
+  <%= @label.gravity %>
+</p>
+
+<p>
+  <b>Kerning:</b>
+  <%= @label.kerning %>
+</p>
+
+
+<%= link_to 'Edit', edit_label_path(@label) %> |
+<%= link_to 'Back', labels_path %>

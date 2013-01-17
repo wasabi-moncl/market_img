@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114151911) do
+ActiveRecord::Schema.define(:version => 20130116064454) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20130114151911) do
     t.string   "column"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.integer  "mold_id"
+    t.integer  "position_id"
   end
 
   create_table "molds", :force => true do |t|

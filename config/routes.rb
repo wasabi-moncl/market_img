@@ -22,7 +22,6 @@ MarketImg::Application.routes.draw do
   resources :photos, :only => [:index, :edit, :destroy]
   resources :sessions
   resources :users
-  resources :positions
 
   resources :items do
     resources :photos
@@ -57,9 +56,20 @@ MarketImg::Application.routes.draw do
   resources :molds do
     scope :module => "mold" do
       resources :positions do
-        collection { get :example_image}
+        collection do
+          get :example_image
+          get :annotated_example_image
+        end
       end
       resources :photos
+    end
+  end
+  
+  resources :positions do
+    scope :module => "position" do
+      resources :labels do
+        collection {get :example_image}
+      end
     end
   end
   

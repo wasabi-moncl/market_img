@@ -2,9 +2,15 @@ class Mold::PositionsController < ApplicationController
   before_filter :the_mold
   
   def example_image
-    example_image = Composer.m(@mold)
+    example_image = Composer.mold_preview(@mold)
     send_data example_image, :filename => "product_" + @mold.id.to_s + ".png",
     :disposition => 'inline', :type => "image/png"
+  end
+  
+  def annotated_example_image
+    example_image = Composer.annotated_mold_preview(@mold)
+    send_data example_image, :filename => "product_" + @mold.id.to_s + ".png",
+    :disposition => 'inline', :type => "image/png"    
   end
   # GET /positions
   # GET /positions.json

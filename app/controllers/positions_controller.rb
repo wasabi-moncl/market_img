@@ -1,3 +1,4 @@
+#encoding: utf-8
 class PositionsController < ApplicationController
   # GET /positions
   # GET /positions.json
@@ -60,10 +61,23 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       if @position.update_attributes(params[:position])
-        format.html { redirect_to @position, notice: 'Position was successfully updated.' }
+        if request.referer == position_labels_url(@position)
+          format.html { redirect_to position_labels_path(@position), notice: '레이블링 수정 반영됨.' }
+        else
+          format.html { redirect_to template, notice: '반영됨.' }
+          format.json { head :no_content }
+        end
+        format.html { redirect_to @position, notice: 'Mold was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        if request.referer == position_labels_url(@position)
+          format.html { redirect_to position_labels_path(@position), alert: "설정 저장 안됨. 확인 필요" }
+          puts "@@@@@@@@@@"
+          @position.labels.each{|label| label.errors.each{|error| puts error}}
+        else
+          format.html { redirect_to template }
+          format.json { head :no_content }
+        end
         format.json { render json: @position.errors, status: :unprocessable_entity }
       end
     end

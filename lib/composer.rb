@@ -1,9 +1,33 @@
 class Composer
   class << self
-    def m(mold)
+    def combine(item = example_item, mold)
+    # def c(item = example_item, mold = Mold.last)
+      result_name = 'public/generated_images/item_' + item.id.to_s + '_mold_' + mold.id.to_s + '.png'
+      dst = Magick::Image.new(image_width(mold), image_height(mold))
+      dst.background_color = "#aaaaaa"
+      dst.format = "PNG"
+      dst.write(result_name)
+      mold.positions.order("part desc").each do |position|
+        dst = MiniMagick::Image.open(result_name)
+        src = labeling(item, position)
+        geo = position.geo
+        result = dst.composite(src, "png") do |c|
+          c.geometry geo
+          c.gravity 'NorthWest'
+        end
+        result.write(result_name)        
+      end
+      result = MiniMagick::Image.open(result_name)
+    end
+    
+    def annotated_mold_preview(item = example_item, mold)
+      combine(item, mold).to_blob
+    end
+    
+    def molding(item = example_item, mold)
       if mold.photos.where(:part => mold.positions.map(&:part)).empty?
         rails_png = './app/assets/images/rails.png'
-        dst = MiniMagick::Image.open(rails_png)
+        result_name = rails_png
       else
         result_name = 'public/generated_images/mold_' + mold.id.to_s + '_example.png'
         dst = Magick::Image.new(image_width(mold), image_height(mold))
@@ -13,24 +37,65 @@ class Composer
         parts = Array.new
         mold.positions.order("part desc").each do |position|
           if mold.photos.where(:part => position.part).count > 0
-            parts << {:photo => mold.photos.where(:part => position.part).first, :position => position}
-          elsif example_item.photos.where(:part => position.part).count > 0
-            parts << {:photo => example_item.photos.where(:part => position.part).first, :position => position}
+            parts << {:photo => mold.photos.where(:part => position.part).first, :geometry => position.geo}
+          elsif item.photos.where(:part => position.part).count > 0
+            parts << {:photo => item.photos.where(:part => position.part).first, :geometry => position.geo}
           end
         end
         parts.each do |part|
+          geo = part[:geometry]
+          puts geo
           src = MiniMagick::Image.open('public' + part[:photo].photo_file.url)          
           dst = MiniMagick::Image.open(result_name)
           result = dst.composite(src, "png") do |c|
-            c.geometry part[:position].geometry
+            c.geometry geo
             c.gravity 'NorthWest'
           end
           result.write(result_name)
         end
       end
       result = MiniMagick::Image.open(result_name)
-      result.to_blob
     end
+    
+    def labeling(item = example_item, position)
+      # if position.labels.empty?
+      #   rails_png = './app/assets/images/rails.png'
+      #   result_name = rails_png
+      # else
+        result_name = 'public/generated_images/position' + position.id.to_s + '_label_example_.png'
+        photo = nil
+        photo = position.mold.photos.where(:part => position.part).first unless position.mold.photos.where(:part => position.part).empty?
+        if photo.nil?
+          photo = item.photos.where(:part => position.part).first unless item.photos.where(:part => position.part).empty?
+        end
+        src = MiniMagick::Image.open('public' + photo.photo_file.url)
+        src.write(result_name)
+        unless position.labels.empty?
+          position.labels.each do |label|
+            src = MiniMagick::Image.open(result_name)
+            src.combine_options do |c|
+              c.font Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+              c.pointsize label.size
+              c.gravity label.gravity
+              c.fill label.color
+              c.draw "text " + label.geo + " '" + item.send(label.column) + "'"
+            end
+            src.write(result_name)
+          end
+        end
+      # end
+      result = MiniMagick::Image.open(result_name)
+    end
+    
+    def mold_preview(item = item, mold)
+      molding(item, mold).to_blob
+    end
+
+    def label_preview(item = example_item, position)
+      labeling(item, position).to_blob
+    end
+    
+    
     
     def test
       src = MiniMagick::Image.open('public' + Photo.last.photo_file.url)          

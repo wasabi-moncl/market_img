@@ -1,9 +1,14 @@
+include MiniGeo
 class Position < ActiveRecord::Base
   attr_accessible :height, :name, :part, :template_id, :width, :x_pos, :y_pos
+  attr_accessible :labels_attributes
+
   belongs_to :template
   belongs_to :mold
+  has_many :labels
   has_one :photo
-  
+
+  accepts_nested_attributes_for :labels, :allow_destroy => true
   #for generate test seed
   def self.association_to_the_template(current_user)
     template = Template.first
@@ -13,24 +18,4 @@ class Position < ActiveRecord::Base
     puts "associate " + template.positions.count.to_s + " items to template"
   end
   
-  def geometry
-    if x_pos.nil? && y_pos.nil?
-      result = "+0+0"
-    elsif x_pos.nil? && y_pos.class == Fixnum
-      result = "+0" + operation(y_pos)
-    elsif x_pos.class == Fixnum && y_pos.nil?
-      result = operation(x_pos) + "+0"
-    else
-      result = operation(x_pos) + operation(y_pos)
-    end
-    result
-  end
-end
-private
-def operation(number)
-  if number > -1
-    "+" + number.to_s
-  else
-    number.to_s
-  end
 end

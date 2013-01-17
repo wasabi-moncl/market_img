@@ -4,7 +4,7 @@ class CreateLabels < ActiveRecord::Migration
       t.integer :user_id
       t.integer :template_id
       t.integer :part
-      t.string :gravity, :default => "NorthGravity"
+      t.string :gravity, :default => "northwest"
       t.integer :x_pos
       t.integer :y_pos
       t.integer :width

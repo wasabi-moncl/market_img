@@ -30,6 +30,23 @@ class Item < ActiveRecord::Base
     end
   end
   
+  def self.example
+    Item.joins(:photos).group("photos.item_id").having("count(photos.id) > 0").first
+  end
+  
+  def self.label_columns
+    result = Array.new
+    except = ["id", "created_at", "updated_at", "url", "user_id", "template_id", "mall_code", "brand_id"]
+    item = self.new
+    columns = item.attributes.keys - except
+  
+    columns.each do |column|
+      result << column
+    end
+    result
+  end
+  
+  
   def parts
     positions = Array.new 
     self.user.brand.templates.first.positions.each do |position|

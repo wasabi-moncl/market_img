@@ -6,8 +6,10 @@
 		<div class="span3 well">
 			<ul>
 				<%= photo_form.hidden_field :template_id, :value => @template.id %>
-				<li><%= image_tag photo_form.object.photo_file.url(:thumb)%></li>
 		    <li>
+					<%= link_to image_tag(@mold.photos.find(photo_form.object.id).photo_file.url(:thumb)), mold_photo_path(@mold, photo_form.object.id) if @mold.photos.exists?(photo_form.object.id)%>
+				</li>
+				<li>
 					<%= photo_form.label :part %>
 					<%= photo_form.text_field :part, :class => "input-small" %>
 				</li>

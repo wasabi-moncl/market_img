@@ -1,3 +1,4 @@
+#encoding: utf-8
 class LabelsController < ApplicationController
   def update_all
     template = Template.find(params[:template_id])

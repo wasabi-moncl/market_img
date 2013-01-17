@@ -1,0 +1,53 @@
+<%= form_for(@label) do |f| %>
+  <% if @label.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@label.errors.count, "error") %> prohibited this label from being saved:</h2>
+
+      <ul>
+      <% @label.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :x_pos %><br />
+    <%= f.number_field :x_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :y_pos %><br />
+    <%= f.number_field :y_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :part %><br />
+    <%= f.number_field :part %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :color %><br />
+    <%= f.text_field :color %>
+  </div>
+  <div class="field">
+    <%= f.label :size %><br />
+    <%= f.number_field :size %>
+  </div>
+  <div class="field">
+    <%= f.label :font %><br />
+    <%= f.text_field :font %>
+  </div>
+  <div class="field">
+    <%= f.label :gravity %><br />
+    <%= f.text_field :gravity %>
+  </div>
+  <div class="field">
+    <%= f.label :kerning %><br />
+    <%= f.number_field :kerning %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
