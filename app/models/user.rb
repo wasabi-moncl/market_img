@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :labels
   has_many :items
+  has_many :template_rights
+  has_many :templates, :through => :template_rights
   
   validates_uniqueness_of :username
   validates_uniqueness_of :email    

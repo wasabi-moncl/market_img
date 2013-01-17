@@ -14,7 +14,8 @@ class TemplatesController < ApplicationController
   end
   
   def html_code
-    @brand = Brand.find(params[:id])
+    @user = User.where(:username => params[:username])
+    @templates = @user.templates
     @item = @brand.items.where(:item_code => params[:item_code])
     html_code = @brand.templates.last.code || "<%= @item.name %><%= @brand.name%>"
     render :layout => false, :inline => html_code
@@ -122,6 +123,8 @@ class TemplatesController < ApplicationController
       if template.update_attributes(params[:template])
         if request.referer == template_molds_url(template)
           format.html { redirect_to template_molds_path(template), notice: '이미지 틀 수정 반영됨.' }
+        elsif request.referer == template_elements_url(template)
+          format.html { redirect_to template_molds_path(template), notice: '템플릿 구성 부품 수정 반영됨.' }
         else
           format.html { redirect_to template, notice: '반영됨.' }
           format.json { head :no_content }

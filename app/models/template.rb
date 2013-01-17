@@ -1,7 +1,7 @@
 # require "erb"
 #encoding: utf-8
 class Template < ActiveRecord::Base
-  attr_accessible :name, :brand_id
+  attr_accessible :name, :brand_id, :code
   attr_accessible :labels_attributes, :molds_attributes, :elements_attributes, :sent_controller
 
   belongs_to :brand
@@ -11,6 +11,9 @@ class Template < ActiveRecord::Base
   has_many :labels
   has_many :molds
   has_many :elements
+  has_many :users, :through => :template_rights
+  has_many :template_rights
+  
   has_and_belongs_to_many :items
 
   #label에 컬러코드가 없으면 저장 안됨.

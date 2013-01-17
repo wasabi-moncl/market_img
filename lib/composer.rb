@@ -1,7 +1,6 @@
 class Composer
   class << self
     def combine(item = example_item, mold)
-    # def c(item = example_item, mold = Mold.last)
       result_name = 'public/generated_images/item_' + item.id.to_s + '_mold_' + mold.id.to_s + '.png'
       dst = Magick::Image.new(image_width(mold), image_height(mold))
       dst.background_color = "#aaaaaa"
@@ -58,32 +57,27 @@ class Composer
     end
     
     def labeling(item = example_item, position)
-      # if position.labels.empty?
-      #   rails_png = './app/assets/images/rails.png'
-      #   result_name = rails_png
-      # else
-        result_name = 'public/generated_images/position' + position.id.to_s + '_label_example_.png'
-        photo = nil
-        photo = position.mold.photos.where(:part => position.part).first unless position.mold.photos.where(:part => position.part).empty?
-        if photo.nil?
-          photo = item.photos.where(:part => position.part).first unless item.photos.where(:part => position.part).empty?
-        end
-        src = MiniMagick::Image.open('public' + photo.photo_file.url)
-        src.write(result_name)
-        unless position.labels.empty?
-          position.labels.each do |label|
-            src = MiniMagick::Image.open(result_name)
-            src.combine_options do |c|
-              c.font Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-              c.pointsize label.size
-              c.gravity label.gravity
-              c.fill label.color
-              c.draw "text " + label.geo + " '" + item.send(label.column) + "'"
-            end
-            src.write(result_name)
+      result_name = 'public/generated_images/position' + position.id.to_s + '_label_example_.png'
+      photo = nil
+      photo = position.mold.photos.where(:part => position.part).first unless position.mold.photos.where(:part => position.part).empty?
+      if photo.nil?
+        photo = item.photos.where(:part => position.part).first unless item.photos.where(:part => position.part).empty?
+      end
+      src = MiniMagick::Image.open('public' + photo.photo_file.url)
+      src.write(result_name)
+      unless position.labels.empty?
+        position.labels.each do |label|
+          src = MiniMagick::Image.open(result_name)
+          src.combine_options do |c|
+            c.font Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+            c.pointsize label.size
+            c.gravity label.gravity
+            c.fill label.color
+            c.draw "text " + label.geo + " '" + item.send(label.column) + "'"
           end
+          src.write(result_name)
         end
-      # end
+      end
       result = MiniMagick::Image.open(result_name)
     end
     

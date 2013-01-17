@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116064454) do
+ActiveRecord::Schema.define(:version => 20130117190755) do
 
   create_table "banners", :force => true do |t|
     t.integer  "photo_id"
@@ -132,6 +132,16 @@ ActiveRecord::Schema.define(:version => 20130116064454) do
     t.integer  "width"
     t.integer  "height"
     t.integer  "mold_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "template_rights", :force => true do |t|
+    t.integer  "template_id"
+    t.integer  "user_id"
+    t.datetime "started_at"
+    t.datetime "expired_at"
+    t.integer  "price"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

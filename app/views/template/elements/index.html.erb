@@ -1,26 +1,29 @@
-<h1><%= @template.name %>의 elements</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Part</th>
-    <th>Template</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @elements.each do |element| %>
-  <tr>
-    <td><%= element.name %></td>
-    <td><%= element.part %></td>
-    <td><%= link_to 'Show', element %></td>
-    <td><%= link_to 'Edit', edit_element_path(element) %></td>
-    <td><%= link_to 'Destroy', element, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<%= link_to "템플릿 관리로 돌아가기", template_path(@template) %>
+<h1><%= @template.name %>의 html 코드에 들어갈 부품 관리</h1>
+<%= nested_form_for @template do |f| %>	
+	<ul>
+		<li>
+			<%= f.fields_for :elements do |element_form|%>
+			<ul>
+				<li>
+					<%= element_form.label :name, "부품 이름"%>
+					<%= element_form.text_field :name%>
+				</li>
+				<li>
+					<% molds = @template.molds%>
+					<%= element_form.label :mold_id %>
+					<%= element_form.select(:mold_id, molds.collect{|m| [m.name, m.id]}, {:include_blank => "이미지틀선택"})%>
+				</li>
+				<li>
+					<%= element_form.label :url %>
+					<%= element_form.text_field :url %>
+				<li>
+					<%= link_to("#{element_form.object.name} 부품 세부 설정", template_elements_path(element_form.object.id)) if Element.exists?(element_form.object.id) %>
+				</li>
+			</ul>
+			<% end %>
+		</li>
+		<li><%= f.link_to_add "새 부품 추가", :elements %></li>
+		<li><%= f.submit %></li>
+	</ul>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Element', new_template_element_path(@template) %>

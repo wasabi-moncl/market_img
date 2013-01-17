@@ -1,28 +1,20 @@
 MarketImg::Application.routes.draw do
 
-
-  resources :elements
-
-  resources :branches
-
-  resources :brand_categories
-
-  resources :brands
-
-  match 'banners/import' => 'banners#import', :via => :post  
-  match 'photos_write_all' => 'photos#write_all', :via => :get
+  match 'user/:username/:item_code' => 'templates#html_code', :via => :get, :as => "html_code"
   match 'product_image/:id' => 'user/items#product_image', :via => :get, :as => "product_image"
   match 'saved_image/:id' => 'user/items#saved_image', :via => :get, :as => "saved_image"
-  match 'brands/:id/:item_code' => 'templates#html_code', :via => :get, :as => "html_code"
   get "dashboard" => "user/dashboard#index", :via => :get, :as => "dashboard" 
   get "logout"  => "sessions#destroy", :as => "logout"
   get "login"   => "sessions#new", :as => "login"
   get "signup"  => "users#new", :as => "signup"
-  
-  resources :photos, :only => [:index, :edit, :destroy]
+
   resources :sessions
   resources :users
-
+  resources :branches
+  resources :brand_categories
+  resources :brands
+  resources :photos, :only => [:index, :edit, :destroy]
+  
   resources :items do
     resources :photos
   end

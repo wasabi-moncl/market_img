@@ -2,16 +2,20 @@
 <h2><%= @template.name %> 템플릿 관리</h2>
 <ul>
 	<li><%= link_to "이미지 좌표 설정", template_molds_path(@template)%></li>
-	<li><%= link_to "합성된 이미지 배치", template_elements_path(@template)%></li>
+	<li><%= link_to "html에 들어갈 부품 설정", template_elements_path(@template)%></li>
 	<li><%= link_to "템플릿 이미지 올리기", template_photos_path(@template)%></li>
 </ul>
 <%= nested_form_for @template do |f| %>
 	<ul class="unstyled">
 		<li>
 			<dl>
-				<dt>해당 브랜드</dt>
+				<dt><%= f.label :brand_id, "해당 브랜드"%></dt>
 				<dd><%= f.collection_select :brand_id, Brand.all, :id, :name, {:prompt => "브랜드 선택"} %></dd>
 			</dl>
+		</li>
+		<li>
+			<%= f.label :code %>
+			<%= f.text_area :code, :size => "80x8", :class => "code-box" %>
 		</li>
 		<li><%= f.submit %></li>
 	</ul>
