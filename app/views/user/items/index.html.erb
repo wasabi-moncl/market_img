@@ -23,7 +23,7 @@
 							<ul class="unstyled">
 								<li><h3><%= item.item_code %></h3></li>
 								<li>
-									<%= link_to image_tag(photo.photo_file.url(:thumb).to_s, :class => "product_image"), edit_user_item_path(photo) %>
+									<%= link_to image_tag(photo.photo_file.url(:thumb).to_s, :class => "product_image"), edit_user_item_path(item) %>
 								</li>
 								<li>
 									<%= link_to "미리보기", html_code_path(current_user.username, item.item_code), :class => "btn" %>
