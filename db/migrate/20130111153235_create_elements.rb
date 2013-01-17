@@ -4,6 +4,8 @@ class CreateElements < ActiveRecord::Migration
       t.string :name
       t.integer :part
       t.integer :template_id
+      t.integer :mold_id
+      t.string :url
 
       t.timestamps
     end

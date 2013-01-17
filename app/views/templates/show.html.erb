@@ -1,3 +1,4 @@
+<%= link_to "전체 템플릿 보기로 돌아가기", templates_path%>
 <h2><%= @template.name %> 템플릿 관리</h2>
 <ul>
 	<li><%= link_to "이미지 좌표 설정", template_molds_path(@template)%></li>
@@ -14,52 +15,10 @@
 		</li>
 		<li><%= f.submit %></li>
 	</ul>
-	<ul class="parts unstyled">
-		<% @photos.each do |photo| %>
-			<li>
-				<dl>
-					<dt>Part: <%= photo.part %></dt>
-					<dd><%= link_to image_tag(composed_image_template_path(@template, :part => photo.part)), edit_template_photo_path(@template, photo)%></dd>
-				</dl>
-				<%= f.submit "반영"%>
-				<div class="row columns">
-
-					<div class="span12">
-						<%= f.fields_for :labels do |label_form|%>
-						<%= label_form.hidden_field :part, :value => photo.part %>
-							<dl class="dl-horizontal">
-								<dt><span class="label label-inverse">column</span></dt>
-								<dd>
-									<%= label_form.text_field :column %>
-								</dd>
-							</dl>
-							<div class="row">
-								<div class="span4">
-									<dl class="dl-horizontal">
-										<dt class="">정렬 기준점</dt>
-										<dd class="">
-											<%= label_form.select "gravity", [["가운데", "North"],["왼쪽", "NorthWest"],["오른쪽", "NorthEast"]]%>
-										</dd>
-									</dl>
-								</div>
-							</div>
-							<% keys = [:x_pos, :y_pos, :color, :size]%>
-							<div class="row">
-								<% keys.each do |key| %>
-									<div class="span4">
-										<dl class="dl-horizontal">
-											<dt class=""><%= key.to_s%> </dt>
-											<dd class=""><%= label_form.text_field key, :class => "input-mini" %></dd>
-										</dl>
-									</div>
-								<% end %>
-							</div>
-						<% end %><!-- f.fields_for :labels -->
-					</div><!-- span12 -->
-
-				</div><!-- div_columns-->
-				<%= f.submit "반영"%>
-			</li>
-		<% end %><!--photo -->
-	</ul>
 <% end %><!-- nested_form -->
+
+<ul>
+<% @template.molds.each do |mold|%>
+<li><%= link_to "#{mold.name} 이미지 틀 설정", edit_template_mold_path(@template, mold)%></li>
+<% end %>
+</ul>

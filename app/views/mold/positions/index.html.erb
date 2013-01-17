@@ -5,8 +5,9 @@
 <% if Item.joins(:photos).group("photos.item_id").having("count(photos.id) > 0").empty? %>
 	<li><strong><%= link_to "예제 파일 생성용 이미지 없음.", dashboard_path%></strong></li>
 <% else %>
-	<li><%= image_tag example_image_mold_positions_path(@mold)%></li>
+	<li><%= link_to "조합된 이미지 빠른 확인", example_image_mold_positions_path(@mold)%></li>
 <% end %>
+	<li><%= link_to "글씨 새겨진 버전 확인", annotated_example_image_mold_positions_path(@mold)%></li>
 </ul>
 <div class="row">
 	<div class="span10">
