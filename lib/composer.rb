@@ -1,5 +1,27 @@
 class Composer
   class << self
+    def serve_file(item = example_item, mold)
+      result_name = 'public/generated_images/item_' + item.id.to_s + '_mold_' + mold.id.to_s + '.png'
+      dst = Magick::Image.new(image_width(mold), image_height(mold))
+      dst.background_color = "#aaaaaa"
+      dst.format = "PNG"
+      dst.write(result_name)
+      mold.positions.order("part desc").each do |position|
+        dst = MiniMagick::Image.open(result_name)
+        src = labeling(item, position)
+        geo = position.geo
+        result = dst.composite(src, "png") do |c|
+          c.geometry geo
+          c.gravity 'NorthWest'
+        end
+        result.write(result_name)        
+      end
+      photo = mold.photos.create(:photo_file => open(Rails.root.to_s + "/" +result_name), :part => mold.element.part)
+      mold.element.update_attributes(:photo_id => photo.id)
+      
+      mold.element.photo
+    end
+        
     def combine(item = example_item, mold)
       result_name = 'public/generated_images/item_' + item.id.to_s + '_mold_' + mold.id.to_s + '.png'
       dst = Magick::Image.new(image_width(mold), image_height(mold))
@@ -87,22 +109,6 @@ class Composer
 
     def label_preview(item = example_item, position)
       labeling(item, position).to_blob
-    end
-    
-    
-    
-    def test
-      src = MiniMagick::Image.open('public' + Photo.last.photo_file.url)          
-      dst = MiniMagick::Image.open('public' + Photo.first.photo_file.url)
-      result = src.composite(dst, "png") do |c|
-        c.geometry "+100+100"
-        c.gravity 'NorthWest'
-      end
-      result.to_blob      
-    end
-    
-    def item
-      example_item
     end
     
     def image_width(mold)

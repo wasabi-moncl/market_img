@@ -13,11 +13,19 @@ class TemplatesController < ApplicationController
     end
   end
   
+  def test_page
+    @user = User.where(:username => params[:username]).first
+    @template = Template.find(params[:template_id])
+    @item = Photo.where(:item_code => params[:item_code]).first.item if Photo.where(:item_code => params[:item_code]).any?
+    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
+    render :layout => false
+  end
+  
   def html_code
-    @user = User.where(:username => params[:username])
-    @templates = @user.templates
-    @item = @brand.items.where(:item_code => params[:item_code])
-    html_code = @brand.templates.last.code || "<%= @item.name %><%= @brand.name%>"
+    @user = User.where(:username => params[:username]).first
+    @template = @user.templates.last
+    @item = @user.items.where(:item_code => params[:item_code]).first
+    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
     render :layout => false, :inline => html_code
   end
 
@@ -124,7 +132,7 @@ class TemplatesController < ApplicationController
         if request.referer == template_molds_url(template)
           format.html { redirect_to template_molds_path(template), notice: '이미지 틀 수정 반영됨.' }
         elsif request.referer == template_elements_url(template)
-          format.html { redirect_to template_molds_path(template), notice: '템플릿 구성 부품 수정 반영됨.' }
+          format.html { redirect_to template_elements_path(template), notice: '템플릿 구성 부품 수정 반영됨.' }
         else
           format.html { redirect_to template, notice: '반영됨.' }
           format.json { head :no_content }

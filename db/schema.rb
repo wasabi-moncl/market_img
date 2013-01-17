@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130117190755) do
     t.integer  "template_id"
     t.integer  "mold_id"
     t.string   "url"
+    t.integer  "photo_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

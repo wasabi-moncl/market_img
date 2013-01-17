@@ -2,7 +2,7 @@ class Mold < ActiveRecord::Base
   attr_accessible :name, :part, :template_id, :bg_color
   attr_accessible :positions_attributes, :photos_attributes
   belongs_to :template
-  belongs_to :element
+  has_one :element
 
   has_many :positions
   has_many :photos
