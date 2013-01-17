@@ -1,19 +1,4 @@
-<!-- <div class="row">
-	<div class="span2 well well-small">
-		<h5>1. 엑셀 파일 업로드</h5>
-	</div>
-	<div class="span2 well well-small">
-		<h5>2. 이미지 업로드</h5>
-	</div>
-	<div class="span2 well well-small">
-		<h5>3. 품번 입력</h5>
-	</div>
-	<div class="span3 well" style="text-align: center;">
-		<h2><i class="icon-arrow-right"></i>&nbsp 완료</h2>
-	</div>
-</div> -->
 <h2>4. 완성된 상품 이미지</h2>
-
 	<div class="row">
 		<div class="span3 bs-docs-sidebar">
 			<h3>템플릿 선택</h3>
@@ -41,7 +26,7 @@
 									<%= link_to image_tag(photo.photo_file.url(:thumb).to_s, :class => "product_image"), edit_user_item_path(photo) %>
 								</li>
 								<li>
-									<%= link_to "미리보기", product_image_path(item), :class => "btn" %>
+									<%= link_to "미리보기", html_code_path(current_user.username, item.item_code), :class => "btn" %>
 									<%= link_to "링크 복사하기", saved_image_path(item, "png"),
 										:id => "saved_image_" + item.id.to_s, :class => "btn btn-primary" %>
 								</li>
@@ -50,9 +35,9 @@
 							<script>
 						
 								$('<%= saved_image_id %>').zclip({
-								    copy: "<%= saved_image_url(item, 'png')%>",
+								    copy: "<%= html_code_url(current_user.username, item.item_code)%>",
 										afterCopy: function() {
-											alert("주소창에 콘트롤+V 눌러보세요.\n<%= saved_image_url(item, 'png')%>")
+											alert("주소창에 콘트롤+V 눌러보세요.\n<%= html_code_url(current_user.username, item.item_code)%>")
 										}
 								});
 							</script>

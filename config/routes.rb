@@ -1,7 +1,7 @@
 MarketImg::Application.routes.draw do
 
-  match 'store/:username/:item_code/item' => 'templates#html_code', :via => :get, :as => "html_code"
-  match 'templates/:template_id/test_page/:item_code' => 'templates#test_page', :via => :get, :as => "test_page"
+  match 'store/:username/:item_code/item' => 'user/items#html_code', :via => :get, :as => "html_code"
+  match 'templates/:template_id/test_page/:item_code' => 'user/items#test_page', :via => :get, :as => "test_page"
   match 'product_image/:id' => 'user/items#product_image', :via => :get, :as => "product_image"
   match 'saved_image/:id' => 'user/items#saved_image', :via => :get, :as => "saved_image"
   get "dashboard" => "user/dashboard#index", :via => :get, :as => "dashboard" 

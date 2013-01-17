@@ -22,7 +22,7 @@ class Item < ActiveRecord::Base
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      item = find_by_id(row["id"]) || new
+      item = self.where(:item_code => row["item_code"], :user_id => user.id).first || new
       item.attributes = row.to_hash.slice(*accessible_attributes)
       item.user = user
       item.brand = user.brand

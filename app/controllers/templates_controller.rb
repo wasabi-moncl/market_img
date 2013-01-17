@@ -13,21 +13,6 @@ class TemplatesController < ApplicationController
     end
   end
   
-  def test_page
-    @user = User.where(:username => params[:username]).first
-    @template = Template.find(params[:template_id])
-    @item = Photo.where(:item_code => params[:item_code]).first.item if Photo.where(:item_code => params[:item_code]).any?
-    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
-    render :layout => false
-  end
-  
-  def html_code
-    @user = User.where(:username => params[:username]).first
-    @template = @user.templates.last
-    @item = Photo.where(:item_code => params[:item_code]).first.item if Photo.where(:item_code => params[:item_code]).any?
-    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
-    render :layout => false, :inline => @template.code
-  end
 
   # GET /templates/1
   # GET /templates/1.json

@@ -3,9 +3,20 @@ class User::ItemsController < ApplicationController
   def show
   end
   
+  def test_page
+    @user = User.where(:username => params[:username]).first
+    @template = Template.find(params[:template_id])
+    @item = Photo.where(:item_code => params[:item_code]).first.item if Photo.where(:item_code => params[:item_code]).any?
+    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
+    render :layout => false
+  end
+  
   def html_code
-    @brand = Brand.find(params[:id])
-    @item = @brand.items.where(:item_code => params[:item_code]).first
+    @user = User.where(:username => params[:username]).first
+    @template = @user.templates.last
+    @item = @user.items.where(:item_code => params[:item_code]).first if @user.items.where(:item_code => params[:item_code]).any?
+    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
+    render :layout => false, :inline => @template.code
   end
 
   def index
@@ -27,58 +38,13 @@ class User::ItemsController < ApplicationController
     end
   end
   
-  def product_image
-    item = Item.find(params[:id])
-    parts = item.parts
-    dst = Magick::Image.new(780,item.image_height(current_user))
-    dst.background_color = '#ffffff'
-    dst.format = 'PNG'
-    result_name = 'public/generated_images/generated_' + item.item_code + '.png'
-    dst.write(result_name)
-    parts.each do |part|
-      filename = 'public' + part[:photo].photo_file.to_s
-      src = Magick::Image.read(filename)[0]
-      label = Magick::Draw.new
-      current_user.brand.templates.last.labels.find_all_by_part(part[:photo].part).each do |part_label|
-        begin
-          gravity = ("Magick::" + part_label.gravity + "Gravity").constantize
-        rescue
-          gravity = Magick::NorthGravity
-        end
-        unless item[part_label.column.to_sym].nil?
-          label.annotate(src, 0, 0, part_label.x_pos, part_label.y_pos, item.send(part_label.column)) do 
-            label.fill      = part_label.color
-            label.pointsize = part_label.size.to_i
-            label.gravity = gravity
-            label.font = Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-          end
-        end
-      end
-      x_pos = part[:position].x_pos
-      y_pos = part[:position].y_pos
-      # next if x_pos == nil or y_pos == nil
-      dst.composite!(src, x_pos, y_pos, Magick::OverCompositeOp)
-      dst.write(result_name)
-    end
-    result_image = dst.to_blob
-    
-    send_data result_image, :filename => "product_" + item.item_code + ".png",
-    :disposition => 'inline', :type => "image/png"
-  end
-  
+
   def saved_image
-    item = Item.find(params[:id])
-    result_name = 'public/generated_images/generated_' + item.item_code + '.png'
-    if File.exist?(result_name)
-      respond_to do |format|
-        format.png do 
-          send_data File.read(result_name), :filename => "product_" + item.item_code + ".png",
-          :disposition => 'inline', :type => "image/png"
-        end
-      end
-    else
-      redirect_to product_image_item_path(item)
-    end
+    @user = User.where(:username => params[:username]).first
+    @template = @user.templates.last
+    @item = @user.items.where(:item_code => params[:item_code]).first if @user.items.where(:item_code => params[:item_code]).any?
+    html_code = @template.code || "<%= @item.name %><%= @brand.name%>"
+    render :layout => false, :inline => @template.code
   end
   
   def first
