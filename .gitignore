@@ -3,6 +3,7 @@
 .sass-cache
 capybara-*.html
 .rspec
+/Gemfile.lock
 /.bundle
 /vendor/bundle
 /log/*

@@ -1,0 +1,16 @@
+<html>
+<head>
+</head>
+	<body>
+
+			<% @template.elements.each do |element|%>
+			<p>
+			
+				<%= link_to(image_tag(Composer.serve_file(@item, element.mold).photo_file.url), element.url) %>
+			
+
+			</p>
+		<% end %>
+		
+	</body>
+</html>
