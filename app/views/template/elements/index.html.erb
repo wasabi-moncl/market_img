@@ -18,6 +18,11 @@
 					<%= element_form.label :url %>
 					<%= element_form.text_field :url %>
 				<li>
+				<li>
+					<%= element_form.label :part %>
+					<%= element_form.text_field :part %>
+				<li>
+					
 					<%= link_to("#{element_form.object.name} 부품 세부 설정", template_elements_path(element_form.object.id)) if Element.exists?(element_form.object.id) %>
 				</li>
 			</ul>
