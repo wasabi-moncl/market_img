@@ -36,7 +36,6 @@ namespace :deploy do
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
     run "mkdir -p #{shared_path}/config"
     # put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
@@ -53,6 +52,7 @@ namespace :deploy do
   desc "Symlink shared configs and folders on each release."
   task :create_symlink_shared do
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
+    run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
     # run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
     # run "ln -nfs #{shared_path}/config/apikey.yml #{release_path}/config/apikey.yml"
   end
