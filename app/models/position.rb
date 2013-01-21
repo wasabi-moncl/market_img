@@ -1,6 +1,6 @@
 include MiniGeo
 class Position < ActiveRecord::Base
-  attr_accessible :height, :name, :part, :template_id, :width, :x_pos, :y_pos
+  attr_accessible :height, :name, :part, :template_id, :width, :x_pos, :y_pos, :mold_id
   attr_accessible :labels_attributes
 
   belongs_to :template

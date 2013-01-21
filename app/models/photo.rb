@@ -2,7 +2,7 @@
 class Photo < ActiveRecord::Base
   has_many :banners
   
-  attr_accessible :photo_file, :item_id, :template_id, :element_id, :user_id, :item_code, :part
+  attr_accessible :photo_file, :item_id, :template_id, :element_id, :user_id, :item_code, :part, :mold_id
   belongs_to :item
   belongs_to :user
   belongs_to :position

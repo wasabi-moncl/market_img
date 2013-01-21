@@ -20,8 +20,7 @@
 								<%= position_form.hidden_field :template_id, :value => @template.id %>
 								<div class="span2">
 									<%= image_tag(@mold.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) if @mold.photos.where(:part => position_form.object.part).any? %>
-									<%= image_tag(Item.example.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) if Item.example.photos.where(:part => position_form.object.part).any? %>
-
+									<%= image_tag(Item.example.photos.where(:part => position_form.object.part).first.photo_file.url(:thumb)) unless Item.example.nil? || Item.example.photos.where(:part => position_form.object.part).empty? %>
 								</div>
 								<div class="span2">
 									<%= position_form.label :name, "포지션 이름" %>
@@ -43,7 +42,6 @@
 									<%= link_to "레이블링 설정", position_labels_path(position_form.object.id) if Position.exists?(position_form.object.id) %>
 								</div>
 								<%= position_form.link_to_remove "삭제" %>
-								
 							</div>
 							<p><%=  %></p>
 						<% end %>

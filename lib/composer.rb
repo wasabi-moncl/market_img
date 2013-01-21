@@ -57,22 +57,19 @@ class Composer
         dst.write(result_name)
         parts = Array.new
         mold.positions.order("part desc").each do |position|
-          if mold.photos.where(:part => position.part).count > 0
-            parts << {:photo => mold.photos.where(:part => position.part).first, :geometry => position.geo}
-          elsif item.photos.where(:part => position.part).count > 0
-            parts << {:photo => item.photos.where(:part => position.part).first, :geometry => position.geo}
-          end
-        end
-        parts.each do |part|
-          geo = part[:geometry]
-          puts geo
-          src = MiniMagick::Image.open('public' + part[:photo].photo_file.url)          
           dst = MiniMagick::Image.open(result_name)
+          photo = nil
+          photo = position.mold.photos.where(:part => position.part).first unless position.mold.photos.where(:part => position.part).empty?
+          if photo.nil?
+            photo = item.photos.where(:part => position.part).first unless item.photos.where(:part => position.part).empty?
+          end
+          src = MiniMagick::Image.open('public' + photo.photo_file.url)
+          geo = position.geo
           result = dst.composite(src, "png") do |c|
             c.geometry geo
             c.gravity 'NorthWest'
           end
-          result.write(result_name)
+          result.write(result_name)        
         end
       end
       result = MiniMagick::Image.open(result_name)
@@ -103,7 +100,7 @@ class Composer
       result = MiniMagick::Image.open(result_name)
     end
     
-    def mold_preview(item = item, mold)
+    def mold_preview(item = example_item, mold)
       molding(item, mold).to_blob
     end
 

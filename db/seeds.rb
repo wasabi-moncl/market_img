@@ -68,140 +68,88 @@ template = Template.create(
   ]
 )
 
-  template_id = Template.last.id
-Position.create(
+Mold.create(
   [
     {
-      name: "sisley_0",
-      part: 0,
-      template_id: template_id,
-      x_pos: 1,
-      y_pos: 1
+      :name => "상품설명",
+      :part => "1000",
+      :template_id => Template.last.id
     },
     {
-      name: "sisley_1",
-      part: 1,
-      template_id: template_id,
-      x_pos: 32,
-      y_pos: 1077
-    },
-    {
-      name: "sisley_2",
-      part: 2,
-      template_id: template_id,
-      x_pos: 75,
-      y_pos: 1646
-    },
-    {
-      name: "sisley_3",
-      part: 3,
-      template_id: template_id,
-      x_pos: 232,
-      y_pos: 1646
-    },
-    {
-      name: "sisley_4",
-      part: 4,
-      template_id: template_id,
-      x_pos: 390,
-      y_pos: 1646
-    },
-    {
-      name: "sisley_5",
-      part: 5,
-      template_id: template_id,
-      x_pos: 550,
-      y_pos: 1646
-    },
-    {
-      name: "guess_0",
-      part: 0,
-      template_id: 2,
-      x_pos: 1,
-      y_pos: 1
-    },
-    {
-      name: "guess_1",
-      part: 1,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 1317
-    },
-    {
-      name: "guess_2",
-      part: 2,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 2544
-    },
-    {
-      name: "guess_3",
-      part: 3,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 3107
-    },
-    {
-      name: "guess_4",
-      part: 4,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 3670
-    },
-    {
-      name: "guess_5",
-      part: 5,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 4233
-    },
-    {
-      name: "guess_6",
-      part: 6,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 4796
-    },
-    {
-      name: "guess_7",
-      part: 7,
-      template_id: 2,
-      x_pos: 115,
-      y_pos: 5359
-    }
+      :name => "상품7개나열",
+      :part => "1001",
+      :template_id => Template.last.id
+    }  
   ]
 )
 
-puts Template.first.name + ' 템플릿 생성완료'
+template_id = Template.last.id
+mold_id = Mold.find(1).id
+Position.create(
+  [
+    {
+      name: "상품설명bg",
+      part: 100,
+      template_id: template_id,
+      mold_id: mold_id,
+      x_pos: 1,
+      y_pos: 1
+    },
+    {
+      name: "상품설명0",
+      part: 0,
+      template_id: template_id,
+      mold_id: mold_id,
+      x_pos: 1,
+      y_pos: 1
+    }
+  ]
+)
+puts "포지션 " + Position.count.to_s + "개 생성"
 
-# Label.create(
-#   [
-#     {
-#       part: 0,
-#       template_id: template_id,
-#       x_pos: 1,
-#       y_pos: 1,
-#       gravity: "North",
-#       color: "#ffcfdf"
-#       size: "26"
-#     },
-#   ]
-# )
+p_id = Position.first.id
+x_pos = 270
+size = 17
+color = "#ffffff"
+gravity = "NorthWest"
+font = "NanumGothic.ttf"
+position_id = 3
+label_datas = [
+  {:column => "name", :y_pos => 1987, 
+  :color => color, :position_id => p_id, :x_pos => x_pos, :size => size, :gravity => gravity, :font => font}, 
+  {:column => "item_code", :y_pos => 2006,
+  :color => color, :position_id => p_id, :x_pos => x_pos, :size => size, :gravity => gravity, :font => font}, 
+  {:column => "description", :y_pos => 2042,
+  :color => color, :position_id => p_id, :x_pos => x_pos, :size => size, :gravity => gravity, :font => font}, 
+  {:column => "color", :y_pos => 2182,
+  :color => color, :position_id => p_id, :x_pos => x_pos, :size => size, :gravity => gravity, :font => font}, 
+  {:column => "size", :y_pos => 2238,
+  :color => color, :position_id => p_id, :x_pos => x_pos, :size => size, :gravity => gravity, :font => font}, 
+  {:column => "fabric", :y_pos => 2283,
+  :color => color, :position_id => p_id, :x_pos => x_pos, :size => size, :gravity => gravity, :font => font}
+]
+label_datas.each do |label_data|
+  Label.create(
+  {
+    position_id: p_id,
+    size: size,
+    color: color,
+    gravity: gravity,
+    x_pos: x_pos,
+    y_pos: label_data[:y_pos],
+    column: label_data[:column],
+    font: font
+  }
+)
+end
+
+puts "레이블 " + Label.count.to_s + "개 생성"
+
+puts Template.first.name + ' 템플릿 생성완료'
 
 Position.association_to_the_template(User.find(3))
 
+photos = ['bg-part1-3.png']
 
-# photos = ['MC1G2D401DB.png',   'MC1G2D403GE_1.png',  'MCD02D409BL.png',    'MCD02D503GE_1.png',
-# 'MC1G2D401DB_1.png',  'MC1G2D403MT.png',    'MCD02D409BL_1.png',  'MCD02D503KK.png',
-# 'MC1G2D402GE.png',    'MC1G2D403MT_1.png',  'MCD02D409IV.png',    'MCD02D503KK_1.png',
-# 'MC1G2D402GE_1.png',  'MCD01D908NV.png',    'MCD02D409IV_1.png',  'MCH02C301DI.png',
-# 'MC1G2D403GE.png',    'MCD01D908NV_1.png',  'MCD02D503GE.png',    'MCH02C301DI_1.png' ]
-photos = ['bg_sisley.png']
-
-photos.each do |x|
-  Photo.create(:photo_file => open(Rails.root.to_s + "/db/photos/" + x), :template_id => 1, :part => 0)
-end
-
-  
-  
-
+Photo.create(:photo_file => open(Rails.root.to_s + "/db/photos/" + 'bg-part1-3.png'), 
+:template_id => Template.last.id, :mold_id => Mold.find(1).id, :part => 100)
