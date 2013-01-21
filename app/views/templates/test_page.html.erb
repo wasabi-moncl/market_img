@@ -5,12 +5,12 @@
 		<%= @item.item_code %>
 
 			<% @template.elements.each do |element|%>
-					<p>
-			<% unless @template.elements.first.photo.item_code == params[:item_code]%>
-				<%= link_to(image_tag(Composer.serve_file(@item, element.mold).photo_file.url), element.url) %>
-			<% else %>
-				<%= image_tag(@template.elements.first.photo.photo_file.url) %>
-			<% end %>
+				<p>
+				<% unless @template.elements.first.photo.item_code == params[:item_code]%>
+					<%= link_to(image_tag(Composer.serve_file(@item, element.mold).photo_file.url), element.url) %>
+				<% else %>
+					<%= image_tag(@template.elements.first.photo.photo_file.url) %>
+				<% end %>
 			</p>
 		<% end %>
 		
