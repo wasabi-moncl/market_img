@@ -9,17 +9,24 @@ class Composer
       mold.positions.order("part desc").each do |position|
         dst = MiniMagick::Image.open(result_name)
         src = labeling(item, position)
-        geo = position.geo
-        result = dst.composite(src, "png") do |c|
-          c.geometry geo
-          c.gravity 'NorthWest'
-        end
-        result.write(result_name)        
+        unless src == false
+          geo = position.geo
+          result = dst.composite(src, "png") do |c|
+            c.geometry geo
+            c.gravity 'NorthWest'
+          end
+          result.write(result_name)
+        else
+          result_name = false
+        end        
       end
-      photo = mold.photos.create(:photo_file => open(Rails.root.to_s + "/" +result_name), :part => mold.element.part)
-      mold.element.update_attributes(:photo_id => photo.id)
-      
-      mold.element.photo
+      if result_name == false
+        false
+      else
+        photo = mold.photos.create(:photo_file => open(Rails.root.to_s + "/" +result_name), :part => mold.element.part)
+        mold.element.update_attributes(:photo_id => photo.id)
+        mold.element.photo
+      end
     end
         
     def combine(item = example_item, mold)
@@ -82,22 +89,26 @@ class Composer
       if photo.nil?
         photo = item.photos.where(:part => position.part).first unless item.photos.where(:part => position.part).empty?
       end
-      src = MiniMagick::Image.open('public' + photo.photo_file.url)
-      src.write(result_name)
-      unless position.labels.empty?
-        position.labels.each do |label|
-          src = MiniMagick::Image.open(result_name)
-          src.combine_options do |c|
-            c.font Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
-            c.pointsize label.size
-            c.gravity label.gravity
-            c.fill label.color
-            c.draw "text " + label.geo + " '" + item.send(label.column) + "'"
+      unless photo.nil?
+        src = MiniMagick::Image.open('public' + photo.photo_file.url)
+        src.write(result_name)
+        unless position.labels.empty?
+          position.labels.each do |label|
+            src = MiniMagick::Image.open(result_name)
+            src.combine_options do |c|
+              c.font Rails.root.to_s + '/public/' + 'NanumGothic.ttf'
+              c.pointsize label.size
+              c.gravity label.gravity
+              c.fill label.color
+              c.draw "text " + label.geo + " '" + item.send(label.column) + "'"
+            end
+            src.write(result_name)
           end
-          src.write(result_name)
         end
+        result = MiniMagick::Image.open(result_name)
+      else
+        false
       end
-      result = MiniMagick::Image.open(result_name)
     end
     
     def mold_preview(item = example_item, mold)

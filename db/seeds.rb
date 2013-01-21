@@ -27,6 +27,17 @@ CSV.foreach(Rails.root.join("db", "branch_list.csv"), headers: true) do |row|
   end
 end
 puts "Imported " + Branch.count.to_s + " branchs"
+template = Template.create(
+  [
+    {
+      name: "시슬리(영패션)"
+    },
+    {
+      name: "게스",
+      brand_id: 1
+    }
+  ]
+)
 users = User.create(
   [
     { 
@@ -56,17 +67,8 @@ users = User.create(
       
   ]
 )
+User.first.templates << Template.last
 puts'"onesup", "test" 계정 생성완료'
-template = Template.create(
-  [
-    {
-      name: "시슬리(영패션)"
-    },
-    {
-      name: "게스"
-    }
-  ]
-)
 
 Mold.create(
   [
@@ -74,15 +76,9 @@ Mold.create(
       :name => "상품설명",
       :part => "1000",
       :template_id => Template.last.id
-    },
-    {
-      :name => "상품7개나열",
-      :part => "1001",
-      :template_id => Template.last.id
-    }  
+    }
   ]
 )
-
 template_id = Template.last.id
 mold_id = Mold.find(1).id
 Position.create(
@@ -100,14 +96,68 @@ Position.create(
       part: 0,
       template_id: template_id,
       mold_id: mold_id,
-      x_pos: 1,
-      y_pos: 1
+      x_pos: 117,
+      y_pos: 1317
     }
   ]
 )
+Element.create(
+{
+    name: "상품설명",
+    template_id: Template.find(2).id,
+    mold_id: Mold.first.id,
+    part: 1,
+} 
+)
+
+6.times do |i|
+  one = i+1
+  two = i+2
+  Mold.create(
+    {
+      :name => "상품 나열" + one.to_s,
+      :part => "100" + two.to_s,
+      :template_id => Template.last.id
+    }
+  )
+  Position.create(
+    [
+      {
+        name: "상품 나열 bg",
+        part: 100,
+        template_id: Template.last.id,
+        mold_id: two,
+        x_pos: 1,
+        y_pos: 1
+      },
+      {
+        name: "상품 나열" + one.to_s,
+        part: one,
+        template_id: Template.last.id,
+        mold_id: i + 2,
+        x_pos: 116,
+        y_pos: 14
+      }
+    ]
+  )
+  Photo.create(:photo_file => open(Rails.root.to_s + "/db/photos/" + 'bg-part2-3.png'), 
+  :template_id => Template.last.id, :mold_id => two, :part => 100)
+  Element.create(
+    {
+        name: "상품나열"+one.to_s,
+        template_id: Template.find(2).id,
+        mold_id: two,
+        part: two
+    } 
+  )
+  
+end
+
+
+
 puts "포지션 " + Position.count.to_s + "개 생성"
 
-p_id = Position.first.id
+p_id = Position.where(:name => "상품설명bg").first.id
 x_pos = 270
 size = 17
 color = "#ffffff"
