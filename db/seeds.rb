@@ -88,16 +88,16 @@ Position.create(
       part: 100,
       template_id: template_id,
       mold_id: mold_id,
-      x_pos: 1,
-      y_pos: 1
+      x_pos: 0,
+      y_pos: 0
     },
     {
       name: "상품설명0",
       part: 0,
       template_id: template_id,
       mold_id: mold_id,
-      x_pos: 117,
-      y_pos: 1317
+      x_pos: 115,
+      y_pos: 1315
     }
   ]
 )
@@ -127,16 +127,16 @@ Element.create(
         part: 100,
         template_id: Template.last.id,
         mold_id: two,
-        x_pos: 1,
-        y_pos: 1
+        x_pos: 0,
+        y_pos: 0
       },
       {
         name: "상품 나열" + one.to_s,
         part: one,
         template_id: Template.last.id,
         mold_id: i + 2,
-        x_pos: 116,
-        y_pos: 14
+        x_pos: 115,
+        y_pos: 11
       }
     ]
   )

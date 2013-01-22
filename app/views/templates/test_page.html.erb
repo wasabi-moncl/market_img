@@ -1,12 +1,33 @@
 <html>
 <head>
+	<title><%= @item.item_code %></title>
+	<style type="text/css">
+	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td
+	{ margin : 0; padding : 0; }
+	h1,h2,h3,h4,h5,h6 { font-size : 100%; }
+	ol,ul { list-style : none; }
+	address, caption, cite, code, dfn, em, strong, th, var
+	{ font-style : normal; font-weight : normal; }
+	table { border-collapse : collapse; border-spacing : 0; }
+	fieldset,img { border : 0; }
+	caption,th { text-align : left; }
+	q:before, q:after { content :''; }
+	a:link{ text-decoration:none;}
+	a:visited{text-decoration:none;}
+	a:hover{text-decoration:none;}
+	a:active{text-decoration:none;}
+	</style>
 </head>
 	<body>
-		<%= @item.item_code %>
-		<% @template.elements.each do |element|%>
-			<p>
-				<%= link_to(image_tag(Composer.serve_file(@item, element.mold).photo_file.url), element.url) unless Composer.serve_file(@item, element.mold) == false %>
-			</p>
-		<% end %>
+
+			<% @template.elements.each do |element|%>
+				<div>
+					<%= link_to(image_tag(Composer.serve_file(@item, element.mold).photo_file.url), element.url) unless Composer.serve_file(@item, element.mold) == false %></td>
+				</div>
+			<% end %>
+			<div>
+					<iframe height="2706" width="780" src="http://ffdesign.interhosting.kr//system/guess_1.html" frameborder=no  marginwidth="0"webkitAllowFullScreen mozallowfullscreen allowFullScreen scrolling="no"></iframe>
+				</div>
+
 	</body>
 </html>
