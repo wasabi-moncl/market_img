@@ -17,7 +17,7 @@
 		<div class="span9">
 			<div class="row">
 				<% @items.each do |item| %>
-					<% photo = Photo.where(:item_code => item.item_code).first %>
+					<% photo = current_user.photos.where(:item_code => item.item_code).first %>
 					<% unless photo.nil? %>
 						<div class="span2 well well-small">
 							<ul class="unstyled">
